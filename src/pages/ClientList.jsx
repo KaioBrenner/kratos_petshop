@@ -11,7 +11,7 @@ const ClientList = () => {
       <Header page="client-list" />
 
       <main className="sm:px-16 px-6 flex flex-col justify-center my-20">
-        <h1 className="text-5xl text-left font-bold mb-4">Clientes</h1>
+        <h1 className="text-5xl text-left font-bold mb-4 container">Clientes</h1>
 
         <div className="flex container justify-between flex-col bg-white m-auto max-h-[726px]">
           <table className="w-full overflow-y-scroll">
