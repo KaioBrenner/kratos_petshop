@@ -1,5 +1,6 @@
 import dog from "../assets/images/pastor-alemão.jpg";
-import addService from "../assets/images/pet-hospital.svg"
+
+import Modal from "./Modal";
 
 const PetCard = () => {
   return (
@@ -11,9 +12,7 @@ const PetCard = () => {
         className="rounded-full border border-white bg-white m-auto"
       />
 
-      <div className="bg-black">
-        <img src={addService} width={45} className="absolute top-2 right-2 border border-gray-600 rounded-full bg-brand-orange-faded cursor-pointer slide-bck-center"/>
-      </div>
+      <Modal></Modal>
 
       <div className="w-[90%]">
         <label htmlFor="name">Nome:</label>
