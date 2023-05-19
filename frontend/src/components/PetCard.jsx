@@ -12,7 +12,7 @@ const PetCard = () => {
         className="rounded-full border border-white bg-white m-auto"
       />
 
-      <Modal></Modal>
+      <Modal type="addService"></Modal>
 
       <div className="w-[90%]">
         <label htmlFor="name">Nome:</label>

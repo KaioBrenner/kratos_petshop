@@ -50,11 +50,6 @@ body {
 }
 
 
-.slide-bck-center:focus{
-    padding: 1px;
-    outline-color: #ffb445;
-}
-
 
 .modal-overlay {
   position: fixed;

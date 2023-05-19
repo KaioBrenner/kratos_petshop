@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import PetCard from "../components/PetCard";
+import Modal from "../components/Modal";
 
 import { Link } from "react-router-dom";
 
@@ -12,13 +13,13 @@ const ClientData = () => {
         <div className=" bg-white w-[1200px] h-[650px] text-center rounded-lg flex flex-col items-center justify-evenly p-4 drop-shadow-xl shadow-neutral-900">
           <div class="gap-4 w-full h-full text-left flex flex-row">
             <div class=" w-[60%]">
-              <div
-                className=" flex flex-col justify-between gap-4 rounded-lg h-full"
-              >
+              <div className=" flex flex-col justify-between gap-4 rounded-lg h-full">
                 <div className="bg-gray-100 p-3 h-full rounded-lg">
                   <div className="flex flex-col justify-between h-full">
                     <div>
-                      <h1 className="text-2xl font-bold mb-2">Dados do Cliente</h1>
+                      <h1 className="text-2xl font-bold mb-2">
+                        Dados do Cliente
+                      </h1>
                       <div className="flex flex-wrap justify-between gap-2">
                         <div className="w-[45%]">
                           <label htmlFor="name">Nome Completo:</label>
@@ -106,12 +107,15 @@ const ClientData = () => {
                 </div>
 
                 <div className="flex gap-5">
-                  <button className=" w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2 ">
+                  <button className=" w-[50%] bg-brand-orange rounded-[8px]  h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 flex justify-center items-center cursor-pointer ">
                     Editar Dados
                   </button>
-                  <button className=" w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 ">
+
+                  <Modal type="addPet"></Modal>
+
+                  {/* <button className=" w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 ">
                     Adicionar Pet
-                  </button>
+                  </button>  */}
                 </div>
               </div>
             </div>
