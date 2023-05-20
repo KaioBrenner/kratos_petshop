@@ -60,3 +60,17 @@ body {
   background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo escurecida */
   z-index: 40; /* Certifique-se de que este valor seja maior que o valor z-index do modal */
 }
+
+input[type="checkbox"] {
+  display: none; /* oculta o checkbox padrão */
+}
+
+/* Estilos para o checkbox marcado */
+input[type="checkbox"]:checked + .custom-checkbox {
+  /* Estilos quando o checkbox está marcado */
+  /* Por exemplo, você pode alterar a cor de fundo ou adicionar uma sombra */
+  transform: scale(0.85);
+  transition: 0.3s;
+}
+
+/* Estilos para a div personalizada que substitui o checkbox */
