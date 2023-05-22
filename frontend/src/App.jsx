@@ -17,7 +17,6 @@ const App = () => {
         <Route path="/dados-cliente" element={<ClientData />}/>
         <Route path="/lista-clientes" element={<ClientList />}/>
         <Route path="/cadastro-cliente" element={<ClientSignUp />}/>
-        
       </Routes>
 
     </Router>

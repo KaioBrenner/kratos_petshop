@@ -25,7 +25,7 @@ const ClientData = () => {
                           <label htmlFor="name">Nome Completo:</label>
                           <input
                             type="text"
-                            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                             value={"João"}
                             readOnly
                           />
@@ -34,7 +34,7 @@ const ClientData = () => {
                           <label htmlFor="name">CPF:</label>
                           <input
                             type="text"
-                            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                             value={"123.456.789-00"}
                             readOnly
                           />
@@ -43,10 +43,18 @@ const ClientData = () => {
                           <label htmlFor="name">Telefone:</label>
                           <input
                             type="text"
-                            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                             value={"(57) 99158-7603"}
                             readOnly
                           />
+                        </div>
+                        <div className="w-[45%]">
+                          <label htmlFor="name">Ativo:</label>
+                          <select name="viagem" className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2">
+                            <option value=""></option>
+                            <option value="sim">Sim</option>
+                            <option value="nao">Não</option>
+                          </select>
                         </div>
                       </div>
                     </div>
@@ -58,7 +66,7 @@ const ClientData = () => {
                           <label htmlFor="name">CEP:</label>
                           <input
                             type="text"
-                            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                             value={"(57) 99158-7603"}
                             readOnly
                           />
@@ -68,7 +76,7 @@ const ClientData = () => {
                             <label htmlFor="name">Rua:</label>
                             <input
                               type="text"
-                              className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                              className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                               value={"(57) 99158-7603"}
                               readOnly
                             />
@@ -77,7 +85,7 @@ const ClientData = () => {
                             <label htmlFor="name">Bairro:</label>
                             <input
                               type="text"
-                              className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                              className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                               value={"(57) 99158-7603"}
                               readOnly
                             />
@@ -86,7 +94,7 @@ const ClientData = () => {
                             <label htmlFor="name">Cidade:</label>
                             <input
                               type="text"
-                              className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                              className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                               value={"(57) 99158-7603"}
                               readOnly
                             />
@@ -95,7 +103,7 @@ const ClientData = () => {
                             <label htmlFor="name">Estado:</label>
                             <input
                               type="text"
-                              className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                              className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                               value={"(57) 99158-7603"}
                               readOnly
                             />
@@ -137,28 +145,28 @@ const ClientData = () => {
                     <label htmlFor="name">Nome:</label>
                     <input
                       type="text"
-                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                     />
                   </div>
                   <div className="w-full">
                     <label htmlFor="name">Raça:</label>
                     <input
                       type="text"
-                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                     />
                   </div>
                   <div className="w-full">
                     <label htmlFor="name">Porte:</label>
                     <input
                       type="text"
-                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                     />
                   </div>
                   <div className="w-full">
                     <label htmlFor="name">Idade:</label>
                     <input
                       type="text"
-                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                     />
                   </div>
                 </div>

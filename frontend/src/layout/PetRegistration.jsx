@@ -12,44 +12,80 @@ const PetRegistration = ({ closeModal }) => {
           <AiOutlineClose />
         </button>
         <h1 className="text-2xl font-bold mb-2">Cadastro do Pet</h1>
-        <div className="flex flex-col gap-4 justify-between w-[400px] h-[420px]">
+        <form className="flex flex-col gap-4 justify-between w-[400px]">
           <div className="flex flex-col gap-4">
+            <div className="w-full">
+              <label htmlFor="name">Foto:</label>
+              <input
+                type="file"
+                className="inline-block h-22 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl text-base  w-full mt-2"
+                accept="image/*"
+              />
+            </div>
             <div className="w-full">
               <label htmlFor="name">Nome:</label>
               <input
                 type="text"
-                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                min="3"
               />
             </div>
             <div className="w-full">
               <label htmlFor="name">Raça:</label>
               <input
                 type="text"
-                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                min="3"
               />
             </div>
             <div className="w-full">
               <label htmlFor="name">Porte:</label>
-              <input
-                type="text"
-                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
-              />
+              <select
+                name="porte"
+                class="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+              >
+                <option value="pequeno">Pequeno</option>
+                <option value="medio">Médio</option>
+                <option value="grande">Grande</option>
+              </select>
             </div>
             <div className="w-full">
               <label htmlFor="name">Idade:</label>
               <input
-                type="text"
-                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl h-6 rounded-lg text-base pl-3 py-5 w-full mt-2"
+                type="number"
+                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                min={0}
               />
+            </div>
+            <div className="w-full">
+              <label htmlFor="name">Peso:</label>
+              <input
+                type="number"
+                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                min={0.1}
+              />
+            </div>
+            <div className="w-full">
+              <label htmlFor="name">Sexo:</label>
+              <select
+                name="sexo"
+                class="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+              >
+                <option value="macho">Macho</option>
+                <option value="femea">Fêmea</option>
+              </select>
             </div>
           </div>
 
           <div className="flex gap-5">
-            <button className="  w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2">
+            <button
+              type="submit"
+              className="  w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
+            >
               Cadastrar Pet
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );
