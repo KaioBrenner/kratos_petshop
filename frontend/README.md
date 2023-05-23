@@ -4,8 +4,8 @@
 
 * Tela de login OK 
 * Lista de Clientes NOT OK | Resolver overflow da tabela
-* Dados do Cliente NOT OK
-* Cadastro do cliente NOT OK
+* Dados do Cliente OK
+* Cadastro do cliente OK
 * Tela de banho e tosa NOT OK
 * Cadastro de produto NOT OK
 * Lista de compras NOT OK

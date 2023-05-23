@@ -26,8 +26,6 @@ const ClientData = () => {
                           <input
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                            value={"João"}
-                            readOnly
                           />
                         </div>
                         <div className="w-[45%]">
@@ -36,7 +34,6 @@ const ClientData = () => {
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                             value={"123.456.789-00"}
-                            readOnly
                           />
                         </div>
                         <div className="w-[45%]">
@@ -45,7 +42,6 @@ const ClientData = () => {
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                             value={"(57) 99158-7603"}
-                            readOnly
                           />
                         </div>
                         <div className="w-[45%]">
@@ -68,7 +64,6 @@ const ClientData = () => {
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                             value={"(57) 99158-7603"}
-                            readOnly
                           />
                         </div>
                         <div className="flex flex-wrap justify-between gap-4">
@@ -78,7 +73,6 @@ const ClientData = () => {
                               type="text"
                               className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                               value={"(57) 99158-7603"}
-                              readOnly
                             />
                           </div>
                           <div className="w-[45%]">
@@ -87,7 +81,6 @@ const ClientData = () => {
                               type="text"
                               className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                               value={"(57) 99158-7603"}
-                              readOnly
                             />
                           </div>
                           <div className="w-[45%]">
@@ -96,7 +89,6 @@ const ClientData = () => {
                               type="text"
                               className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                               value={"(57) 99158-7603"}
-                              readOnly
                             />
                           </div>
                           <div className="w-[45%]">
@@ -105,7 +97,6 @@ const ClientData = () => {
                               type="text"
                               className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                               value={"(57) 99158-7603"}
-                              readOnly
                             />
                           </div>
                         </div>

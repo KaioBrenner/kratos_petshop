@@ -2,7 +2,7 @@ import { BiCheck } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 
-const UserRow = ({ name, cpf, active, index }) => {
+const ClientRow = ({ name, cpf, active, index }) => {
 
   
 
@@ -23,4 +23,4 @@ const UserRow = ({ name, cpf, active, index }) => {
   );
 };
 
-export default UserRow;
+export default ClientRow;

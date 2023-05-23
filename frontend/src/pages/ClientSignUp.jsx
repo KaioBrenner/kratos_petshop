@@ -61,14 +61,14 @@ const ClientSignUp = () => {
                       <label htmlFor="name">CPF:</label>
                       <input
                         type="number"
-                        className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                        className="border border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                         placeholder="Ex: 12345678900"
                       />
                     </div>
                     <div className="w-[45%]">
                       <label htmlFor="number">Telefone:</label>
                       <input
-                        type="text"
+                        type="number"
                         className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                         placeholder="Ex: 75981365975"
                       />
@@ -84,7 +84,7 @@ const ClientSignUp = () => {
                     <div className="w-[45%]">
                       <label htmlFor="cep">CEP:</label>
                       <input
-                        type="text"
+                        type="number"
                         className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                         id="cep"
                         value={cep}

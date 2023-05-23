@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import UserRow from "../components/UserRow";
+import UserRow from "../components/ClientRow";
 import { BiCheck } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
 
@@ -13,7 +13,7 @@ const ClientList = () => {
       <main className="sm:px-16 px-6 flex flex-col justify-center my-20">
         <h1 className="text-5xl text-left font-bold mb-4 container">Clientes</h1>
 
-        <div className="flex container justify-between flex-col bg-white m-auto max-h-[726px]">
+        <div className="flex container justify-between flex-col bg-white m-auto max-h-[726px] rounded-lg">
           <table className="w-full overflow-y-scroll">
             <thead>
               <tr className="w-full">

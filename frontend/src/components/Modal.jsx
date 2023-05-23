@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import addService from "../assets/images/pet-hospital.svg";
 import PetRegistration from "../layout/PetRegistration";
 import AddService from "../layout/AddService";
+import ProductRegistration from "../layout/ProductRegistration";
 import { AiOutlineClose } from "react-icons/ai";
 
-const Modal = ({ type }) => {
+const Modal = ({ type, name }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -42,6 +43,24 @@ const Modal = ({ type }) => {
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end">
               <PetRegistration closeModal={closeModal}></PetRegistration>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  } else if (type === "addProduct") {
+    return (
+      <>
+        <button
+          className=""
+          onClick={() => setIsOpen(true)}
+        >
+          {name}
+        </button>
+        {isOpen && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end">
+              <ProductRegistration closeModal={closeModal}></ProductRegistration>
             </div>
           </div>
         )}

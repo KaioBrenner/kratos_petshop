@@ -119,8 +119,12 @@ const Header = ({ page }) => {
           </div>
 
           <ul className="flex flex-row gap-5 items-center">
-            <li>Clientes</li>
-            <li>Produtos</li>
+            <li>
+              <Link to="/lista-clientes">Clientes</Link>
+            </li>
+            <li>
+              <Link to="/lista-produtos">Produtos</Link>
+            </li>
             <li>Histórico de Vendas</li>
             <li>
               <Link to="/cadastro-cliente">Cadastrar Cliente</Link>
