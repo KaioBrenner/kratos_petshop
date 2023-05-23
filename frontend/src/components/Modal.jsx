@@ -4,6 +4,7 @@ import PetRegistration from "../layout/PetRegistration";
 import AddService from "../layout/AddService";
 import ProductRegistration from "../layout/ProductRegistration";
 import { AiOutlineClose } from "react-icons/ai";
+import BuyProducts from "../layout/BuyProducts";
 
 const Modal = ({ type, name }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,6 +62,24 @@ const Modal = ({ type, name }) => {
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end">
               <ProductRegistration closeModal={closeModal}></ProductRegistration>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  } else if (type === "buyProducts") {
+    return (
+      <>
+        <button
+          className=" w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 "
+          onClick={() => setIsOpen(true)}
+        >
+          Comprar Produtos
+        </button>
+        {isOpen && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end">
+              <BuyProducts closeModal={closeModal} />
             </div>
           </div>
         )}

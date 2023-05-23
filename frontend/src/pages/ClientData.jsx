@@ -111,6 +111,7 @@ const ClientData = () => {
                   </button>
 
                   <Modal type="addPet"></Modal>
+                  <Modal type="buyProducts"></Modal>
 
                   {/* <button className=" w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 ">
                     Adicionar Pet
