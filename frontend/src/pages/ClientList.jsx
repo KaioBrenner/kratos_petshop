@@ -2,8 +2,9 @@ import Header from "../components/Header";
 import UserRow from "../components/ClientRow";
 import { BiCheck } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
+import Modal from "../components/Modal";
 
-import dataUsers from "../constants/dataUsers";
+import dataClients from "../constants/dataUsers";
 
 const ClientList = () => {
   return (
@@ -13,21 +14,36 @@ const ClientList = () => {
       <main className="sm:px-16 px-6 flex flex-col justify-center my-20">
         <h1 className="text-5xl text-left font-bold mb-4 container">Clientes</h1>
 
-        <div className="flex container justify-between flex-col bg-white m-auto max-h-[726px] rounded-lg">
-          <table className="w-full overflow-y-scroll">
-            <thead>
-              <tr className="w-full">
-                <th className="border border-gray-950 p-3">Nome completo</th>
-                <th className="border border-gray-950 p-3">CPF</th>
-                <th className="border border-gray-950 p-3">Ativo</th>
-              </tr>
-            </thead>
-            <tbody className="w-full overflow-y-scroll">
-              {dataUsers.map(({ name, cpf, active }, index) => (
-                <UserRow name={name} cpf={cpf} active={active} index={index} />
-              ))}
-            </tbody>
-          </table>
+        <div className="bg-white p-3 rounded-lg">
+          <div class="max-h-[60vh] bg-white overflow-y-auto border border-gray-200 rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50 sticky top-0">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Nome
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    CPF
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Ativo
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">
+                    Exclusão
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white">
+                {dataClients.map(({ name, cpf, active }) => (
+                  <UserRow name={name} cpf={cpf} active={active}></UserRow>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="flex gap-5">
+            <Modal type="buyProducts"></Modal>
+          </div>
         </div>
       </main>
     </div>

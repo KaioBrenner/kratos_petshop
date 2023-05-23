@@ -36,7 +36,10 @@ const Modal = ({ type, name }) => {
       <>
         <button
           className=" w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 "
-          onClick={() => setIsOpen(true)}
+          onClick={(e) => {
+            setIsOpen(true);
+            e.preventDefault()
+          }}
         >
           Adicionar Pet
         </button>
@@ -52,16 +55,36 @@ const Modal = ({ type, name }) => {
   } else if (type === "addProduct") {
     return (
       <>
-        <button
-          className=""
-          onClick={() => setIsOpen(true)}
-        >
+        <button className="" onClick={() => setIsOpen(true)}>
           {name}
         </button>
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end">
-              <ProductRegistration closeModal={closeModal}></ProductRegistration>
+              <ProductRegistration
+                closeModal={closeModal}
+              ></ProductRegistration>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  } else if (type === "buyProductsClient") {
+    return (
+      <>
+        <button
+          className=" w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 "
+          onClick={(e) => {
+            setIsOpen(true);
+            e.preventDefault();
+          }}
+        >
+          Comprar Produtos
+        </button>
+        {isOpen && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end">
+              <BuyProducts closeModal={closeModal} />
             </div>
           </div>
         )}
@@ -71,7 +94,7 @@ const Modal = ({ type, name }) => {
     return (
       <>
         <button
-          className=" w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 "
+          className=" w-[25%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 "
           onClick={() => setIsOpen(true)}
         >
           Comprar Produtos

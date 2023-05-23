@@ -14,7 +14,7 @@ const BuyProducts = ({ closeModal }) => {
           <AiOutlineClose />
         </button>
         <h1 className="text-2xl font-bold mb-2">Comprar Produtos</h1>
-        <form className="flex flex-col gap-4 justify-between w-[400px]">
+        <form className="flex flex-col gap-4 justify-between w-[670px]">
           <div className="flex flex-col gap-4">
             <div className="w-full">
               <label htmlFor="name">Produto:</label>
@@ -45,7 +45,7 @@ const BuyProducts = ({ closeModal }) => {
             </div>
             <div className="w-full">
               <button
-                className="w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
+                className="w-[100%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
                 onClick={(e) => {
                   e.preventDefault();
                 }}
@@ -54,20 +54,55 @@ const BuyProducts = ({ closeModal }) => {
               </button>
             </div>
           </div>
-          <div>
-            <table>
-              <thead>
+          <div class="max-h-44 overflow-y-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
                 <tr>
-                  <th>Nome</th>
-                  <th>Quantidade</th>
-                  <th>Preço Total</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Produto
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Quantidade
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Preço Total
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Excluir
+                  </th>
+
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="bg-white divide-y divide-gray-200">
                 <tr>
-                  <td>Ração Premium</td>
-                  <td>Quantidade</td>
-                  <td>Preço Total</td>
+                  <td class="px-6 py-4 whitespace-nowrap">Ração Premium</td>
+                  <td class="px-6 py-4 whitespace-nowrap">12</td>
+                  <td class="px-6 py-4 whitespace-nowrap">150.22</td>
+                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">Excluir</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap">Shampoo Hipoalergênico</td>
+                  <td class="px-6 py-4 whitespace-nowrap">2</td>
+                  <td class="px-6 py-4 whitespace-nowrap">30.99</td>
+                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">Excluir</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap">Ração Premium</td>
+                  <td class="px-6 py-4 whitespace-nowrap">12</td>
+                  <td class="px-6 py-4 whitespace-nowrap">150.22</td>
+                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">Excluir</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap">Shampoo Hipoalergênico</td>
+                  <td class="px-6 py-4 whitespace-nowrap">2</td>
+                  <td class="px-6 py-4 whitespace-nowrap">30.99</td>
+                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">Excluir</td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap">Ração Premium</td>
+                  <td class="px-6 py-4 whitespace-nowrap">12</td>
+                  <td class="px-6 py-4 whitespace-nowrap">150.22</td>
+                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">Excluir</td>
                 </tr>
               </tbody>
             </table>
@@ -75,7 +110,7 @@ const BuyProducts = ({ closeModal }) => {
           <div className="flex gap-5">
             <button
               type=""
-              className="  w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
+              className="  w-[100%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
             >
               Efetuar Compra
             </button>

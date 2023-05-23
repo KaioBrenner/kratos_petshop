@@ -1,4 +1,4 @@
-const dataUsers = [
+const dataClients = [
   { id: 1, name: "João", cpf: "123.456.789-00", active: true },
   { id: 2, name: "Maria", cpf: "987.654.321-00", active: false },
   { id: 3, name: "Pedro", cpf: "456.123.789-00", active: true },
@@ -27,4 +27,4 @@ const dataUsers = [
 ];
 
 
-export default dataUsers;
+export default dataClients;

@@ -3,6 +3,7 @@ import PetCard from "../components/PetCard";
 import Modal from "../components/Modal";
 
 import { Link } from "react-router-dom";
+import PetList from "../components/PetCard";
 
 const ClientData = () => {
   return (
@@ -11,7 +12,7 @@ const ClientData = () => {
 
       <div className="w-full h-[92vh] flex justify-center items-center">
         <div className=" bg-white w-[1200px] h-[650px] text-center rounded-lg flex flex-col items-center justify-evenly p-4 drop-shadow-xl shadow-neutral-900">
-          <div class="gap-4 w-full h-full text-left flex flex-row">
+          <form class="gap-4 w-full h-full text-left flex flex-row">
             <div class=" w-[60%]">
               <div className=" flex flex-col justify-between gap-4 rounded-lg h-full">
                 <div className="bg-gray-100 p-3 h-full rounded-lg">
@@ -111,7 +112,7 @@ const ClientData = () => {
                   </button>
 
                   <Modal type="addPet"></Modal>
-                  <Modal type="buyProducts"></Modal>
+                  <Modal type="buyProductsClient"></Modal>
 
                   {/* <button className=" w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 ">
                     Adicionar Pet
@@ -123,9 +124,7 @@ const ClientData = () => {
               <h1 className="text-2xl font-bold">Dados dos Pets</h1>
               <div className="flex flex-col justify-between h-[650px] mt-6">
                 <div className="flex flex-col gap-4 overflow-y-scroll h-[537px]">
-                  <PetCard></PetCard>
-                  <PetCard></PetCard>
-                  <PetCard></PetCard>
+                  <PetList></PetList>
                 </div>
               </div>
             </div>
@@ -173,7 +172,7 @@ const ClientData = () => {
                 </div>
               </div>
             </div> */}
-          </div>
+          </form>
         </div>
       </div>
 

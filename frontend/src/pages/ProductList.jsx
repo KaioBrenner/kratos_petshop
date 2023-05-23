@@ -4,6 +4,7 @@ import { BiCheck } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
 
 import dataProducts from "../constants/dataProducts";
+import Modal from "../components/Modal";
 
 const ProductList = () => {
   return (
@@ -15,23 +16,45 @@ const ProductList = () => {
           Produtos
         </h1>
 
-        <div className="flex container justify-between flex-col bg-white m-auto max-h-[726px] rounded-lg">
-          <table className="w-full overflow-y-scroll">
-            <thead>
-              <tr className="w-full">
-                <th className="border border-gray-950 p-3">Nome</th>
-                <th className="border border-gray-950 p-3">Tipo</th>
-                <th className="border border-gray-950 p-3">Quantidade</th>
-                <th className="border border-gray-950 p-3">Preço</th>
-                <th className="border border-gray-950 p-3">Exclusão</th>
-              </tr>
-            </thead>
-            <tbody className="w-full overflow-y-scroll">
-              {dataProducts.map(({ name, category, stock, price }, index) => (
-                <ProductRow name={name} category={category} stock={stock} price={price} index={index} />
-              ))}
-            </tbody>
-          </table>
+        <div className="bg-white p-3">
+          <div class="max-h-[60vh] bg-white overflow-y-auto border border-gray-200">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50 sticky top-0">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Nome
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Categoria
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Estoque
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Preço
+                  </th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">
+                    Exclusão
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white">
+                {dataProducts.map(({ name, category, stock, price }) => (
+                  <tr className="border-y border-y-gray-200">
+                    <td class="px-6 py-4 whitespace-nowrap border-r border-r-gray-200">{name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border-r border-r-gray-200">{category}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border-r border-r-gray-200">{stock}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border-r border-r-gray-200">{price}</td>
+                    <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">Excluir</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="flex gap-5">
+            <Modal type="buyProducts"></Modal>
+          </div>
         </div>
       </main>
     </div>

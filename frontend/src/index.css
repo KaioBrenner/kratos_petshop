@@ -65,6 +65,8 @@ input[type="checkbox"] {
   display: none; /* oculta o checkbox padrão */
 }
 
+
+
 /* Estilos para o checkbox marcado */
 input[type="checkbox"]:checked + .custom-checkbox {
   /* Estilos quando o checkbox está marcado */

@@ -19,6 +19,7 @@ const ClientRow = ({ name, cpf, active, index }) => {
             <HiOutlineXMark className="m-auto text-red-500" />
           )}
         </td>
+        <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">Excluir</td>
       </tr>
   );
 };
