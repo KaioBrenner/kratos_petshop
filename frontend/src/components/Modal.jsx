@@ -55,8 +55,8 @@ const Modal = ({ type, name }) => {
   } else if (type === "addProduct") {
     return (
       <>
-        <button className="" onClick={() => setIsOpen(true)}>
-          {name}
+        <button className="w-[15%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mb-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2" onClick={() => setIsOpen(true)}>
+          Adicionar Produto
         </button>
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -94,7 +94,7 @@ const Modal = ({ type, name }) => {
     return (
       <>
         <button
-          className=" w-[25%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 "
+          className=" w-[15%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mb-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 "
           onClick={() => setIsOpen(true)}
         >
           Comprar Produtos

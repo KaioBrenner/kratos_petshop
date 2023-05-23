@@ -125,7 +125,9 @@ const Header = ({ page }) => {
             <li>
               <Link to="/lista-produtos">Produtos</Link>
             </li>
-            <li>Histórico de Vendas</li>
+            <li>
+              <Link to="/historico-vendas">Histórico de Vendas</Link>
+            </li>
             <li>
               <Link to="/cadastro-cliente">Cadastrar Cliente</Link>
             </li>
