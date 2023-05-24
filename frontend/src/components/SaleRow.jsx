@@ -32,6 +32,7 @@ const SaleRow = ({ name, cpf, active }) => {
         </td>
         <td className="border-[1.24px] border-gray-200 p-4">{cpf}</td>
         <td className="border-[1.24px] border-gray-200 p-4">150.89</td>
+        <td className="border-[1.24px] border-gray-200 p-4">Cacau</td>
         <td className="border-[1.24px] border-gray-200 p-4">
           {CurrentDateTime()}
         </td>
@@ -41,12 +42,11 @@ const SaleRow = ({ name, cpf, active }) => {
           <td colSpan="12" className="p-4">
             {/* Conteúdo adicional do accordion */}
             <h3 className="text-3xl">Itens comprados</h3>
-            <p className="font-bold">Forma de Pagamento: Cacau</p>
             <ul className="list-disc pl-4">
-              <li>Ração Premium - 12x</li>
-              <li>Coleira Ajustável - 3x</li>
-              <li>Shampoo Hipoalergênico - 2x</li>
-              <li>Brinquedo de Pelúcia</li>
+              <li>Ração Premium | 12x | R$150.89</li>
+              <li>Coleira Ajustável | 3x | R$150.89</li>
+              <li>Shampoo Hipoalergênico | 2x | R$150.89</li>
+              <li>Brinquedo de Pelúcia | R$150.89</li>
             </ul>
           </td>
         </tr>

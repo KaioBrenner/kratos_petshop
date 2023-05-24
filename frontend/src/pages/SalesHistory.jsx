@@ -29,6 +29,9 @@ const SalesHistory = () => {
                     Preço Total
                   </th>
                   <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Forma de Pagamento
+                  </th>
+                  <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Data e hora
                   </th>
                 </tr>

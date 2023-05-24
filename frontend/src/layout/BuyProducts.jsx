@@ -70,7 +70,6 @@ const BuyProducts = ({ closeModal }) => {
                   <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Excluir
                   </th>
-
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-200">
@@ -78,35 +77,63 @@ const BuyProducts = ({ closeModal }) => {
                   <td class="px-6 py-4 whitespace-nowrap">Ração Premium</td>
                   <td class="px-6 py-4 whitespace-nowrap">12</td>
                   <td class="px-6 py-4 whitespace-nowrap">150.22</td>
-                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">Excluir</td>
+                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
+                    Excluir
+                  </td>
                 </tr>
                 <tr>
-                  <td class="px-6 py-4 whitespace-nowrap">Shampoo Hipoalergênico</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    Shampoo Hipoalergênico
+                  </td>
                   <td class="px-6 py-4 whitespace-nowrap">2</td>
                   <td class="px-6 py-4 whitespace-nowrap">30.99</td>
-                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">Excluir</td>
+                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
+                    Excluir
+                  </td>
                 </tr>
                 <tr>
                   <td class="px-6 py-4 whitespace-nowrap">Ração Premium</td>
                   <td class="px-6 py-4 whitespace-nowrap">12</td>
                   <td class="px-6 py-4 whitespace-nowrap">150.22</td>
-                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">Excluir</td>
+                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
+                    Excluir
+                  </td>
                 </tr>
                 <tr>
-                  <td class="px-6 py-4 whitespace-nowrap">Shampoo Hipoalergênico</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    Shampoo Hipoalergênico
+                  </td>
                   <td class="px-6 py-4 whitespace-nowrap">2</td>
                   <td class="px-6 py-4 whitespace-nowrap">30.99</td>
-                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">Excluir</td>
+                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
+                    Excluir
+                  </td>
                 </tr>
                 <tr>
                   <td class="px-6 py-4 whitespace-nowrap">Ração Premium</td>
                   <td class="px-6 py-4 whitespace-nowrap">12</td>
                   <td class="px-6 py-4 whitespace-nowrap">150.22</td>
-                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">Excluir</td>
+                  <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
+                    Excluir
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+          <div className="w-full">
+            <label htmlFor="name">Forma de Pagamento:</label>
+            <select
+              name="porte"
+              class="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+            >
+              <option value="">Dinheiro</option>
+              <option value="">Pix</option>
+              <option value="">Crédito</option>
+              <option value="">Débito</option>
+            </select>
+          </div>
+
           <div className="flex gap-5">
             <button
               type=""
