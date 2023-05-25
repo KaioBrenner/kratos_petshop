@@ -4,7 +4,7 @@ import { BiCheck } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
 import Modal from "../components/Modal";
 
-import dataClients from "../constants/dataUsers";
+// import dataClients from "../constants/dataClients";
 
 const SalesHistory = () => {
   return (

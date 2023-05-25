@@ -12,7 +12,7 @@ const PetRegistration = ({ closeModal }) => {
           <AiOutlineClose />
         </button>
         <h1 className="text-2xl font-bold mb-2">Cadastro do Pet</h1>
-        <form className="flex flex-col gap-4 justify-between w-[400px]">
+        <form className="flex flex-col gap-4 justify-between w-[400px]" method="post">
           <div className="flex flex-col gap-4">
             <div className="w-full">
               <label htmlFor="name">Foto:</label>

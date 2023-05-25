@@ -6,10 +6,13 @@ import { Link } from "react-router-dom";
 
 const ClientSignUp = () => {
   const [cep, setCep] = useState("");
-  const [rua, setRua] = useState("");
-  const [bairro, setBairro] = useState("");
-  const [cidade, setCidade] = useState("");
-  const [estado, setEstado] = useState("");
+  const [address, setAddress] = useState("");
+  const [district, setDistrict] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [tel, setTel] = useState("");
 
   const handleCepChange = async (e) => {
     const novoCep = e.target.value;
@@ -22,16 +25,44 @@ const ClientSignUp = () => {
 
         const { logradouro, bairro, localidade, uf } = response.data;
 
-        setRua(logradouro);
-        setBairro(bairro);
-        setCidade(localidade);
-        setEstado(uf);
+        setAddress(logradouro);
+        setDistrict(bairro);
+        setCity(localidade);
+        setState(uf);
       } catch (error) {
         console.log("Erro ao buscar CEP:", error);
       }
     }
 
     setCep(novoCep);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    
+    const clientData = {
+      fullName,
+      cpf,
+      tel,
+      cep,
+      address,
+      district,
+      city,
+      state,
+    };
+
+    async function createClient(clientData) {
+      try {
+        const response = await axios.post("http://localhost:3000/newClient", clientData);
+        return response.data; // Se desejar, pode retornar a resposta do servidor
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    createClient(clientData)
+
+    console.log(clientData);
   };
 
   return (
@@ -50,27 +81,36 @@ const ClientSignUp = () => {
                   </h1>
                   <div className="flex flex-wrap justify-between gap-2">
                     <div className="w-[45%]">
-                      <label htmlFor="name">Nome Completo:</label>
+                      <label htmlFor="fullName">Nome Completo:</label>
                       <input
                         type="text"
                         className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                         placeholder="Ex: José Santos"
+                        name="fullName"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
                       />
                     </div>
                     <div className="w-[45%]">
-                      <label htmlFor="name">CPF:</label>
+                      <label htmlFor="cpf">CPF:</label>
                       <input
                         type="number"
                         className="border border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                         placeholder="Ex: 12345678900"
+                        name="cpf"
+                        value={cpf}
+                        onChange={(e) => setCpf(e.target.value)}
                       />
                     </div>
                     <div className="w-[45%]">
-                      <label htmlFor="number">Telefone:</label>
+                      <label htmlFor="tel">Telefone:</label>
                       <input
                         type="number"
                         className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                         placeholder="Ex: 75981365975"
+                        name="tel"
+                        value={tel}
+                        onChange={(e) => setTel(e.target.value)}
                       />
                     </div>
                   </div>
@@ -90,43 +130,48 @@ const ClientSignUp = () => {
                         value={cep}
                         onChange={handleCepChange}
                         placeholder="Ex: 91910450"
+                        name="cep"
                       />
                     </div>
                     <div className="flex flex-wrap justify-between gap-4">
                       <div className="w-[45%]">
-                        <label htmlFor="name">Rua:</label>
+                        <label htmlFor="street">Rua:</label>
                         <input
                           type="text"
                           className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                          value={rua}
+                          value={address}
                           placeholder="Rua Domingos da Silva"
+                          name="address"
                         />
                       </div>
                       <div className="w-[45%]">
-                        <label htmlFor="name">Bairro:</label>
+                        <label htmlFor="district">Bairro:</label>
                         <input
                           type="text"
                           className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                          value={bairro}
+                          value={district}
                           placeholder="Camaquã"
+                          name="district"
                         />
                       </div>
                       <div className="w-[45%]">
-                        <label htmlFor="name">Cidade:</label>
+                        <label htmlFor="city">Cidade:</label>
                         <input
                           type="text"
                           className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                          value={cidade}
+                          value={city}
                           placeholder="Porto Alegre"
+                          name="city"
                         />
                       </div>
                       <div className="w-[45%]">
-                        <label htmlFor="name">Estado:</label>
+                        <label htmlFor="state">Estado:</label>
                         <input
                           type="text"
                           className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                          value={estado}
+                          value={state}
                           placeholder="RS"
+                          name="state"
                         />
                       </div>
                     </div>
@@ -139,6 +184,7 @@ const ClientSignUp = () => {
               <button
                 type="submit"
                 className="  w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
+                onClick={handleFormSubmit}
               >
                 Cadastrar Cliente
               </button>

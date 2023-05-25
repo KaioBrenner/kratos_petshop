@@ -1,5 +1,48 @@
-GET http://localhost:3000/
+### Rota Clientes 
 
 ###
-GET http://localhost:3000/todos
+GET http://localhost:3000/clients
 
+###
+POST http://localhost:3000/newClient
+Content-Type: application/json
+
+{
+    "fullName": "Pedro Pandorim",
+    "cpf": "13335928154",
+    "tel": "24841825287",
+    "active": "sim",
+    "cep": "44054362",
+    "address": "Gentio do Ouro",
+    "district": "Parque Ipê",
+    "city": "Feira de Santana",
+    "state": "BA"
+}
+
+###
+
+DELETE http://localhost:3000/cliente/64680f92271438b6a2a09b59
+
+### Rota Pets
+
+###
+GET http://localhost:3000/pets
+
+###
+POST http://localhost:3000/newPet
+Content-Type: application/json
+
+{
+    "petPicture":"",
+    "name": "José Messias",
+    "race": "Pé Duro",
+    "size": "Médio",
+    "age": "8",
+    "weight": "10.3",
+    "sex": "Masculino",
+    "owner": "6468c0774799597ac19fed9b"
+}
+
+###
+
+DELETE http://localhost:3000/pet/64680f92271438b6a2a09b59

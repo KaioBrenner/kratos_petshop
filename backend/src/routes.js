@@ -1,13 +1,18 @@
 const express = require('express');
-const ToDocontroller = require('./controllers/TodoController')
+const clientController = require('./controllers/ClientController');
+const petController = require('./controllers/PetController')
 const routes = express.Router();
 
-/* Rotas */
+/* Rotas  Client */
+routes.post('/newClient', clientController.createClient)
+routes.get('/clients', clientController.clientLists)
+routes.delete('/cliente/:id', clientController.deleteClient)
 
-routes.get('/', (req,res)=>{
-    return res.json({hello:'Hello Worldadasdasdasdasd'})
-})
+/* Rotas Pets */
+routes.get('/pets',petController.petList)
+routes.post('/newPet', petController.createPet)
+routes.post('/pet/:id', clientController.deleteClient)
 
-routes.get('/todos',ToDocontroller.teste)
+
 
 module.exports = routes;
