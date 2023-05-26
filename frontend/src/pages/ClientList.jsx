@@ -5,7 +5,6 @@ import { HiOutlineXMark } from "react-icons/hi2";
 import Modal from "../components/Modal";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom';
 // import fetchClients from "../constants/dataClients";
 
 const ClientList = () => {
@@ -57,9 +56,22 @@ const ClientList = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {clients.map(({fullName, cpf, tel, active, cep, address, district, city, state, _id}, index) => (
-                  <ClientRow name={fullName} cpf={cpf} active={active} id={_id} index={index} key={_id} />
-                ))}
+              {clients.map(({ fullName, cpf, tel, active, cep, address, district, city, state, _id }, index) => (
+                <ClientRow
+                  fullName={fullName}
+                  cpf={cpf}
+                  tel={tel}
+                  active={active}
+                  cep={cep}
+                  address={address}
+                  district={district}
+                  city={city}
+                  state={state}
+                  id={_id}
+                  index={index}
+                  key={_id}
+                />
+              ))}
               </tbody>
             </table>
           </div>

@@ -2,10 +2,42 @@ import Header from "../components/Header";
 import PetCard from "../components/PetCard";
 import Modal from "../components/Modal";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import PetList from "../components/PetCard";
+import { useEffect, useState } from "react";
 
 const ClientData = () => {
+  const location = useLocation();
+  const {
+    fullName,
+    cpf,
+    tel,
+    active,
+    cep,
+    address,
+    district,
+    city,
+    state,
+    id,
+  } = location.state;
+
+  const [clientData, setClientData] = useState({
+    fullName: fullName,
+    cpf: cpf,
+    tel: tel,
+    active: "",
+    cep: cep,
+    address: address,
+    district: district,
+    city: city,
+    state: state,
+    id: id,
+  });
+
+  useEffect(() => {
+    console.log(clientData)
+  }, [clientData])
+
   return (
     <div>
       <Header page="client-data" />
@@ -27,6 +59,8 @@ const ClientData = () => {
                           <input
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                            value={clientData.fullName}
+                            onChange={(e) => setClientData({ ...clientData, fullName: e.target.value })}
                           />
                         </div>
                         <div className="w-[45%]">
@@ -34,7 +68,8 @@ const ClientData = () => {
                           <input
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                            value={"123.456.789-00"}
+                            value={clientData.cpf}
+                            onChange={(e) => setClientData({ ...clientData, cpf: e.target.value })}
                           />
                         </div>
                         <div className="w-[45%]">
@@ -42,14 +77,20 @@ const ClientData = () => {
                           <input
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                            value={"(57) 99158-7603"}
+                            value={clientData.tel}
+                            onChange={(e) => setClientData({ ...clientData, tel: e.target.value })}
                           />
                         </div>
                         <div className="w-[45%]">
                           <label htmlFor="name">Ativo:</label>
-                          <select name="viagem" className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2">
+                          <select
+                            name="viagem"
+                            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                            value={clientData.active}
+                            onChange={(e) => setClientData({ ...clientData, active: e.target.value })}
+                          >
                             <option value=""></option>
-                            <option value="sim">Sim</option>
+                            <option value="sim" >Sim</option>
                             <option value="nao">Não</option>
                           </select>
                         </div>
@@ -64,7 +105,8 @@ const ClientData = () => {
                           <input
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                            value={"(57) 99158-7603"}
+                            value={clientData.cep}
+                            onChange={(e) => setClientData({ ...clientData, cep: e.target.value })}
                           />
                         </div>
                         <div className="flex flex-wrap justify-between gap-4">
@@ -73,7 +115,8 @@ const ClientData = () => {
                             <input
                               type="text"
                               className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                              value={"(57) 99158-7603"}
+                              value={clientData.address}
+                              onChange={(e) => setClientData({ ...clientData, address: e.target.value })}
                             />
                           </div>
                           <div className="w-[45%]">
@@ -81,7 +124,8 @@ const ClientData = () => {
                             <input
                               type="text"
                               className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                              value={"(57) 99158-7603"}
+                              value={clientData.district}
+                              onChange={(e) => setClientData({ ...clientData, district: e.target.value })}
                             />
                           </div>
                           <div className="w-[45%]">
@@ -89,7 +133,8 @@ const ClientData = () => {
                             <input
                               type="text"
                               className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                              value={"(57) 99158-7603"}
+                              value={clientData.city}
+                              onChange={(e) => setClientData({ ...clientData, city: e.target.value })}
                             />
                           </div>
                           <div className="w-[45%]">
@@ -97,7 +142,8 @@ const ClientData = () => {
                             <input
                               type="text"
                               className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                              value={"(57) 99158-7603"}
+                              value={clientData.state}
+                              onChange={(e) => setClientData({ ...clientData, state: e.target.value })}
                             />
                           </div>
                         </div>

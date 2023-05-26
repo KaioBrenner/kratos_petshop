@@ -1,11 +1,13 @@
 import { BiCheck } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import deleteClient from "../constants/fetchClients.js";
 import { useEffect } from "react";
 
-const ClientRow = ({ id, name, cpf, active }) => {
+const ClientRow = ({ fullName, cpf, tel, active, cep, address, district, city, state, id, key, index }) => {
+  const navigate = useNavigate();
+
   const handleDelete = () => {
     async function deleteClient(clientId) {
       try {
@@ -19,18 +21,53 @@ const ClientRow = ({ id, name, cpf, active }) => {
       }
     }
 
-    
     deleteClient(id);
     window.location.reload();
   };
 
+  const handleClick = () => {
+    const clientData = {
+      fullName: fullName,
+      cpf: cpf,
+      tel: tel,
+      active: active,
+      cep: cep,
+      address: address,
+      district: district,
+      city: city,
+      state: state,
+      id: id,
+      key: key,
+      index: index
+    };
+
+    navigate("/dados-cliente", { state: clientData });
+  };
   return (
     <tr
       className={`w-full text-center bg-white border-b-[1.24px] border-gray-200 hover:bg-gray-100`}
+      onClick={handleClick}
     >
       <td className="border-[1.24px] border-gray-200 p-4">
-        <Link to="/dados-cliente" className="w-full h-full inline-block">
-          {name}
+        <Link
+          to={{
+            pathname: "/client-inputs",
+            state: {
+              fullName: fullName,
+              cpf: cpf,
+              tel: tel,
+              active: active,
+              cep: cep,
+              address: address,
+              district: district,
+              city: city,
+              state: state,
+              id: id,
+              index: index,
+            },
+          }}
+        >
+          {fullName}
         </Link>
       </td>
       <td className="border-[1.24px] border-gray-200 p-4">{cpf}</td>
@@ -41,8 +78,10 @@ const ClientRow = ({ id, name, cpf, active }) => {
           <HiOutlineXMark className="m-auto text-red-500" />
         )}
       </td>
-      <td className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer"
-      onClick={handleDelete}>
+      <td
+        className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer"
+        onClick={handleDelete}
+      >
         Excluir
       </td>
     </tr>
