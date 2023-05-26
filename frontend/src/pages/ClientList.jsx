@@ -1,10 +1,11 @@
 import Header from "../components/Header";
-import UserRow from "../components/ClientRow";
+import ClientRow from "../components/ClientRow";
 import { BiCheck } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
 import Modal from "../components/Modal";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom';
 // import fetchClients from "../constants/dataClients";
 
 const ClientList = () => {
@@ -57,7 +58,7 @@ const ClientList = () => {
               </thead>
               <tbody className="bg-white">
                 {clients.map(({fullName, cpf, tel, active, cep, address, district, city, state, _id}, index) => (
-                  <UserRow name={fullName} cpf={cpf} active={active} id={_id} index={index} key={_id}></UserRow>
+                  <ClientRow name={fullName} cpf={cpf} active={active} id={_id} index={index} key={_id} />
                 ))}
               </tbody>
             </table>
