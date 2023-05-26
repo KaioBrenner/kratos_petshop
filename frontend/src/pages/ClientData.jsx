@@ -12,8 +12,8 @@ const ClientData = () => {
 
       <div className="w-full h-[92vh] flex justify-center items-center">
         <div className=" bg-white w-[1200px] h-[650px] text-center rounded-lg flex flex-col items-center justify-evenly p-4 drop-shadow-xl shadow-neutral-900">
-          <form class="gap-4 w-full h-full text-left flex flex-row">
-            <div class=" w-[60%]">
+          <form className="gap-4 w-full h-full text-left flex flex-row">
+            <div className=" w-[60%]">
               <div className=" flex flex-col justify-between gap-4 rounded-lg h-full">
                 <div className="bg-gray-100 p-3 h-full rounded-lg">
                   <div className="flex flex-col justify-between h-full">
@@ -120,7 +120,7 @@ const ClientData = () => {
                 </div>
               </div>
             </div>
-            <div class="bg-gray-100 w-[40%] p-3 rounded-lg">
+            <div className="bg-gray-100 w-[40%] p-3 rounded-lg">
               <h1 className="text-2xl font-bold">Dados dos Pets</h1>
               <div className="flex flex-col justify-between h-[650px] mt-6">
                 <div className="flex flex-col gap-4 overflow-y-scroll h-[537px]">
@@ -128,7 +128,7 @@ const ClientData = () => {
                 </div>
               </div>
             </div>
-            {/* <div class="bg-gray-300 col-span-1 p-4">
+            {/* <div className="bg-gray-300 col-span-1 p-4">
               <h1 className="text-2xl font-bold">Cadastro do Pet</h1>
               <div className="flex flex-col justify-between h-[620px] mt-10">
                 <div className="flex flex-col gap-14">
@@ -176,12 +176,12 @@ const ClientData = () => {
         </div>
       </div>
 
-      {/* <div class="fixed inset-0 flex items-center justify-center z-50">
-        <div class="bg-white p-6 rounded-lg shadow-lg">
+      {/* <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="bg-white p-6 rounded-lg shadow-lg">
           <p>Kaioasdasd</p>
-          <h2 class="text-xl font-bold mb-4">Título do Modal</h2>
+          <h2 className="text-xl font-bold mb-4">Título do Modal</h2>
           <p>Conteúdo do modal aqui...</p>
-          <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+          <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
             Fechar
           </button>
         </div>

@@ -1,7 +1,8 @@
 ### Rota Clientes 
 
 ###
-GET http://localhost:3000/clients
+GET http://localhost:3000/getClient/6470944b07f2b0a216530554
+
 
 ###
 POST http://localhost:3000/newClient
@@ -20,8 +21,21 @@ Content-Type: application/json
 }
 
 ###
-
 DELETE http://localhost:3000/cliente/64680f92271438b6a2a09b59
+
+
+### Rota Categoria
+
+###
+POST http://localhost:3000/createCategory
+Content-Type: application/json
+
+{
+    "name": "Brinquedo"
+}
+
+###
+GET http://localhost:3000/categoryList
 
 ### Rota Pets
 

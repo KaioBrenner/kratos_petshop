@@ -56,8 +56,8 @@ const ClientList = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {clients.map(({fullName, cpf, active, _id}) => (
-                  <UserRow name={fullName} cpf={cpf} active={active} id={_id}></UserRow>
+                {clients.map(({fullName, cpf, tel, active, cep, address, district, city, state, _id}, index) => (
+                  <UserRow name={fullName} cpf={cpf} active={active} id={_id} index={index} key={_id}></UserRow>
                 ))}
               </tbody>
             </table>

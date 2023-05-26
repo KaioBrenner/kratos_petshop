@@ -56,6 +56,18 @@ module.exports = {
           console.log('====================================');
           res.status(500).json({msg:"Erro ao deletar o cliente"})
         }
+    },
+
+    async getClient(req, res){
+        try {
+            const result = await Client.findById(req.params.id);
+            res.json(result)
+        } catch (error){
+            console.log('====================================');
+            console.log(error);
+            console.log('====================================');
+            res.status(500).json({msg:'Erro ao buscas o cliente'})
+        }
     }
 
 }

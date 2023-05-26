@@ -4,7 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 const PetRegistration = ({ closeModal }) => {
   return (
     <>
-      <div class="bg-gray-100 p-3 rounded-lg relative">
+      <div className="bg-gray-100 p-3 rounded-lg relative">
         <button
           className="p-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center mb-4 absolute right-3 top-3"
           onClick={closeModal}
@@ -42,7 +42,7 @@ const PetRegistration = ({ closeModal }) => {
               <label htmlFor="name">Porte:</label>
               <select
                 name="porte"
-                class="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
               >
                 <option value="pequeno">Pequeno</option>
                 <option value="medio">Médio</option>
@@ -69,7 +69,7 @@ const PetRegistration = ({ closeModal }) => {
               <label htmlFor="name">Sexo:</label>
               <select
                 name="sexo"
-                class="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
               >
                 <option value="macho">Macho</option>
                 <option value="femea">Fêmea</option>

@@ -31,6 +31,21 @@ async function createClient(clientData) {
   }
 }
 
+const clientId = "6470944b07f2b0a216530554"
+
+async function getClient(clientId){
+  try {
+    const response = await axios.get(
+      `http://localhost:3000/getClient/${clientId}`
+    );
+
+    console.log(response.data)
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 
 export default { fetchClients, deleteClient, createClient };

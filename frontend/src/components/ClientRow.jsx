@@ -27,7 +27,6 @@ const ClientRow = ({ id, name, cpf, active }) => {
   return (
     <tr
       className={`w-full text-center bg-white border-b-[1.24px] border-gray-200 hover:bg-gray-100`}
-      value={id}
     >
       <td className="border-[1.24px] border-gray-200 p-4">
         <Link to="/dados-cliente" className="w-full h-full inline-block">
@@ -42,7 +41,7 @@ const ClientRow = ({ id, name, cpf, active }) => {
           <HiOutlineXMark className="m-auto text-red-500" />
         )}
       </td>
-      <td class="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer"
+      <td className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer"
       onClick={handleDelete}>
         Excluir
       </td>

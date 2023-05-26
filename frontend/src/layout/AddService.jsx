@@ -68,18 +68,18 @@ const AddService = ({ closeModal }) => {
                 checked={checkboxValues.myCheckbox1}
                 onChange={handleCheckboxChange}
               />
-              <div class="custom-checkbox w-[100%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2">
+              <div className="custom-checkbox w-[100%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2">
                 <img
                   src={petSoap}
                   alt="Imagem de Banho"
-                  class="w-full h-full object-cover rounded-md"
+                  className="w-full h-full object-cover rounded-md"
                 />
               </div>
             </label>
 
             <label
               htmlFor="myCheckbox2"
-              class="flex items-center cursor-pointer"
+              className="flex items-center cursor-pointer"
               title="Tosa"
             >
               <input
@@ -88,17 +88,17 @@ const AddService = ({ closeModal }) => {
               checked={checkboxValues.myCheckbox2}
               onChange={handleCheckboxChange}
             />
-              <div class="custom-checkbox w-[100%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2">
+              <div className="custom-checkbox w-[100%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2">
                 <img
                   src={grooming}
                   alt="Imagem de Tosa"
-                  class="w-full h-full object-cover rounded-md"
+                  className="w-full h-full object-cover rounded-md"
                 />
               </div>
             </label>
             <label
               htmlFor="myCheckbox3"
-              class="flex items-center cursor-pointer"
+              className="flex items-center cursor-pointer"
               title="Cortar Unhas"
             >
               <input
@@ -107,17 +107,17 @@ const AddService = ({ closeModal }) => {
               checked={checkboxValues.myCheckbox3}
               onChange={handleCheckboxChange}
             />
-              <div class="custom-checkbox w-[100%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2">
+              <div className="custom-checkbox w-[100%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2">
                 <img
                   src={nailClipper}
                   alt="Imagem de Cortar Unhas"
-                  class="w-full h-full object-cover rounded-md"
+                  className="w-full h-full object-cover rounded-md"
                 />
               </div>
             </label>
             <label
               htmlFor="myCheckbox4"
-              class="flex items-center cursor-pointer"
+              className="flex items-center cursor-pointer"
               title="Entrega a domicílio"
             >
               <input
@@ -126,19 +126,19 @@ const AddService = ({ closeModal }) => {
               checked={checkboxValues.myCheckbox4}
               onChange={handleCheckboxChange}
             />
-              <div class="custom-checkbox w-[100%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2">
+              <div className="custom-checkbox w-[100%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2">
                 <img
                   src={petDelivery}
                   alt="Imagem de Entrega a domicílio"
-                  class="w-full h-full object-cover rounded-md"
+                  className="w-full h-full object-cover rounded-md"
                 />
               </div>
             </label>
 
-            {/* <label for="meuCheckbox" class="flex items-center cursor-pointer">
-                <input type="checkbox" id="meuCheckbox" class=""/>
+            {/* <label for="meuCheckbox" className="flex items-center cursor-pointer">
+                <input type="checkbox" id="meuCheckbox" className=""/>
                 <div className="w-[50%] h-[130px] bg-brand-orange rounded-[8px] inline-block  self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2">
-                <img src={petSoap} alt="Imagem do Checkbox" class="w-full h-full object-cover rounded-md"/>
+                <img src={petSoap} alt="Imagem do Checkbox" className="w-full h-full object-cover rounded-md"/>
                 </div>
             </label> */}
             {/* <button className=" custom-checkbox w-[50%] h-[130px] bg-brand-orange rounded-[8px] inline-block  self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2">
