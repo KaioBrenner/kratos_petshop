@@ -51,7 +51,7 @@ const ClientRow = ({ fullName, cpf, tel, active, cep, address, district, city, s
       <td className="border-[1.24px] border-gray-200 p-4">
         <Link
           to={{
-            pathname: "/client-inputs",
+            pathname: "/lista-clientes",
             state: {
               fullName: fullName,
               cpf: cpf,

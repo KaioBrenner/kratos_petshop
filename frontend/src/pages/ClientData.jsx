@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import PetCard from "../components/PetCard";
 import Modal from "../components/Modal";
-
+import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import PetList from "../components/PetCard";
 import { useEffect, useState } from "react";
@@ -25,7 +25,7 @@ const ClientData = () => {
     fullName: fullName,
     cpf: cpf,
     tel: tel,
-    active: "",
+    active: active,
     cep: cep,
     address: address,
     district: district,
@@ -34,9 +34,40 @@ const ClientData = () => {
     id: id,
   });
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    // const clientData = {
+    //   fullName,
+    //   cpf,
+    //   tel,
+    //   cep,
+    //   address,
+    //   district,
+    //   city,
+    //   state,
+    // };
+
+    async function updateClient(clientData) {
+      try {
+        const response = await axios.put(
+          `http://localhost:3000/updateClient/${clientData.id}`,
+          clientData
+        );
+        return response.data; // Se desejar, pode retornar a resposta do servidor
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    updateClient(clientData);
+
+    console.log(clientData);
+  };
+
   useEffect(() => {
-    console.log(clientData)
-  }, [clientData])
+    console.log(clientData);
+  }, [clientData]);
 
   return (
     <div>
@@ -44,8 +75,8 @@ const ClientData = () => {
 
       <div className="w-full h-[92vh] flex justify-center items-center">
         <div className=" bg-white w-[1200px] h-[650px] text-center rounded-lg flex flex-col items-center justify-evenly p-4 drop-shadow-xl shadow-neutral-900">
-          <form className="gap-4 w-full h-full text-left flex flex-row">
-            <div className=" w-[60%]">
+          <div className="gap-4 w-full h-full text-left flex flex-row">
+            <form method="post" className=" w-[60%]">
               <div className=" flex flex-col justify-between gap-4 rounded-lg h-full">
                 <div className="bg-gray-100 p-3 h-full rounded-lg">
                   <div className="flex flex-col justify-between h-full">
@@ -60,7 +91,12 @@ const ClientData = () => {
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                             value={clientData.fullName}
-                            onChange={(e) => setClientData({ ...clientData, fullName: e.target.value })}
+                            onChange={(e) =>
+                              setClientData({
+                                ...clientData,
+                                fullName: e.target.value,
+                              })
+                            }
                           />
                         </div>
                         <div className="w-[45%]">
@@ -69,7 +105,12 @@ const ClientData = () => {
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                             value={clientData.cpf}
-                            onChange={(e) => setClientData({ ...clientData, cpf: e.target.value })}
+                            onChange={(e) =>
+                              setClientData({
+                                ...clientData,
+                                cpf: e.target.value,
+                              })
+                            }
                           />
                         </div>
                         <div className="w-[45%]">
@@ -78,20 +119,30 @@ const ClientData = () => {
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                             value={clientData.tel}
-                            onChange={(e) => setClientData({ ...clientData, tel: e.target.value })}
+                            onChange={(e) =>
+                              setClientData({
+                                ...clientData,
+                                tel: e.target.value,
+                              })
+                            }
                           />
                         </div>
                         <div className="w-[45%]">
                           <label htmlFor="name">Ativo:</label>
                           <select
                             name="viagem"
-                            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                            className="border border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                             value={clientData.active}
-                            onChange={(e) => setClientData({ ...clientData, active: e.target.value })}
+                            onChange={(e) =>
+                              setClientData({
+                                ...clientData,
+                                active: e.target.value === "true",
+                              })
+                            }
                           >
-                            <option value=""></option>
-                            <option value="sim" >Sim</option>
-                            <option value="nao">Não</option>
+                            <option value="">Selecione</option>
+                            <option value={true}>Sim</option>
+                            <option value={false}>Não</option>
                           </select>
                         </div>
                       </div>
@@ -106,7 +157,12 @@ const ClientData = () => {
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                             value={clientData.cep}
-                            onChange={(e) => setClientData({ ...clientData, cep: e.target.value })}
+                            onChange={(e) =>
+                              setClientData({
+                                ...clientData,
+                                cep: e.target.value,
+                              })
+                            }
                           />
                         </div>
                         <div className="flex flex-wrap justify-between gap-4">
@@ -116,7 +172,12 @@ const ClientData = () => {
                               type="text"
                               className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                               value={clientData.address}
-                              onChange={(e) => setClientData({ ...clientData, address: e.target.value })}
+                              onChange={(e) =>
+                                setClientData({
+                                  ...clientData,
+                                  address: e.target.value,
+                                })
+                              }
                             />
                           </div>
                           <div className="w-[45%]">
@@ -125,7 +186,12 @@ const ClientData = () => {
                               type="text"
                               className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                               value={clientData.district}
-                              onChange={(e) => setClientData({ ...clientData, district: e.target.value })}
+                              onChange={(e) =>
+                                setClientData({
+                                  ...clientData,
+                                  district: e.target.value,
+                                })
+                              }
                             />
                           </div>
                           <div className="w-[45%]">
@@ -134,7 +200,12 @@ const ClientData = () => {
                               type="text"
                               className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                               value={clientData.city}
-                              onChange={(e) => setClientData({ ...clientData, city: e.target.value })}
+                              onChange={(e) =>
+                                setClientData({
+                                  ...clientData,
+                                  city: e.target.value,
+                                })
+                              }
                             />
                           </div>
                           <div className="w-[45%]">
@@ -143,7 +214,12 @@ const ClientData = () => {
                               type="text"
                               className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                               value={clientData.state}
-                              onChange={(e) => setClientData({ ...clientData, state: e.target.value })}
+                              onChange={(e) =>
+                                setClientData({
+                                  ...clientData,
+                                  state: e.target.value,
+                                })
+                              }
                             />
                           </div>
                         </div>
@@ -153,7 +229,11 @@ const ClientData = () => {
                 </div>
 
                 <div className="flex gap-5">
-                  <button className=" w-[50%] bg-brand-orange rounded-[8px]  h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 flex justify-center items-center cursor-pointer ">
+                  <button
+                    type="submit"
+                    className=" w-[50%] bg-brand-orange rounded-[8px]  h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 flex justify-center items-center cursor-pointer "
+                    onClick={handleFormSubmit}
+                  >
                     Editar Dados
                   </button>
 
@@ -165,7 +245,7 @@ const ClientData = () => {
                   </button>  */}
                 </div>
               </div>
-            </div>
+            </form>
             <div className="bg-gray-100 w-[40%] p-3 rounded-lg">
               <h1 className="text-2xl font-bold">Dados dos Pets</h1>
               <div className="flex flex-col justify-between h-[650px] mt-6">
@@ -218,7 +298,7 @@ const ClientData = () => {
                 </div>
               </div>
             </div> */}
-          </form>
+          </div>
         </div>
       </div>
 

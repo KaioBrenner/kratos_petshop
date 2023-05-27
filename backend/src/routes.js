@@ -7,9 +7,10 @@ const routes = express.Router();
 /* Rotas  Client */
 routes.post('/newClient', clientController.createClient)
 
-
 routes.get('/clients', clientController.clientLists)
 routes.get('/getClient/:id', clientController.getClient)
+
+routes.put('/updateClient/:id', clientController.updateClient)
 
 routes.delete('/cliente/:id', clientController.deleteClient)
 
