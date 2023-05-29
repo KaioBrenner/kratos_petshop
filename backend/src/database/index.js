@@ -10,6 +10,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/petshop", {
 const db = mongoose.connection;
 
 
+
+
 db.on('error', (error) => {
     console.error('Erro de conexão:', error);
   });

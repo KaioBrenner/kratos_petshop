@@ -14,6 +14,12 @@ const ClientSignUp = () => {
   const [cpf, setCpf] = useState("");
   const [tel, setTel] = useState("");
 
+
+  const [fullNameError, setFullNameError] = useState('');
+  const [cpfError, setCpfError] = useState('');
+  const [telError, setTelError] = useState('');
+  const [cepError, setCepError] = useState('')
+
   const handleCepChange = async (e) => {
     const novoCep = e.target.value;
 
@@ -39,6 +45,35 @@ const ClientSignUp = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
+
+    // Validar o campo de nome completo
+    if (fullName.length <= 3) {
+      setFullNameError('O nome é obrigatório');
+    } else {
+      setFullNameError('');
+    }
+
+    // Validar o campo de CPF
+    if (cpf.length !== 11) {
+      setCpfError('O CPF deve ter exatamente 11 dígitos');
+    } else {
+      setCpfError('');
+    }
+
+    // Validar o campo de telefone
+    if (tel.length !== 11) {
+      setTelError('O telefone é obrigatório');
+    } else {
+      setTelError('');
+    }
+
+    // Validar o campo de cep
+    if (cep.length !== 8) {
+      setCepError('O cep é obrigatório');
+    } else {
+      setCepError('');
+    }
     
     const clientData = {
       fullName,
@@ -54,6 +89,7 @@ const ClientSignUp = () => {
     async function createClient(clientData) {
       try {
         const response = await axios.post("http://localhost:3000/newClient", clientData);
+        alert("Cliente cadastrado com sucesso!")
         return response.data; // Se desejar, pode retornar a resposta do servidor
       } catch (error) {
         console.log(error);
@@ -89,7 +125,9 @@ const ClientSignUp = () => {
                         name="fullName"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
+                        min="3"
                       />
+                      {fullNameError && <span className="text-red-400 text-sm">{fullNameError}</span>}
                     </div>
                     <div className="w-[45%]">
                       <label htmlFor="cpf">CPF:</label>
@@ -100,7 +138,10 @@ const ClientSignUp = () => {
                         name="cpf"
                         value={cpf}
                         onChange={(e) => setCpf(e.target.value)}
+                        min="11"
+                        max="11"
                       />
+                      {cpfError && <span className="text-red-400 text-sm">{cpfError}</span>}
                     </div>
                     <div className="w-[45%]">
                       <label htmlFor="tel">Telefone:</label>
@@ -112,6 +153,7 @@ const ClientSignUp = () => {
                         value={tel}
                         onChange={(e) => setTel(e.target.value)}
                       />
+                      {telError && <span className="text-red-400 text-sm">{telError}</span>}
                     </div>
                   </div>
                 </div>
@@ -132,6 +174,7 @@ const ClientSignUp = () => {
                         placeholder="Ex: 91910450"
                         name="cep"
                       />
+                      {cepError && <span className="text-red-400 text-sm">{cepError}</span>}
                     </div>
                     <div className="flex flex-wrap justify-between gap-4">
                       <div className="w-[45%]">
@@ -178,9 +221,8 @@ const ClientSignUp = () => {
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="flex gap-5 justify-center">
+              
+              <div className="flex gap-5 justify-center mt-8">
               <button
                 type="submit"
                 className="  w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
@@ -189,6 +231,9 @@ const ClientSignUp = () => {
                 Cadastrar Cliente
               </button>
             </div>
+            </div>
+
+            
           </form>
         </div>
       </div>

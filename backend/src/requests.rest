@@ -10,8 +10,8 @@ Content-Type: application/json
 
 {
     "fullName": "Pedro Pandorim",
-    "cpf": "13335928154",
-    "tel": "24841825287",
+    "cpf": "13325928454",
+    "tel": "24141825687",
     "active": "sim",
     "cep": "44054362",
     "address": "Gentio do Ouro",

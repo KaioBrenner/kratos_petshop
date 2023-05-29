@@ -140,7 +140,6 @@ const ClientData = () => {
                               })
                             }
                           >
-                            <option value="">Selecione</option>
                             <option value={true}>Sim</option>
                             <option value={false}>Não</option>
                           </select>
@@ -234,7 +233,7 @@ const ClientData = () => {
                     className=" w-[50%] bg-brand-orange rounded-[8px]  h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 flex justify-center items-center cursor-pointer "
                     onClick={handleFormSubmit}
                   >
-                    Editar Dados
+                    Salvar Dados
                   </button>
 
                   <Modal type="addPet"></Modal>

@@ -46,9 +46,9 @@ const ClientRow = ({ fullName, cpf, tel, active, cep, address, district, city, s
   return (
     <tr
       className={`w-full text-center bg-white border-b-[1.24px] border-gray-200 hover:bg-gray-100`}
-      onClick={handleClick}
     >
-      <td className="border-[1.24px] border-gray-200 p-4">
+      <td className="border-[1.24px] border-gray-200 p-4"
+      onClick={handleClick}>
         <Link
           to={{
             pathname: "/lista-clientes",
