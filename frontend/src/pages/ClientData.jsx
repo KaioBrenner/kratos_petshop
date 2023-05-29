@@ -1,9 +1,8 @@
 import Header from "../components/Header";
-import PetCard from "../components/PetCard";
 import Modal from "../components/Modal";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
-import PetList from "../components/PetCard";
+import PetList from "../components/PetList";
 import { useEffect, useState } from "react";
 
 const ClientData = () => {
@@ -230,7 +229,7 @@ const ClientData = () => {
                 <div className="flex gap-5">
                   <button
                     type="submit"
-                    className=" w-[50%] bg-brand-orange rounded-[8px]  h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 flex justify-center items-center cursor-pointer "
+                    className="w-[50%] bg-brand-orange rounded-[8px]  h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 flex justify-center items-center cursor-pointer"
                     onClick={handleFormSubmit}
                   >
                     Salvar Dados

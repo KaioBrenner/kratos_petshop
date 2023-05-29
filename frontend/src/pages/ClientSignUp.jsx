@@ -74,6 +74,10 @@ const ClientSignUp = () => {
     } else {
       setCepError('');
     }
+
+    if(!(fullName.length <= 3 && cpf.length !== 11 && tel.length !== 11 && cep.length !== 8)){
+      alert("Cliente cadastrado com sucesso!")
+    }
     
     const clientData = {
       fullName,
@@ -89,7 +93,6 @@ const ClientSignUp = () => {
     async function createClient(clientData) {
       try {
         const response = await axios.post("http://localhost:3000/newClient", clientData);
-        alert("Cliente cadastrado com sucesso!")
         return response.data; // Se desejar, pode retornar a resposta do servidor
       } catch (error) {
         console.log(error);
@@ -123,7 +126,7 @@ const ClientSignUp = () => {
                         className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                         placeholder="Ex: José Santos"
                         name="fullName"
-                        value={fullName}
+                        defaultValue={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         min="3"
                       />
@@ -136,7 +139,7 @@ const ClientSignUp = () => {
                         className="border border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                         placeholder="Ex: 12345678900"
                         name="cpf"
-                        value={cpf}
+                        defaultValue={cpf}
                         onChange={(e) => setCpf(e.target.value)}
                         min="11"
                         max="11"
@@ -150,7 +153,7 @@ const ClientSignUp = () => {
                         className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                         placeholder="Ex: 75981365975"
                         name="tel"
-                        value={tel}
+                        defaultValue={tel}
                         onChange={(e) => setTel(e.target.value)}
                       />
                       {telError && <span className="text-red-400 text-sm">{telError}</span>}
@@ -169,7 +172,7 @@ const ClientSignUp = () => {
                         type="number"
                         className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                         id="cep"
-                        value={cep}
+                        defaultValue={cep}
                         onChange={handleCepChange}
                         placeholder="Ex: 91910450"
                         name="cep"
@@ -182,7 +185,7 @@ const ClientSignUp = () => {
                         <input
                           type="text"
                           className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                          value={address}
+                          defaultValue={address}
                           placeholder="Rua Domingos da Silva"
                           name="address"
                         />
@@ -192,7 +195,7 @@ const ClientSignUp = () => {
                         <input
                           type="text"
                           className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                          value={district}
+                          defaultValue={district}
                           placeholder="Camaquã"
                           name="district"
                         />
@@ -202,7 +205,7 @@ const ClientSignUp = () => {
                         <input
                           type="text"
                           className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                          value={city}
+                          defaultValue={city}
                           placeholder="Porto Alegre"
                           name="city"
                         />
@@ -212,7 +215,7 @@ const ClientSignUp = () => {
                         <input
                           type="text"
                           className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                          value={state}
+                          defaultValue={state}
                           placeholder="RS"
                           name="state"
                         />
