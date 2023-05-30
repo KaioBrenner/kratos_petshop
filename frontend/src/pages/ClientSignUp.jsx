@@ -87,7 +87,7 @@ const ClientSignUp = () => {
       address,
       district,
       city,
-      state,
+      state
     };
 
     async function createClient(clientData) {

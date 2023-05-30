@@ -24,7 +24,7 @@ routes.delete('/deletCategory', CategoryController.deletCategory)
 
 /* Rotas Pets */
 routes.get('/pets',petController.petList)
-routes.post('/newPet', petController.createPet)
+routes.post('/newPet/:id', petController.createPet)
 routes.post('/pet/:id', clientController.deleteClient)
 
 

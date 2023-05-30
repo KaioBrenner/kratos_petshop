@@ -13,7 +13,7 @@ const PetSchema = new Schema({
     required: [true, "O campo foto é obrigatório"],
   },
 
-  name: {
+  petName: {
     type: String,
     validate: {
       validator: (name) => name.length > 0,

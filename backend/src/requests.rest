@@ -1,7 +1,7 @@
 ### Rota Clientes 
 
 ###
-GET http://localhost:3000/getClient/6470944b07f2b0a216530554
+GET http://localhost:3000/clients
 
 
 ###
@@ -43,18 +43,17 @@ GET http://localhost:3000/categoryList
 GET http://localhost:3000/pets
 
 ###
-POST http://localhost:3000/newPet
+POST http://localhost:3000/newPet/647493d40f77dcbcb3f4dfd6
 Content-Type: application/json
 
 {
-    "petPicture":"",
     "name": "José Messias",
     "race": "Pé Duro",
     "size": "Médio",
-    "age": "8",
-    "weight": "10.3",
-    "sex": "Masculino",
-    "owner": "6468c0774799597ac19fed9b"
+    "age": 8,
+    "weight": 10.3,
+    "sex": "Macho",
+    "owner": "647493d40f77dcbcb3f4dfd6"
 }
 
 ###
