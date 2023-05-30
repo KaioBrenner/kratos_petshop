@@ -18,46 +18,50 @@ const PetRegistration = ({ closeModal }) => {
     id,
   } = location.state;
 
-  // petPicture
-  // petName
-  // race
-  // size
-  // age
-  // weight
-  // sex
-  // owner
+  const [bufferData, setBufferData] = useState("");
 
-  const [bufferData, setBufferData] = useState('');
+  // Função para converter base64 para ArrayBuffer
+  const base64ToArrayBuffer = (base64) => {
+    const binaryString = window.atob(base64);
+    const len = binaryString.length;
+    const bytes = new Uint8Array(len);
 
-  // Converter o Buffer para base64
-  const bufferToBase64 = (buffer) => {
-    return Buffer.from(buffer).toString('base64');
+    for (let i = 0; i < len; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+
+    return bytes.buffer;
   };
 
-  // Converter base64 para Buffer
-  const base64ToBuffer = (base64) => {
-    return Buffer.from(base64, 'base64');
+  // Função para converter ArrayBuffer para base64
+  const arrayBufferToBase64 = (buffer) => {
+    let binary = "";
+    const bytes = new Uint8Array(buffer);
+    const len = bytes.byteLength;
+
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    return window.btoa(binary);
   };
 
-  // Manipular a seleção do arquivo
+  // Manipulador de eventos para o input de arquivo
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
+    const reader = new FileReader();
 
-    if (file) {
-      const reader = new FileReader();
+    reader.onload = (e) => {
+      const base64Data = e.target.result.split(";base64,")[1];
+      const arrayBuffer = base64ToArrayBuffer(base64Data);
+      setBufferData(arrayBufferToBase64(arrayBuffer));
+    };
 
-      reader.onload = (e) => {
-        const base64Data = e.target.result.split(';base64,')[1];
-        const buffer = base64ToBuffer(base64Data);
-        setBufferData(bufferToBase64(buffer));
-      };
-
-      reader.readAsDataURL(file);
-    }
+    reader.readAsDataURL(file);
   };
 
 
-  
+
   const [petName, setPetName] = useState("");
   const [race, setRace] = useState("");
   const [size, setSize] = useState("Pequeno");
@@ -75,12 +79,12 @@ const PetRegistration = ({ closeModal }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    // // Validar o campo de nome completo
-    // if (fullName.length <= 3) {
-    //   setFullNameError("O nome é obrigatório");
-    // } else {
-    //   setFullNameError("");
-    // }
+    // Validar o campo de nome completo
+    if (petName.length <= 3) {
+      setpetNameError("O nome é obrigatório");
+    } else {
+      setpetNameError("");
+    }
 
     // // Validar o campo de CPF
     // if (cpf.length !== 11) {
@@ -115,7 +119,7 @@ const PetRegistration = ({ closeModal }) => {
     // }
 
     const petData = {
-      petPicture,
+      petPicture: bufferData,
       petName,
       race,
       size,
@@ -131,7 +135,7 @@ const PetRegistration = ({ closeModal }) => {
           `http://localhost:3000/newPet/${clientId}`,
           petData
         );
-        console.log(petData)
+        console.log(petData);
         return response.data; // Se desejar, pode retornar a resposta do servidor
       } catch (error) {
         console.log(error);
@@ -157,11 +161,10 @@ const PetRegistration = ({ closeModal }) => {
               <label htmlFor="name">Foto:</label>
               <input
                 type="file"
-                className="inline-block h-22 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl text-base w-full mt-2"
+                className="inline-block h-22 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl text-base  w-full mt-2"
                 accept="image/*"
                 onChange={handleFileInputChange}
               />
-              {bufferData && <img src={`data:image/png;base64, ${bufferData}`} alt="Selected Image" />}
             </div>
             <div className="w-full">
               <label htmlFor="name">Nome:</label>
@@ -172,6 +175,7 @@ const PetRegistration = ({ closeModal }) => {
                 defaultValue={petName}
                 onChange={(e) => setPetName(e.target.value)}
               />
+              {petNameError && <span className="text-red-400 text-sm">{petNameError}</span>}
             </div>
             <div className="w-full">
               <label htmlFor="name">Raça:</label>
@@ -191,7 +195,7 @@ const PetRegistration = ({ closeModal }) => {
                 defaultValue={size}
                 onChange={(e) => {
                   setSize(e.target.value);
-                  console.log(e.target.value)
+                  console.log(e.target.value);
                 }}
               >
                 <option value="Pequeno">Pequeno</option>

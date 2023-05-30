@@ -1,4 +1,4 @@
-import logo from "../assets/images/dogKratosLado.png";
+import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
 
 const Header = ({ page }) => {
@@ -97,8 +97,8 @@ const Header = ({ page }) => {
       <header className="sm:px-16 px-6 flex justify-center items-center bg-white h-[8vh]">
         <div className="flex container justify-between items-center">
           <div className="logo">
-            <Link to="/">
-              <img src={logo} className="w-[140px]" />
+            <Link to="/" className="flex justify-center items-center">
+              <img src={logo} className="h-[80px]"/>
             </Link>
           </div>
 
@@ -112,9 +112,9 @@ const Header = ({ page }) => {
     return (
       <header className="sm:px-16 px-6 flex justify-center items-center bg-white h-[8vh]">
         <div className="flex container justify-between items-center">
-          <div className="logo">
-            <Link to="/lista-clientes">
-              <img src={logo} className="w-[140px]" />
+        <div className="logo">
+            <Link to="/lista-clientes" className="flex justify-center items-center">
+              <img src={logo} className="h-[80px]"/>
             </Link>
           </div>
 

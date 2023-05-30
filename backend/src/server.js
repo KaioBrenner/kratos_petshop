@@ -1,19 +1,18 @@
 const express = require("express");
 const routes = require("./routes");
+const bodyParser = require('body-parser');
 const cors = require("cors");
 
 require("./database");
 
 const app = express();
 
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+
 app.use(express.json());
 
-// Configurar o CORS
-app.use(
-  cors({
-    origin: "http://127.0.0.1:5173",
-  })
-);
+app.use(cors());
 
 app.use(routes);
 
