@@ -75,7 +75,7 @@ const ClientSignUp = () => {
       setCepError('');
     }
 
-    if(!(fullName.length <= 3 && cpf.length !== 11 && tel.length !== 11 && cep.length !== 8)){
+    if(!(fullName.length <= 3 || cpf.length !== 11 || tel.length !== 11 || cep.length !== 8)){
       alert("Cliente cadastrado com sucesso!")
     }
     
@@ -87,7 +87,7 @@ const ClientSignUp = () => {
       address,
       district,
       city,
-      state,
+      state
     };
 
     async function createClient(clientData) {

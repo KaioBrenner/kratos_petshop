@@ -61,7 +61,7 @@ const ClientSchema = new Schema({
       validator: estado => estado.length === 2,
       message: 'O estado informado está incorreto!'
     },
-  }
+  },
 });
 
 const Client = mongoose.model('Cliente', ClientSchema);
