@@ -70,7 +70,7 @@ const PetRegistration = ({ closeModal }) => {
   const [sex, setSex] = useState("Macho");
   const [owner, setOwner] = useState(id);
 
-  const [petPictureError, setPetPictureError] = useState("");
+  const [buffeDataError, setBufferDataError] = useState("");
   const [petNameError, setpetNameError] = useState("");
   const [raceError, setRaceError] = useState("");
   const [ageError, setAgeError] = useState("");
@@ -78,33 +78,43 @@ const PetRegistration = ({ closeModal }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
+    if(!bufferData){
+      setBufferDataError("A foto é obrigatória");
+    } else {
+      setBufferDataError("");
+    }
     
-    if (petName.length <= 3) {
+    if (petName.length < 3) {
       setpetNameError("O nome é obrigatório");
     } else {
       setpetNameError("");
     }
 
-    // // Validar o campo de CPF
-    // if (cpf.length !== 11) {
-    //   setCpfError("O CPF deve ter exatamente 11 dígitos");
-    // } else {
-    //   setCpfError("");
-    // }
+    // Validar o campo de CPF
+    if (race.length < 3) {
+      setRaceError("A raça é obrigatória");
+    } else {
+      setRaceError("");
+    }
 
-    // // Validar o campo de telefone
-    // if (tel.length !== 11) {
-    //   setTelError("O telefone é obrigatório");
-    // } else {
-    //   setTelError("");
-    // }
+    // Validar o campo de telefone
+    if (!(age) || age < 0) {
+      setAgeError("A idade mínima é de 0 anos");
+    } else {
+      setAgeError("");
+    }
 
-    // // Validar o campo de cep
-    // if (cep.length !== 8) {
-    //   setCepError("O cep é obrigatório");
-    // } else {
-    //   setCepError("");
-    // }
+    // Validar o campo de cep
+    if (!(weight) || weight < 0.5) {
+      setWeightError("O peso mínimo é de 0.5Kg");
+    } else {
+      setWeightError("");
+    }
+
+    if(!(!bufferData || petName.length < 3 || race.length < 3 || !(age) || age < 0 || !(weight) || weight < 0.5)){
+      alert("Pet cadastrado com sucesso!")
+    }
 
     // if (
     //   !(
@@ -155,7 +165,7 @@ const PetRegistration = ({ closeModal }) => {
         </button>
         <h1 className="text-2xl font-bold mb-2">Cadastro do Pet</h1>
         <div className="flex flex-col gap-4 justify-between w-[400px]">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
             <div className="w-full">
               <label htmlFor="name">Foto:</label>
               <input
@@ -164,7 +174,8 @@ const PetRegistration = ({ closeModal }) => {
                 accept="image/*"
                 onChange={handleFileInputChange}
               />
-              {bufferData && <img src={`data:image/png;base64, ${bufferData}`} alt="Selected Image" />}
+              {bufferData && <img src={`data:image/png;base64, ${bufferData}`} alt="Selected Image" className="m-auto rounded-full border-2 border-white bg-white w-24 h-24"/>}
+              {buffeDataError && <span className="text-red-400 text-sm">{buffeDataError}</span>}
             </div>
             <div className="w-full">
               <label htmlFor="name">Nome:</label>
@@ -186,6 +197,7 @@ const PetRegistration = ({ closeModal }) => {
                 defaultValue={race}
                 onChange={(e) => setRace(e.target.value)}
               />
+              {raceError && <span className="text-red-400 text-sm">{raceError}</span>}
             </div>
             <div className="w-full">
               <label htmlFor="name">Porte:</label>
@@ -212,16 +224,17 @@ const PetRegistration = ({ closeModal }) => {
                 defaultValue={age}
                 onChange={(e) => setAge(e.target.value)}
               />
+              {ageError && <span className="text-red-400 text-sm">{ageError}</span>}
             </div>
             <div className="w-full">
               <label htmlFor="name">Peso:</label>
               <input
                 type="number"
                 className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                min={1}
                 defaultValue={weight}
                 onChange={(e) => setWeight(e.target.value)}
               />
+              {weightError && <span className="text-red-400 text-sm">{weightError}</span>}
             </div>
             <div className="w-full">
               <label htmlFor="name">Sexo:</label>

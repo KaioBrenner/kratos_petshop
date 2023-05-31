@@ -3,41 +3,7 @@ import PetCard from "./PetCard";
 useState;
 
 const PetList = () => {
-  const [pets, setPets] = useState([
-    {
-      id: 1,
-      petPicture: undefined,
-      name: "Jacob",
-      race: "Pasto Alemão",
-      size: "Médio",
-      age: 2,
-      weight: 24,
-      sex: "macho",
-      owner: undefined,
-    },
-    {
-      id: 2,
-      petPicture: undefined,
-      name: "Jacob",
-      race: "Pasto Alemão",
-      size: "Médio",
-      age: 2,
-      weight: 24,
-      sex: "macho",
-      owner: undefined,
-    },
-    {
-      id: 3,
-      petPicture: undefined,
-      name: "Jacob",
-      race: "Pasto Alemão",
-      size: "Médio",
-      age: 2,
-      weight: 24,
-      sex: "macho",
-      owner: undefined,
-    },
-  ]);
+  const [pets, setPets] = useState([])
 
   const handleUpdatePet = (updatedPet) => {
     const updatedPets = pets.map((pet) => {
