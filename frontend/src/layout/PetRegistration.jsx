@@ -138,6 +138,8 @@ const PetRegistration = ({ closeModal }) => {
       owner,
     };
 
+    console.log(petData.petPicture)
+
     async function createPet(clientId, petData) {
       try {
         const response = await axios.post(

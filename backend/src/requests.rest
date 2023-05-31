@@ -43,17 +43,18 @@ GET http://localhost:3000/categoryList
 GET http://localhost:3000/pets
 
 ###
-POST http://localhost:3000/newPet/647493d40f77dcbcb3f4dfd6
+POST http://localhost:3000/newPet/646fdb15f7ffc8723b41ac9d
 Content-Type: application/json
 
 {
+    "petPicture": "",
     "name": "José Messias",
     "race": "Pé Duro",
     "size": "Médio",
     "age": 8,
     "weight": 10.3,
     "sex": "Macho",
-    "owner": "647493d40f77dcbcb3f4dfd6"
+    "owner": "646fdb15f7ffc8723b41ac9d"
 }
 
 ###

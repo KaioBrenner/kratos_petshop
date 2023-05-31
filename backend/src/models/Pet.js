@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { Buffer } = require('buffer');
 
 const PetSchema = new Schema({
   petPicture: {

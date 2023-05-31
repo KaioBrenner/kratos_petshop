@@ -24,7 +24,6 @@ const PetCard = ({ pet, onUpdate }) => {
   const [weight, setWeight] = useState(initialWeight);
   const [sex, setSex] = useState(initialSex);
 
-
   const handleSave = () => {
     const updatedPet = {
       id,
@@ -40,20 +39,23 @@ const PetCard = ({ pet, onUpdate }) => {
     onUpdate(updatedPet);
   };
 
-    const bufferObj = Buffer.from(`${petPicture.data}`, 'utf-8');
-    const base64String = bufferObj.toString('base64');
+  console.log(petPicture)
 
-    console.log(base64String)
+  const bufferData = new Buffer(petPicture.data);
+  const base64String = bufferData.toString('base64');
+
+  console.log(base64String)
 
   return (
     <div className="mb-4 border border-neutral-950 rounded-lg p-4 relative">
-      {petPicture && (
-        <img
-          src={`data:${petPicture.type};base64,/${base64String}`}
-          alt="Selected Image"
-          className="m-auto rounded-full border-2 border-white bg-white w-24 h-24"
-        />
-      )}
+        <div>
+          {petPicture && (
+            <img
+              src={`data:image/jpeg;base64, ${base64String}`}
+              alt="Imagem"
+            />
+          )}
+        </div>
 
       <Modal type="addService"></Modal>
 
