@@ -246,8 +246,8 @@ const PetRegistration = ({ closeModal }) => {
                 defaultValue={sex}
                 onChange={(e) => setSex(e.target.value)}
               >
-                <option value="macho">Macho</option>
-                <option value="femea">Fêmea</option>
+                <option value="Macho">Macho</option>
+                <option value="Fêmea">Fêmea</option>
               </select>
             </div>
           </div>

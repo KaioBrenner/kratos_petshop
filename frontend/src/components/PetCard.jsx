@@ -2,34 +2,37 @@ import React, { useEffect, useState } from "react";
 import dog from "../assets/images/pastor-alemão.jpg";
 import Modal from "./Modal";
 import { Buffer } from "buffer";
-import grave from "../assets/images/pet-grave.svg"
+import grave from "../assets/images/pet-grave.svg";
 import axios from "axios";
 
 const PetCard = ({ pet, onUpdate }) => {
   const {
     _id,
     petPicture,
-    name: initialName,
-    race: initialRace,
-    size: initialSize,
-    age: initialAge,
-    weight: initialWeight,
-    sex: initialSex,
-    owner: initialOwner,
+    petName,
+    race,
+    size,
+    age,
+    weight,
+    sex,
   } = pet;
 
+  const [petData, setPetData] = useState({
+    petPicture,
+    petName,
+    race,
+    size,
+    age,
+    weight,
+    sex,
+  });
+
+  
+
   // const [petPicture, setPetPicture] = useState(initialPicture)
-  const [bufferData, setBufferData] = useState("");
-  const [name, setName] = useState(initialName);
-  const [race, setRace] = useState(initialRace);
-  const [size, setSize] = useState(initialSize);
-  const [age, setAge] = useState(initialAge);
-  const [weight, setWeight] = useState(initialWeight);
-  const [sex, setSex] = useState(initialSex);
 
   const handleSave = () => {
     const updatedPet = {
-      id,
       petPicture,
       name,
       race,
@@ -37,7 +40,6 @@ const PetCard = ({ pet, onUpdate }) => {
       age,
       weight,
       sex,
-      owner,
     };
     onUpdate(updatedPet);
   };
@@ -55,7 +57,7 @@ const PetCard = ({ pet, onUpdate }) => {
       }
     }
 
-    console.log(pet)
+    console.log(pet);
     deletePet(_id);
     window.location.reload();
   };
@@ -95,8 +97,11 @@ const PetCard = ({ pet, onUpdate }) => {
             type="text"
             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
             min="3"
-            value={pet.petName}
-            onChange={(e) => setName(e.target.value)}
+            defaultValue={pet.petName}
+            onChange={(e) => {
+              setName(e.target.value);
+              console.log(pet)
+            }}
           />
         </div>
         <div className="w-full">
@@ -105,7 +110,7 @@ const PetCard = ({ pet, onUpdate }) => {
             type="text"
             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
             min="3"
-            value={race}
+            defaultValue={pet.race}
             onChange={(e) => setBreed(e.target.value)}
           />
         </div>
@@ -114,12 +119,12 @@ const PetCard = ({ pet, onUpdate }) => {
           <select
             name="porte"
             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-            value={size}
+            defaultValue={pet.size}
             onChange={(e) => setSize(e.target.value)}
           >
-            <option value="pequeno">Pequeno</option>
-            <option value="medio">Médio</option>
-            <option value="grande">Grande</option>
+            <option value="Pequeno">Pequeno</option>
+            <option value="Médio">Médio</option>
+            <option value="Grande">Grande</option>
           </select>
         </div>
         <div className="w-full">
@@ -127,7 +132,7 @@ const PetCard = ({ pet, onUpdate }) => {
           <input
             type="number"
             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-            value={age}
+            defaultValue={pet.age}
             onChange={(e) => setAge(parseInt(e.target.value))}
           />
         </div>
@@ -136,7 +141,7 @@ const PetCard = ({ pet, onUpdate }) => {
           <input
             type="number"
             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-            value={weight}
+            defaultValue={pet.weight}
             onChange={(e) => setWeight(parseFloat(e.target.value))}
           />
         </div>
@@ -145,11 +150,11 @@ const PetCard = ({ pet, onUpdate }) => {
           <select
             name="sexo"
             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-            value={sex}
+            defaultValue={pet.sex}
             onChange={(e) => setSex(e.target.value)}
           >
-            <option value="macho">Macho</option>
-            <option value="femea">Fêmea</option>
+            <option value="Macho">Macho</option>
+            <option value="Fêmea">Fêmea</option>
           </select>
         </div>
       </div>
