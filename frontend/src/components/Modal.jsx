@@ -17,7 +17,7 @@ const Modal = ({ type, name }) => {
     return (
       <div>
         <a
-          className="absolute top-2 right-2 border border-gray-600 rounded-full bg-brand-orange-faded cursor-pointer slide-bck-center"
+          className="absolute top-2 left-2 border border-gray-600 rounded-full bg-brand-orange-faded cursor-pointer slide-bck-center"
           onClick={() => setIsOpen(true)}
         >
           <img src={addService} width={45} alt="Add Service" />

@@ -1,8 +1,8 @@
-import Product from "../models/Product";
-import Category from "../models/Category";
+const Product = require('../models/Product')
+const Category = require('../models/Category')
 
 module.exports = {
-  async creatProduto(req, res) {
+  async createProduto(req, res) {
     try {
       const { name, category, stock, price } = req.body;
 
@@ -10,16 +10,17 @@ module.exports = {
       if (!categoryExists) {
         return res.status(404).json({ msg: "Categoria não encontrada" });
       }
-
+      
+    
       const product = new Product({
         name,
-        category: categoryExists,
+        category: categoryExists.name,
         stock,
         price,
       });
 
       product.save();
-      res.json(client);
+      res.json(product);
     } catch (error) {
       console.log("====================================");
       console.log(error);

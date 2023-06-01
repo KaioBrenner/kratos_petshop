@@ -3,8 +3,8 @@ import axios from "axios";
 import PetCard from "./PetCard";
 useState;
 
-const PetList = () => {
-  const [pets, setPets] = useState([])
+const PetList = ({ clientId }) => {
+  const [pets, setPets] = useState([]);
 
   useEffect(() => {
     async function fetchPets() {
@@ -12,7 +12,9 @@ const PetList = () => {
         const response = await axios.get("http://localhost:3000/pets");
         const dataPets = response.data;
         setPets(dataPets);
-        console.log(dataPets)
+        console.log(dataPets);
+        console.log(pets[0].owner);
+        console.log(clientId);
       } catch (error) {
         console.log(error);
       }
@@ -33,9 +35,12 @@ const PetList = () => {
 
   return (
     <div className="flex flex-col gap-4 overflow-y-auto h-[537px]">
-      {pets.map((pet) => (
-        <PetCard key={pet.id}   pet={pet} onUpdate={handleUpdatePet} />
-      ))}
+      {pets.map((pet) => {
+        if (clientId === pet.owner) {
+          return <PetCard key={pet.id} pet={pet} onUpdate={handleUpdatePet} />;
+        }
+        return null;
+      })}
     </div>
   );
 };

@@ -138,7 +138,6 @@ const PetRegistration = ({ closeModal }) => {
       owner,
     };
 
-    console.log(petData.petPicture)
 
     async function createPet(clientId, petData) {
       try {
@@ -147,6 +146,7 @@ const PetRegistration = ({ closeModal }) => {
           petData
         );
         console.log(petData);
+        window.location.reload()
         return response.data; // Se desejar, pode retornar a resposta do servidor
       } catch (error) {
         console.log(error);

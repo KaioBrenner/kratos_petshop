@@ -247,8 +247,8 @@ const ClientData = () => {
             <div className="bg-gray-100 w-[40%] p-3 rounded-lg">
               <h1 className="text-2xl font-bold">Dados dos Pets</h1>
               <div className="flex flex-col justify-between h-[650px] mt-6">
-                <div className="flex flex-col gap-4 overflow-y-scroll h-[537px]">
-                  <PetList></PetList>
+                <div className="flex flex-col gap-4  h-[537px]">
+                  <PetList clientId={id}></PetList>
                 </div>
               </div>
             </div>

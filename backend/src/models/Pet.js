@@ -3,12 +3,11 @@ const Schema = mongoose.Schema;
 const { Buffer } = require('buffer');
 
 const PetSchema = new Schema({
+  // Antigo Buffer
   petPicture: {
-    type: Buffer,
+    type: String,
     validate: {
-      validator: function (value) {
-        return value instanceof Buffer && value.length > 0;
-      },
+      validator: (petPicture) => petPicture.length > 0,
       message: "A foto do pet é obrigatória e deve ser fornecida corretamente.",
     },
     required: [true, "O campo foto é obrigatório"],

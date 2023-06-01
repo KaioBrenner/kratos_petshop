@@ -59,4 +59,20 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/pet/64680f92271438b6a2a09b59
+DELETE http://localhost:3000/deletePet/64772fa255acbf3db1c428d3
+
+
+### Rota Produto
+
+POST http://localhost:3000/newProduct
+Content-Type: application/json
+
+{
+    "name": "Ração Premiumn",
+    "category": "6470a026ccf53739a6f6a099",
+    "stock": 2222,
+    "price": 666
+}
+
+###
+GET http://localhost:3000/product

@@ -9,12 +9,12 @@ const ProdutcSchema = new Schema({
             validator: nome => nome.length > 0,
             message: 'O nome do produto não pode ser nulo'
         },
-        required:[true, 'O campo nome é obrigatório']
+        required:[true, 'O campo nome é obrigatório'],
+        unique:[true]
     },
 
     category:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Categoria',
+        type: String,
         required: [true, 'O campo categoria é obrigatório']
     },
 

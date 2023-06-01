@@ -51,7 +51,7 @@ module.exports = {
     }
   },
 
-  async deletPet(req, res) {
+  async deletePet(req, res) {
     try {
       const result = await Pet.findByIdAndDelete(req.params.id);
       res.json(result);
