@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import dog from "../assets/images/pastor-alemão.jpg";
 import Modal from "./Modal";
 import { Buffer } from "buffer";
-import grave from "../assets/images/pet-grave_1.svg";
+import grave from "../assets/images/pet-grave.svg";
 import axios from "axios";
 
 const PetCard = ({ pet, onUpdate }) => {
   const { _id, petPicture, petName, race, size, age, weight, sex } = pet;
+  const [showInput, setShowInput] = useState(true);
+  const [bufferData, setBufferData] = useState("");
+
 
   const [petData, setPetData] = useState({
     petPicture,
@@ -20,18 +23,6 @@ const PetCard = ({ pet, onUpdate }) => {
 
   // const [petPicture, setPetPicture] = useState(initialPicture)
 
-  const handleSave = () => {
-    const updatedPet = {
-      petPicture,
-      petName,
-      race,
-      size,
-      age,
-      weight,
-      sex,
-    };
-    onUpdate(updatedPet);
-  };
 
   const handleDelete = () => {
     async function deletePet(petId) {
@@ -51,22 +42,157 @@ const PetCard = ({ pet, onUpdate }) => {
     window.location.reload();
   };
 
-  // console.log(petPicture)
 
-  // const bufferData = Buffer.from('Hello, World!');
-  // const base64String = bufferData.toString('base64');
+  // Função para converter base64 para ArrayBuffer
+  const base64ToArrayBuffer = (base64) => {
+    const binaryString = window.atob(base64);
+    const len = binaryString.length;
+    const bytes = new Uint8Array(len);
 
-  // console.log('Base64 String:', base64String);
+    for (let i = 0; i < len; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+
+    return bytes.buffer;
+  };
+
+  // Função para converter ArrayBuffer para base64
+  const arrayBufferToBase64 = (buffer) => {
+    let binary = "";
+    const bytes = new Uint8Array(buffer);
+    const len = bytes.byteLength;
+
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    return window.btoa(binary);
+  };
+
+  // Manipulador de eventos para o input de arquivo
+  const handleFileInputChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      const base64Data = e.target.result.split(";base64,")[1];
+      const arrayBuffer = base64ToArrayBuffer(base64Data);
+      setBufferData(arrayBufferToBase64(arrayBuffer));
+      setPetData({ ...petData, petPicture: base64Data });
+    };
+
+    reader.readAsDataURL(file);
+    setShowInput(false);
+  };
+
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    // if(!bufferData){
+    //   setBufferDataError("A foto é obrigatória");
+    // } else {
+    //   setBufferDataError("");
+    // }
+    
+    // if (petName.length < 3) {
+    //   setpetNameError("O nome é obrigatório");
+    // } else {
+    //   setpetNameError("");
+    // }
+
+    // // Validar o campo de CPF
+    // if (race.length < 3) {
+    //   setRaceError("A raça é obrigatória");
+    // } else {
+    //   setRaceError("");
+    // }
+
+    // // Validar o campo de telefone
+    // if (!(age) || age < 0) {
+    //   setAgeError("A idade mínima é de 0 anos");
+    // } else {
+    //   setAgeError("");
+    // }
+
+    // // Validar o campo de cep
+    // if (!(weight) || weight < 0.5) {
+    //   setWeightError("O peso mínimo é de 0.5Kg");
+    // } else {
+    //   setWeightError("");
+    // }
+
+    // if(!(!bufferData || petName.length < 3 || race.length < 3 || !(age) || age < 0 || !(weight) || weight < 0.5)){
+    //   alert("Pet cadastrado com sucesso!")
+    //   window.location.reload()
+    // }
+
+    // const petData = {
+    //   petPicture: bufferData,
+    //   petName,
+    //   race,
+    //   size,
+    //   age,
+    //   weight,
+    //   sex,
+    //   owner,
+    // };
+
+
+    async function updatePet(petId, petData) {
+      try {
+        const response = await axios.put(
+          `http://localhost:3000/updatePet/${petId}`,
+          petData
+        );
+        return response.data; // Se desejar, pode retornar a resposta do servidor
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    updatePet(_id, petData);
+
+  };
 
   return (
     <div className="mb-4 border border-neutral-950 rounded-lg p-4 relative">
       <div>
-        {petPicture && (
-          <img
-            src={`data:image/jpeg;base64, ${petPicture}`}
-            alt="Imagem"
-            className="w-[90px] h-[90px] m-auto rounded-full border-2 border-white bg-white"
-          />
+        {bufferData && (
+          <div>
+            <label htmlFor="fileInput">
+              <img
+                src={`data:image/jpeg;base64, ${bufferData}`}
+                alt="Imagem"
+                className="w-[90px] h-[90px] m-auto rounded-full border-2 border-white bg-white cursor-pointer"
+              />
+            </label>
+            <input
+              id="fileInput"
+              type="file"
+              className="h-22 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl text-base w-full mt-2 hidden"
+              accept="image/*"
+              onChange={handleFileInputChange}
+            />
+          </div>
+        )}
+        {(petPicture && showInput) && (
+          <div>
+            <label htmlFor="fileInput">
+              <img
+                src={`data:image/jpeg;base64, ${petPicture}`}
+                alt="Imagem"
+                className="w-[90px] h-[90px] m-auto rounded-full border-2 border-white bg-white cursor-pointer"
+              />
+            </label>
+            <input
+              id="fileInput"
+              type="file"
+              className="h-22 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl text-base w-full mt-2 hidden"
+              accept="image/*"
+              onChange={handleFileInputChange}
+            />
+          </div>
         )}
       </div>
 
@@ -74,7 +200,7 @@ const PetCard = ({ pet, onUpdate }) => {
         className="absolute top-2 right-2 border border-gray-600 rounded-full bg-brand-orange-faded cursor-pointer slide-bck-center"
         onClick={handleDelete}
       >
-        <img src={grave} width={45} alt="Túmulo pet"/>
+        <img src={grave} width={45} alt="Túmulo pet" />
       </div>
 
       <Modal type="addService"></Modal>
@@ -175,7 +301,7 @@ const PetCard = ({ pet, onUpdate }) => {
 
       <button
         className="w-[25%] bg-brand-orange rounded-[8px]  h-10 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white flex justify-center items-center cursor-pointer "
-        onClick={handleSave}
+        onClick={handleFormSubmit}
       >
         Salvar
       </button>
