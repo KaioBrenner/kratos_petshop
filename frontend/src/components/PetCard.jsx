@@ -2,20 +2,11 @@ import React, { useEffect, useState } from "react";
 import dog from "../assets/images/pastor-alemão.jpg";
 import Modal from "./Modal";
 import { Buffer } from "buffer";
-import grave from "../assets/images/pet-grave.svg";
+import grave from "../assets/images/pet-grave_1.svg";
 import axios from "axios";
 
 const PetCard = ({ pet, onUpdate }) => {
-  const {
-    _id,
-    petPicture,
-    petName,
-    race,
-    size,
-    age,
-    weight,
-    sex,
-  } = pet;
+  const { _id, petPicture, petName, race, size, age, weight, sex } = pet;
 
   const [petData, setPetData] = useState({
     petPicture,
@@ -27,14 +18,12 @@ const PetCard = ({ pet, onUpdate }) => {
     sex,
   });
 
-  
-
   // const [petPicture, setPetPicture] = useState(initialPicture)
 
   const handleSave = () => {
     const updatedPet = {
       petPicture,
-      name,
+      petName,
       race,
       size,
       age,
@@ -85,7 +74,7 @@ const PetCard = ({ pet, onUpdate }) => {
         className="absolute top-2 right-2 border border-gray-600 rounded-full bg-brand-orange-faded cursor-pointer slide-bck-center"
         onClick={handleDelete}
       >
-        <img src={grave} width={45} alt="Túmulo pet" />
+        <img src={grave} width={45} alt="Túmulo pet"/>
       </div>
 
       <Modal type="addService"></Modal>
@@ -95,12 +84,12 @@ const PetCard = ({ pet, onUpdate }) => {
           <label htmlFor="name">Nome:</label>
           <input
             type="text"
-            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+            className="border border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
             min="3"
-            defaultValue={pet.petName}
+            defaultValue={petData.petName}
             onChange={(e) => {
-              setName(e.target.value);
-              console.log(pet)
+              setPetData({ ...petData, petName: e.target.value });
+              console.log(petData);
             }}
           />
         </div>
@@ -110,8 +99,11 @@ const PetCard = ({ pet, onUpdate }) => {
             type="text"
             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
             min="3"
-            defaultValue={pet.race}
-            onChange={(e) => setBreed(e.target.value)}
+            defaultValue={petData.race}
+            onChange={(e) => {
+              setPetData({ ...petData, race: e.target.value });
+              console.log(petData);
+            }}
           />
         </div>
         <div className="w-full">
@@ -119,8 +111,11 @@ const PetCard = ({ pet, onUpdate }) => {
           <select
             name="porte"
             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-            defaultValue={pet.size}
-            onChange={(e) => setSize(e.target.value)}
+            defaultValue={petData.size}
+            onChange={(e) => {
+              setPetData({ ...petData, size: e.target.value });
+              console.log(petData);
+            }}
           >
             <option value="Pequeno">Pequeno</option>
             <option value="Médio">Médio</option>
@@ -132,8 +127,16 @@ const PetCard = ({ pet, onUpdate }) => {
           <input
             type="number"
             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-            defaultValue={pet.age}
-            onChange={(e) => setAge(parseInt(e.target.value))}
+            defaultValue={petData.age}
+            onKeyDown={(e) => {
+              if (!/\d/.test(e.key) && e.key !== "Backspace") {
+                e.preventDefault();
+              }
+            }}
+            onChange={(e) => {
+              setPetData({ ...petData, age: parseInt(e.target.value) });
+              console.log(petData);
+            }}
           />
         </div>
         <div className="w-full">
@@ -141,8 +144,16 @@ const PetCard = ({ pet, onUpdate }) => {
           <input
             type="number"
             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-            defaultValue={pet.weight}
-            onChange={(e) => setWeight(parseFloat(e.target.value))}
+            defaultValue={petData.weight}
+            onKeyDown={(e) => {
+              if (!/\d/.test(e.key) && e.key !== "Backspace" && e.key !== ".") {
+                e.preventDefault();
+              }
+            }}
+            onChange={(e) => {
+              setPetData({ ...petData, weight: parseFloat(e.target.value) });
+              console.log(petData);
+            }}
           />
         </div>
         <div className="w-full">
@@ -150,8 +161,11 @@ const PetCard = ({ pet, onUpdate }) => {
           <select
             name="sexo"
             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-            defaultValue={pet.sex}
-            onChange={(e) => setSex(e.target.value)}
+            defaultValue={petData.sex}
+            onChange={(e) => {
+              setPetData({ ...petData, sex: e.target.value });
+              console.log(petData);
+            }}
           >
             <option value="Macho">Macho</option>
             <option value="Fêmea">Fêmea</option>

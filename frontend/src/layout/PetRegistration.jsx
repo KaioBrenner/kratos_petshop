@@ -114,18 +114,8 @@ const PetRegistration = ({ closeModal }) => {
 
     if(!(!bufferData || petName.length < 3 || race.length < 3 || !(age) || age < 0 || !(weight) || weight < 0.5)){
       alert("Pet cadastrado com sucesso!")
+      window.location.reload()
     }
-
-    // if (
-    //   !(
-    //     fullName.length <= 3 ||
-    //     cpf.length !== 11 ||
-    //     tel.length !== 11 ||
-    //     cep.length !== 8
-    //   )
-    // ) {
-    //   alert("Cliente cadastrado com sucesso!");
-    // }
 
     const petData = {
       petPicture: bufferData,
@@ -146,7 +136,6 @@ const PetRegistration = ({ closeModal }) => {
           petData
         );
         console.log(petData);
-        window.location.reload()
         return response.data; // Se desejar, pode retornar a resposta do servidor
       } catch (error) {
         console.log(error);
