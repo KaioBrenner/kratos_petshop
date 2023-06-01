@@ -43,12 +43,12 @@ GET http://localhost:3000/categoryList
 GET http://localhost:3000/pets
 
 ###
-POST http://localhost:3000/newPet/646fdb15f7ffc8723b41ac9d
+PUT  http://localhost:3000/updatePet/6477c76672b62f50d480d11e
 Content-Type: application/json
 
 {
-    "petPicture": "",
-    "name": "José Messias",
+    "petPicture": "asdasd",
+    "name": "José Messia",
     "race": "Pé Duro",
     "size": "Médio",
     "age": 8,
