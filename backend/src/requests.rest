@@ -76,3 +76,13 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/product
+
+
+### Rota Usuário
+POST http://localhost:3000/newEmployee
+Content-Type: application/json
+
+{
+    "user": "*@@admin@@*",
+    "password": "admin"
+}

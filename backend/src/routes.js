@@ -2,7 +2,8 @@ const express = require('express');
 const clientController = require('./controllers/ClientController');
 const petController = require('./controllers/PetController');
 const CategoryController = require('./controllers/CategoryController');
-const productController = require('./controllers/ProductController')
+const productController = require('./controllers/ProductController');
+const EmployeeController = require('./controllers/EmployeeController');
 const routes = express.Router();
 
 /* Rotas  Client */
@@ -33,6 +34,11 @@ routes.delete('/deletePet/:id', petController.deletePet)
 /*Rota Produto */
 routes.post('/newProduct', productController.createProduto)
 routes.get('/product', productController.productList)
+
+
+/* Rota ADM */
+routes.post('/newEmployee', EmployeeController.createEmployee)
+routes.get('/employees', EmployeeController.employeeLists)
 
 
 module.exports = routes;
