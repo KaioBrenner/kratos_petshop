@@ -47,10 +47,9 @@ const PetSchema = new Schema({
     required: [true, "O campo Porte é obrigatório"],
   },
   age: {
-    type: Number,
-    integer: true,
+    type: String,
     validate: {
-      validator: (idade) => idade > 0,
+      validator: (idade) => idade.length > 0,
       message: "Idade não pode ser nulo",
     },
     required: [true, "O campo idade é obrigatório"],

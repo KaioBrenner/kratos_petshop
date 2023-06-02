@@ -60,6 +60,7 @@ const ClientData = () => {
     }
 
     updateClient(clientData);
+    window.location.reload()
 
     console.log(clientData);
   };
@@ -89,7 +90,7 @@ const ClientData = () => {
                           <input
                             type="text"
                             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                            value={clientData.fullName}
+                            defaultValue={clientData.fullName}
                             onChange={(e) =>
                               setClientData({
                                 ...clientData,

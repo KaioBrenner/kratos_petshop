@@ -60,12 +60,10 @@ const PetRegistration = ({ closeModal }) => {
     reader.readAsDataURL(file);
   };
 
-
-
   const [petName, setPetName] = useState("");
   const [race, setRace] = useState("");
   const [size, setSize] = useState("Pequeno");
-  const [age, setAge] = useState();
+  const [age, setAge] = useState("");
   const [weight, setWeight] = useState();
   const [sex, setSex] = useState("Macho");
   const [owner, setOwner] = useState(id);
@@ -79,12 +77,12 @@ const PetRegistration = ({ closeModal }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if(!bufferData){
+    if (!bufferData) {
       setBufferDataError("A foto é obrigatória");
     } else {
       setBufferDataError("");
     }
-    
+
     if (petName.length < 3) {
       setpetNameError("O nome é obrigatório");
     } else {
@@ -99,22 +97,32 @@ const PetRegistration = ({ closeModal }) => {
     }
 
     // Validar o campo de telefone
-    if (!(age) || age < 0) {
+    if (!age || age < 0) {
       setAgeError("A idade mínima é de 0 anos");
     } else {
       setAgeError("");
     }
 
     // Validar o campo de cep
-    if (!(weight) || weight < 0.5) {
+    if (!weight || weight < 0.5) {
       setWeightError("O peso mínimo é de 0.5Kg");
     } else {
       setWeightError("");
     }
 
-    if(!(!bufferData || petName.length < 3 || race.length < 3 || !(age) || age < 0 || !(weight) || weight < 0.5)){
-      alert("Pet cadastrado com sucesso!")
-      window.location.reload()
+    if (
+      !(
+        !bufferData ||
+        petName.length < 3 ||
+        race.length < 3 ||
+        !age ||
+        age < 0 ||
+        !weight ||
+        weight < 0.5
+      )
+    ) {
+      alert("Pet cadastrado com sucesso!");
+      window.location.reload();
     }
 
     const petData = {
@@ -127,7 +135,6 @@ const PetRegistration = ({ closeModal }) => {
       sex,
       owner,
     };
-
 
     async function createPet(clientId, petData) {
       try {
@@ -165,8 +172,16 @@ const PetRegistration = ({ closeModal }) => {
                 accept="image/*"
                 onChange={handleFileInputChange}
               />
-              {bufferData && <img src={`data:image/png;base64, ${bufferData}`} alt="Selected Image" className="m-auto rounded-full border-2 border-white bg-white w-24 h-24"/>}
-              {buffeDataError && <span className="text-red-400 text-sm">{buffeDataError}</span>}
+              {bufferData && (
+                <img
+                  src={`data:image/png;base64, ${bufferData}`}
+                  alt="Selected Image"
+                  className="m-auto rounded-full border-2 border-white bg-white w-24 h-24"
+                />
+              )}
+              {buffeDataError && (
+                <span className="text-red-400 text-sm">{buffeDataError}</span>
+              )}
             </div>
             <div className="w-full">
               <label htmlFor="name">Nome:</label>
@@ -177,7 +192,9 @@ const PetRegistration = ({ closeModal }) => {
                 defaultValue={petName}
                 onChange={(e) => setPetName(e.target.value)}
               />
-              {petNameError && <span className="text-red-400 text-sm">{petNameError}</span>}
+              {petNameError && (
+                <span className="text-red-400 text-sm">{petNameError}</span>
+              )}
             </div>
             <div className="w-full">
               <label htmlFor="name">Raça:</label>
@@ -188,7 +205,9 @@ const PetRegistration = ({ closeModal }) => {
                 defaultValue={race}
                 onChange={(e) => setRace(e.target.value)}
               />
-              {raceError && <span className="text-red-400 text-sm">{raceError}</span>}
+              {raceError && (
+                <span className="text-red-400 text-sm">{raceError}</span>
+              )}
             </div>
             <div className="w-full">
               <label htmlFor="name">Porte:</label>
@@ -209,13 +228,26 @@ const PetRegistration = ({ closeModal }) => {
             <div className="w-full">
               <label htmlFor="name">Idade:</label>
               <input
-                type="number"
-                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                min={0}
+                type="text"
+                className="border border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                 defaultValue={age}
-                onChange={(e) => setAge(e.target.value)}
+                onKeyDown={(e) => {
+                  const pattern = /^[a-zA-Z0-9\s]+$/;
+                  if (!pattern.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
+                onChange={(e) => {
+                  const trimmedValue = e.target.value
+                    .split(" ")
+                    .filter((word) => word !== "")
+                    .join(" ");
+                  setAge(trimmedValue);
+                }}
               />
-              {ageError && <span className="text-red-400 text-sm">{ageError}</span>}
+              {ageError && (
+                <span className="text-red-400 text-sm">{ageError}</span>
+              )}
             </div>
             <div className="w-full">
               <label htmlFor="name">Peso:</label>
@@ -225,7 +257,9 @@ const PetRegistration = ({ closeModal }) => {
                 defaultValue={weight}
                 onChange={(e) => setWeight(e.target.value)}
               />
-              {weightError && <span className="text-red-400 text-sm">{weightError}</span>}
+              {weightError && (
+                <span className="text-red-400 text-sm">{weightError}</span>
+              )}
             </div>
             <div className="w-full">
               <label htmlFor="name">Sexo:</label>

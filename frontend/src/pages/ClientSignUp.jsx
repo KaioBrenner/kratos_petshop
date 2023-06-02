@@ -14,11 +14,12 @@ const ClientSignUp = () => {
   const [cpf, setCpf] = useState("");
   const [tel, setTel] = useState("");
 
+  const [clients, setClients] = useState([]);
 
-  const [fullNameError, setFullNameError] = useState('');
-  const [cpfError, setCpfError] = useState('');
-  const [telError, setTelError] = useState('');
-  const [cepError, setCepError] = useState('')
+  const [fullNameError, setFullNameError] = useState("");
+  const [cpfError, setCpfError] = useState("");
+  const [telError, setTelError] = useState("");
+  const [cepError, setCepError] = useState("");
 
   const handleCepChange = async (e) => {
     const novoCep = e.target.value;
@@ -46,39 +47,38 @@ const ClientSignUp = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-
     // Validar o campo de nome completo
     if (fullName.length <= 3) {
-      setFullNameError('O nome é obrigatório');
+      setFullNameError("O nome é obrigatório");
     } else {
-      setFullNameError('');
+      setFullNameError("");
     }
 
     // Validar o campo de CPF
     if (cpf.length !== 11) {
-      setCpfError('O CPF deve ter exatamente 11 dígitos');
+      setCpfError("O CPF deve ter exatamente 11 dígitos");
     } else {
-      setCpfError('');
+      setCpfError("");
     }
 
     // Validar o campo de telefone
     if (tel.length !== 11) {
-      setTelError('O telefone é obrigatório');
+      setTelError("O telefone é obrigatório");
     } else {
-      setTelError('');
+      setTelError("");
     }
 
     // Validar o campo de cep
     if (cep.length !== 8) {
-      setCepError('O cep é obrigatório');
+      setCepError("O cep é obrigatório");
     } else {
-      setCepError('');
+      setCepError("");
     }
 
-    if(!(fullName.length <= 3 || cpf.length !== 11 || tel.length !== 11 || cep.length !== 8)){
-      alert("Cliente cadastrado com sucesso!")
-    }
-    
+    // if(!(fullName.length <= 3 || cpf.length !== 11 || tel.length !== 11 || cep.length !== 8)){
+    //   alert("Cliente cadastrado com sucesso!")
+    // }
+
     const clientData = {
       fullName,
       cpf,
@@ -87,21 +87,65 @@ const ClientSignUp = () => {
       address,
       district,
       city,
-      state
+      state,
     };
 
-    async function createClient(clientData) {
+    async function fetchClients() {
       try {
-        const response = await axios.post("http://localhost:3000/newClient", clientData);
-        return response.data; // Se desejar, pode retornar a resposta do servidor
+        const response = await axios.get("http://localhost:3000/clients");
+        const dataClients = response.data;
+        setClients(dataClients);
       } catch (error) {
         console.log(error);
       }
     }
 
-    createClient(clientData)
+    async function createClient(clientData) {
+      try {
+        fetchClients();
 
-    console.log(clientData);
+        console.log(clientData);
+
+        clients.map((client) => {
+          // console.log(client.cpf)
+          // console.log(clientData.cpf)
+          console.log(client.tel);
+          console.log(clientData.tel);
+        });
+
+        const isClientRegistered = clients.some(
+          (client) =>
+            client.cpf === clientData.cpf || client.tel === clientData.tel
+        );
+
+        console.log(!isClientRegistered);
+
+        if (!isClientRegistered) {
+          alert("Erro ao cadastrar o client! CPF ou Telefone já registrado");
+        } else {
+          const response = await axios.post(
+            "http://localhost:3000/newClient",
+            clientData
+          );
+          if (
+            !(
+              fullName.length <= 3 ||
+              cpf.length !== 11 ||
+              tel.length !== 11 ||
+              cep.length !== 8
+            )
+          ) {
+            alert("Cliente cadastrado com sucesso!");
+          }
+          return response.data;
+        }
+        // Se desejar, pode retornar a resposta do servidor
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    createClient(clientData);
   };
 
   return (
@@ -130,7 +174,11 @@ const ClientSignUp = () => {
                         onChange={(e) => setFullName(e.target.value)}
                         min="3"
                       />
-                      {fullNameError && <span className="text-red-400 text-sm">{fullNameError}</span>}
+                      {fullNameError && (
+                        <span className="text-red-400 text-sm">
+                          {fullNameError}
+                        </span>
+                      )}
                     </div>
                     <div className="w-[45%]">
                       <label htmlFor="cpf">CPF:</label>
@@ -144,7 +192,9 @@ const ClientSignUp = () => {
                         min="11"
                         max="11"
                       />
-                      {cpfError && <span className="text-red-400 text-sm">{cpfError}</span>}
+                      {cpfError && (
+                        <span className="text-red-400 text-sm">{cpfError}</span>
+                      )}
                     </div>
                     <div className="w-[45%]">
                       <label htmlFor="tel">Telefone:</label>
@@ -156,7 +206,9 @@ const ClientSignUp = () => {
                         defaultValue={tel}
                         onChange={(e) => setTel(e.target.value)}
                       />
-                      {telError && <span className="text-red-400 text-sm">{telError}</span>}
+                      {telError && (
+                        <span className="text-red-400 text-sm">{telError}</span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -177,7 +229,9 @@ const ClientSignUp = () => {
                         placeholder="Ex: 91910450"
                         name="cep"
                       />
-                      {cepError && <span className="text-red-400 text-sm">{cepError}</span>}
+                      {cepError && (
+                        <span className="text-red-400 text-sm">{cepError}</span>
+                      )}
                     </div>
                     <div className="flex flex-wrap justify-between gap-4">
                       <div className="w-[45%]">
@@ -224,19 +278,17 @@ const ClientSignUp = () => {
                   </div>
                 </div>
               </div>
-              
-              <div className="flex gap-5 justify-center mt-8">
-              <button
-                type="submit"
-                className="  w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
-                onClick={handleFormSubmit}
-              >
-                Cadastrar Cliente
-              </button>
-            </div>
-            </div>
 
-            
+              <div className="flex gap-5 justify-center mt-8">
+                <button
+                  type="submit"
+                  className="  w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
+                  onClick={handleFormSubmit}
+                >
+                  Cadastrar Cliente
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       </div>

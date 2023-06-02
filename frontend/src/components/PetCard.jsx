@@ -10,7 +10,6 @@ const PetCard = ({ pet, onUpdate }) => {
   const [showInput, setShowInput] = useState(true);
   const [bufferData, setBufferData] = useState("");
 
-
   const [petData, setPetData] = useState({
     petPicture,
     petName,
@@ -22,7 +21,6 @@ const PetCard = ({ pet, onUpdate }) => {
   });
 
   // const [petPicture, setPetPicture] = useState(initialPicture)
-
 
   const handleDelete = () => {
     async function deletePet(petId) {
@@ -41,7 +39,6 @@ const PetCard = ({ pet, onUpdate }) => {
     deletePet(_id);
     window.location.reload();
   };
-
 
   // Função para converter base64 para ArrayBuffer
   const base64ToArrayBuffer = (base64) => {
@@ -85,7 +82,6 @@ const PetCard = ({ pet, onUpdate }) => {
     setShowInput(false);
   };
 
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
@@ -94,7 +90,7 @@ const PetCard = ({ pet, onUpdate }) => {
     // } else {
     //   setBufferDataError("");
     // }
-    
+
     // if (petName.length < 3) {
     //   setpetNameError("O nome é obrigatório");
     // } else {
@@ -138,13 +134,13 @@ const PetCard = ({ pet, onUpdate }) => {
     //   owner,
     // };
 
-
     async function updatePet(petId, petData) {
       try {
         const response = await axios.put(
           `http://localhost:3000/updatePet/${petId}`,
           petData
         );
+        window.location.reload()
         return response.data; // Se desejar, pode retornar a resposta do servidor
       } catch (error) {
         console.log(error);
@@ -152,7 +148,6 @@ const PetCard = ({ pet, onUpdate }) => {
     }
 
     updatePet(_id, petData);
-
   };
 
   return (
@@ -176,7 +171,7 @@ const PetCard = ({ pet, onUpdate }) => {
             />
           </div>
         )}
-        {(petPicture && showInput) && (
+        {petPicture && showInput && (
           <div>
             <label htmlFor="fileInput">
               <img
@@ -251,22 +246,27 @@ const PetCard = ({ pet, onUpdate }) => {
         <div className="w-full">
           <label htmlFor="name">Idade:</label>
           <input
-            type="number"
-            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+            type="text"
+            className="border border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
             defaultValue={petData.age}
             onKeyDown={(e) => {
-              if (!/\d/.test(e.key) && e.key !== "Backspace") {
+              const pattern = /^[a-zA-Z0-9\s]+$/;
+              if (!pattern.test(e.key)) {
                 e.preventDefault();
               }
             }}
             onChange={(e) => {
-              setPetData({ ...petData, age: parseInt(e.target.value) });
+              const trimmedValue = e.target.value
+                .split(" ")
+                .filter((word) => word !== "")
+                .join(" ");
+              setPetData({ ...petData, age: trimmedValue });
               console.log(petData);
             }}
           />
         </div>
         <div className="w-full">
-          <label htmlFor="name">Peso:</label>
+          <label htmlFor="name">Peso(Kg):</label>
           <input
             type="number"
             className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
