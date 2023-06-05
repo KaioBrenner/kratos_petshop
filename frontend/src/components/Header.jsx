@@ -123,6 +123,9 @@ const Header = ({ page }) => {
               <Link to="/lista-clientes">Clientes</Link>
             </li>
             <li>
+              <Link to="/servicos">Serviços</Link>
+            </li>
+            <li>
               <Link to="/lista-produtos">Produtos</Link>
             </li>
             <li>

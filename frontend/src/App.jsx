@@ -6,6 +6,7 @@ import ClientList from "./pages/ClientList";
 import ClientSignUp from "./pages/ClientSignUp";
 import ProductList from "./pages/ProductList";
 import SalesHistory from "./pages/SalesHistory";
+import Services from "./pages/Services";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/cadastro-cliente" element={<ClientSignUp />} />
         <Route path="/lista-produtos" element={<ProductList />} />
         <Route path="/historico-vendas" element={<SalesHistory />} />
+        <Route path="/servicos" element={<Services />} />
       </Routes>
     </Router>
   );

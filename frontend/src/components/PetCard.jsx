@@ -140,7 +140,7 @@ const PetCard = ({ pet, onUpdate }) => {
           `http://localhost:3000/updatePet/${petId}`,
           petData
         );
-        window.location.reload()
+        window.location.reload();
         return response.data; // Se desejar, pode retornar a resposta do servidor
       } catch (error) {
         console.log(error);
@@ -191,12 +191,7 @@ const PetCard = ({ pet, onUpdate }) => {
         )}
       </div>
 
-      <div
-        className="absolute top-2 right-2 border border-gray-600 rounded-full bg-brand-orange-faded cursor-pointer slide-bck-center"
-        onClick={handleDelete}
-      >
-        <img src={grave} width={45} alt="Túmulo pet" />
-      </div>
+      <Modal type="deletePet" handleDelete={handleDelete}></Modal>
 
       <Modal type="addService"></Modal>
 
