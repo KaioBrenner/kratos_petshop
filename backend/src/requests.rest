@@ -83,6 +83,6 @@ POST http://localhost:3000/newEmployee
 Content-Type: application/json
 
 {
-    "user": "*@@admin@@*",
+    "user": "admin",
     "password": "admin"
 }

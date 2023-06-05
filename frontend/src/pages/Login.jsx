@@ -1,4 +1,4 @@
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -6,8 +6,8 @@ import Header from "../components/Header";
 
 const Login = () => {
   const [employees, setEmployees] = useState([]);
-  const [user, setUser] = useState("")
-  const [password, setPassword] = useState("")
+  const [user, setUser] = useState("");
+  const [password, setPassword] = useState("");
   const [redirectToClientes, setRedirectToClientes] = useState(false);
 
   useEffect(() => {
@@ -27,25 +27,24 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Lógica de validação do usuário e senha
-
     if (employees[0].user === user && employees[0].password === password) {
       setRedirectToClientes(true);
     }
   };
 
   const handleUserChange = (e) => {
-    setUser(e.target.value)
-    console.log(user)
+    setUser(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value)
+    setPassword(e.target.value);
   };
 
-  if (redirectToClientes) {
-    return <Redirect to="/lista-clientes" />;
-  }
+  useEffect(() => {
+    if (redirectToClientes) {
+      window.location.replace("/lista-clientes");
+    }
+  }, [redirectToClientes]);
 
   return (
     <div>
