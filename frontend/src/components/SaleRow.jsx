@@ -28,9 +28,9 @@ const SaleRow = ({ name, cpf, active }) => {
           className="border-[1.24px] border-gray-200 p-4"
           onClick={CurrentDateTime}
         >
-          {name}
+          Jonas
         </td>
-        <td className="border-[1.24px] border-gray-200 p-4">{cpf}</td>
+        <td className="border-[1.24px] border-gray-200 p-4">00011122233</td>
         <td className="border-[1.24px] border-gray-200 p-4">150.89</td>
         <td className="border-[1.24px] border-gray-200 p-4">Cacau</td>
         <td className="border-[1.24px] border-gray-200 p-4">

@@ -33,19 +33,23 @@ const ClientData = () => {
     id: id,
   });
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    setClientData({
+      fullName: fullName,
+      cpf: cpf,
+      tel: tel,
+      active: active,
+      cep: cep,
+      address: address,
+      district: district,
+      city: city,
+      state: state,
+      id: id,
+    });
+  }, [fullName, cpf, tel, active, cep, address, district, city, state, id]);
 
-    // const clientData = {
-    //   fullName,
-    //   cpf,
-    //   tel,
-    //   cep,
-    //   address,
-    //   district,
-    //   city,
-    //   state,
-    // };
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
 
     async function updateClient(clientData) {
       try {
@@ -53,16 +57,15 @@ const ClientData = () => {
           `http://localhost:3000/updateClient/${clientData.id}`,
           clientData
         );
-        return response.data; // Se desejar, pode retornar a resposta do servidor
+
+        alert("Dados do cliente salvos com sucesso!");
+        return response.data;
       } catch (error) {
         console.log(error);
       }
     }
 
-    updateClient(clientData);
-    window.location.reload()
-
-    console.log(clientData);
+    await updateClient(clientData);
   };
 
   useEffect(() => {
@@ -253,64 +256,9 @@ const ClientData = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="bg-gray-300 col-span-1 p-4">
-              <h1 className="text-2xl font-bold">Cadastro do Pet</h1>
-              <div className="flex flex-col justify-between h-[620px] mt-10">
-                <div className="flex flex-col gap-14">
-                  <div className="w-full">
-                    <label htmlFor="name">Nome:</label>
-                    <input
-                      type="text"
-                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                    />
-                  </div>
-                  <div className="w-full">
-                    <label htmlFor="name">Raça:</label>
-                    <input
-                      type="text"
-                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                    />
-                  </div>
-                  <div className="w-full">
-                    <label htmlFor="name">Porte:</label>
-                    <input
-                      type="text"
-                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                    />
-                  </div>
-                  <div className="w-full">
-                    <label htmlFor="name">Idade:</label>
-                    <input
-                      type="text"
-                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex gap-5">
-                  <button className=" w-[45%] bg-neutral-300 rounded-lg py-2 px-2 hover:shadow-2xl ">
-                    Editar Dados
-                  </button>
-                  <button className=" w-[45%] bg-neutral-300 rounded-lg py-2 px-2 hover:shadow-2xl ">
-                    Desativar Usuário
-                  </button>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
-
-      {/* <div className="fixed inset-0 flex items-center justify-center z-50">
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <p>Kaioasdasd</p>
-          <h2 className="text-xl font-bold mb-4">Título do Modal</h2>
-          <p>Conteúdo do modal aqui...</p>
-          <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
-            Fechar
-          </button>
-        </div>
-      </div> */}
     </div>
   );
 };

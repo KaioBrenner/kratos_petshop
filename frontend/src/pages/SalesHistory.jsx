@@ -37,9 +37,12 @@ const SalesHistory = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {dataClients.map(({ name, cpf, active }) => (
-                  <SaleRow name={name} cpf={cpf} active={active}></SaleRow>
-                ))}
+                  <SaleRow ></SaleRow>
+                  <SaleRow ></SaleRow>
+                  <SaleRow ></SaleRow>
+                  <SaleRow ></SaleRow>
+                  <SaleRow ></SaleRow>
+                  <SaleRow ></SaleRow>
               </tbody>
             </table>
           </div>

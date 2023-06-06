@@ -91,3 +91,59 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
+
+// import { useState, useEffect } from "react";
+// import axios from "axios";
+// import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+
+// import Header from "../components/Header";
+// import ProtectedPage from "../components/ProtectedPage";
+// import LoginPage from "../components/LoginPage";
+
+// const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
+//   return (
+//     <Route
+//       {...rest}
+//       render={(props) =>
+//         isAuthenticated ? (
+//           <Component {...props} />
+//         ) : (
+//           <LoginPage />
+//         )
+//       }
+//     />
+//   );
+// };
+
+// const App = () => {
+//   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+//   useEffect(() => {
+//     // Realize a lógica de autenticação aqui, como verificar o token de autenticação no localStorage ou fazer uma chamada assíncrona para verificar a autenticação do usuário.
+
+//     // Se o usuário estiver autenticado, defina isAuthenticated como true.
+//     setIsAuthenticated(true);
+//   }, []);
+
+//   return (
+//     <Router>
+//       <div>
+//         <Header />
+
+//         <Switch>
+//           <Route path="/login" component={LoginPage} />
+//           <PrivateRoute
+//             path="/lista-clientes"
+//             component={ProtectedPage}
+//             isAuthenticated={isAuthenticated}
+//           />
+//         </Switch>
+//       </div>
+//     </Router>
+//   );
+// };
+
+// export default App;

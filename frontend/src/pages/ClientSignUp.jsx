@@ -120,7 +120,7 @@ const ClientSignUp = () => {
 
         console.log(!isClientRegistered);
 
-        if (!isClientRegistered) {
+        if (isClientRegistered) {
           alert("Erro ao cadastrar o client! CPF ou Telefone já registrado");
         } else {
           const response = await axios.post(
