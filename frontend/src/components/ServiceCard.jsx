@@ -131,7 +131,7 @@ const ServiceCard = ({
   };
 
   return (
-    <div className=" border border-neutral-400 rounded-lg p-4 relative w-[480px] h-max bg-white text-xl font-bold flex flex-row">
+    <div className=" border border-neutral-400 rounded-lg p-4 relative w-[480px] h-[360px] bg-white text-xl font-bold flex flex-row">
       <div className="absolute z-50 w-[40px] h-[40px] bg-white top-[-15px] left-[-10px] border border-gray-400 rounded-full flex justify-center items-center">
         {index + 1}
       </div>
@@ -143,14 +143,7 @@ const ServiceCard = ({
           className="w-[170px] h-[170px] bg-white mb-4"
         />
 
-        <p>Nome: {pet?.petName}</p>
-        <p>Raça: {pet?.race}</p>
-        <p>Porte: {pet?.size}</p>
-        <p>Idade: {pet?.age}</p>
-        <p>Peso: {pet?.weight} Kg</p>
-      </div>
-      <div className="w-[50%] relative flex flex-col justify-between">
-        <div>
+        <div className="h-[140px] flex flex-col justify-between">
           <div>
             Serviços:
             <ul className="list-disc ml-6">
@@ -159,8 +152,6 @@ const ServiceCard = ({
               {nails ? <li>Cortar Unhas</li> : ""}
             </ul>
           </div>
-          <p>Nome do dono: {client?.fullName.split(" ")[0]}</p>
-          <p>Telefone: {client?.tel}</p>
           <div className="relative">
             <p>Levar:</p>
             {delivery ? (
@@ -174,7 +165,17 @@ const ServiceCard = ({
             )}
           </div>
         </div>
-
+      </div>
+      <div className="w-[50%] relative flex flex-col justify-between">
+        <div>
+          <p>Nome: {pet?.petName}</p>
+          <p>Raça: {pet?.race}</p>
+          <p>Porte: {pet?.size}</p>
+          <p>Idade: {pet?.age}</p>
+          <p>Peso: {pet?.weight} Kg</p>
+          <p>Nome do dono: {client?.fullName.split(" ")[0]}</p>
+          <p>Telefone: {client?.tel}</p>
+        </div>
         <button
           className="w-full bg-brand-orange rounded-[8px]  h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white flex justify-center items-center cursor-pointer font-normal"
           onClick={handleDelete}
