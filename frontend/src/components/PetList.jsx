@@ -12,9 +12,9 @@ const PetList = ({ clientId }) => {
         const response = await axios.get("http://localhost:3000/pets");
         const dataPets = response.data;
         setPets(dataPets);
-        console.log(dataPets);
-        console.log(pets[0].owner);
-        console.log(clientId);
+        // console.log(dataPets);
+        // console.log(pets[0].owner);
+        // console.log(clientId);
       } catch (error) {
         console.log(error);
       }

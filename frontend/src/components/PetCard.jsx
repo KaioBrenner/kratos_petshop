@@ -9,6 +9,8 @@ const PetCard = ({ pet, onUpdate }) => {
   const { _id, petPicture, petName, race, size, age, weight, sex, owner } = pet;
   const [showInput, setShowInput] = useState(true);
   const [bufferData, setBufferData] = useState("");
+  const [services, setServices] = useState([]);
+  const [isPetInServicesState, setIsPetInServicesState] = useState(true);
 
   const [petData, setPetData] = useState({
     petPicture,
@@ -22,22 +24,45 @@ const PetCard = ({ pet, onUpdate }) => {
 
   // const [petPicture, setPetPicture] = useState(initialPicture)
 
-  const handleDelete = () => {
-    async function deletePet(petId) {
+  useEffect(() => {
+    async function fetchServices() {
       try {
-        const response = await axios.delete(
-          `http://localhost:3000/deletePet/${petId}`
-        );
-
-        return response;
+        const response = await axios.get("http://localhost:3000/services");
+        const dataServices = response.data;
+        setServices(dataServices);
       } catch (error) {
         console.log(error);
       }
     }
+    fetchServices();
+  }, []);
 
-    console.log(pet);
-    deletePet(_id);
-    window.location.reload();
+  useEffect(() => {
+    const isPetInServices = services.some((service) => service.pet === pet._id);
+    setIsPetInServicesState(isPetInServices);
+  }, [services, pet._id]);
+
+  const handleDelete = () => {
+    if (isPetInServicesState) {
+      alert("O pet não pode ser excluído porque há um serviço em andamento.");
+      console.log("Não apaga");
+    } else {
+      console.log("Apaga");
+      async function deletePet(petId) {
+
+        try {
+          const response = await axios.delete(
+            `http://localhost:3000/deletePet/${petId}`
+          );
+          return response;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      console.log(pet);
+      deletePet(_id);
+      window.location.reload();
+    }
   };
 
   // Função para converter base64 para ArrayBuffer
@@ -193,7 +218,12 @@ const PetCard = ({ pet, onUpdate }) => {
 
       <Modal type="deletePet" handleDelete={handleDelete}></Modal>
 
-      <Modal type="addService" petName={petName} petId={_id} ownerId={owner}></Modal>
+      <Modal
+        type="addService"
+        petName={petName}
+        petId={_id}
+        ownerId={owner}
+      ></Modal>
 
       <div className="flex flex-col gap-4">
         <div className="w-full">
