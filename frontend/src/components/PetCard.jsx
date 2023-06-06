@@ -6,7 +6,7 @@ import grave from "../assets/images/pet-grave.svg";
 import axios from "axios";
 
 const PetCard = ({ pet, onUpdate }) => {
-  const { _id, petPicture, petName, race, size, age, weight, sex } = pet;
+  const { _id, petPicture, petName, race, size, age, weight, sex, owner } = pet;
   const [showInput, setShowInput] = useState(true);
   const [bufferData, setBufferData] = useState("");
 
@@ -193,7 +193,7 @@ const PetCard = ({ pet, onUpdate }) => {
 
       <Modal type="deletePet" handleDelete={handleDelete}></Modal>
 
-      <Modal type="addService"></Modal>
+      <Modal type="addService" petName={petName} petId={_id} ownerId={owner}></Modal>
 
       <div className="flex flex-col gap-4">
         <div className="w-full">

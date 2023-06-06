@@ -7,7 +7,7 @@ import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import BuyProducts from "../layout/BuyProducts";
 import grave from "../assets/images/pet-grave.svg";
 
-const Modal = ({ type, name, handleDelete }) => {
+const Modal = ({ type, name, handleDelete, petName, petId, ownerId }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -26,7 +26,7 @@ const Modal = ({ type, name, handleDelete }) => {
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end">
-              <AddService closeModal={closeModal}></AddService>
+              <AddService closeModal={closeModal} petName={petName} petId={petId} ownerId={ownerId}></AddService>
             </div>
           </div>
         )}

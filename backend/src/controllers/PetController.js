@@ -91,4 +91,16 @@ module.exports = {
       res.status(500).json({ msg: "Erro ao atualizar o cliente" });
     }
   },
+
+  async getPet(req, res) {
+    try {
+      const result = await Pet.findById(req.params.id);
+      res.json(result);
+    } catch (error) {
+      console.log("====================================");
+      console.log(error);
+      console.log("====================================");
+      res.status(500).json({ msg: "Erro ao buscar o Pet" });
+    }
+  },
 };
