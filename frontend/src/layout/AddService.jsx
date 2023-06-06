@@ -30,22 +30,30 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
   };
 
   const handleSubmit = (event) => {
+
     event.preventDefault();
 
-    async function createService(petId, ownerId, serviceData) {
-      try {
-        const response = await axios.post(
-          `http://localhost:3000/newService/${petId}/${ownerId}`,
-          serviceData
-        );
-        console.log(serviceData);
-        return response.data; // Se desejar, pode retornar a resposta do servidor
-      } catch (error) {
-        console.log(error);
+    if(checkboxValues.bath === true || checkboxValues.shave === true || checkboxValues.nails === true){
+      async function createService(petId, ownerId, serviceData) {
+        try {
+          const response = await axios.post(
+            `http://localhost:3000/newService/${petId}/${ownerId}`,
+            serviceData
+          );
+          console.log(serviceData);
+          return response.data; // Se desejar, pode retornar a resposta do servidor
+        } catch (error) {
+          console.log(error);
+        }
       }
+      
+      alert("Serviço adicionado com sucesso!")
+      createService(petId, ownerId, checkboxValues);
+    }else{
+      alert("Adicione ao menos um serviço para ser feito.")
     }
 
-    createService(petId, ownerId, checkboxValues);
+    
 
     console.log(checkboxValues);
     console.log(petId);

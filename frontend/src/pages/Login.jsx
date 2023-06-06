@@ -50,7 +50,7 @@ const Login = () => {
     <div>
       <Header page="login"></Header>
 
-      <div className="w-full h-[92vh] flex justify-center items-center">
+      <div className="w-full h-[92vh] flex justify-center items-center" id="background">
         <div className=" bg-white w-[450px] h-[400px] text-center rounded-lg flex flex-col items-center px-2 drop-shadow-xl shadow-neutral-900 py-10">
           <h2 className="text-3xl">Login</h2>
           <div className="flex flex-col justify-between w-[80%] mt-10 h-full ">

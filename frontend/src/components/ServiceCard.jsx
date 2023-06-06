@@ -131,7 +131,7 @@ const ServiceCard = ({
   };
 
   return (
-    <div className=" border border-neutral-400 rounded-lg p-4 relative w-[460px] h-max bg-white text-xl flex flex-row">
+    <div className=" border border-neutral-400 rounded-lg p-4 relative w-[480px] h-max bg-white text-xl font-bold flex flex-row">
       <div className="absolute z-50 w-[40px] h-[40px] bg-white top-[-15px] left-[-10px] border border-gray-400 rounded-full flex justify-center items-center">
         {index + 1}
       </div>
@@ -149,32 +149,34 @@ const ServiceCard = ({
         <p>Idade: {pet?.age}</p>
         <p>Peso: {pet?.weight} Kg</p>
       </div>
-      <div className="w-[50%] relative">
+      <div className="w-[50%] relative flex flex-col justify-between">
         <div>
-          Serviços:
-          <ul className="list-disc ml-6">
-            {bath ? <li>Banho</li> : ""}
-            {shave ? <li>Tosa</li> : ""}
-            {nails ? <li>Cortar Unhas</li> : ""}
-          </ul>
-        </div>
-        <p>Nome do dono: {client?.fullName.split(" ")[0]}</p>
-        <p>Telefone: {client?.tel}</p>
-        <div className="relative">
-          <p>Levar:</p>
-          {delivery ? (
-            <p className="absolute left-[60px] top-[7px]  text-green-500">
-              <AiOutlineCheck />
-            </p>
-          ) : (
-            <p className="absolute left-[60px] top-[7px]   text-red-500">
-              <AiOutlineClose />
-            </p>
-          )}
+          <div>
+            Serviços:
+            <ul className="list-disc ml-6">
+              {bath ? <li>Banho</li> : ""}
+              {shave ? <li>Tosa</li> : ""}
+              {nails ? <li>Cortar Unhas</li> : ""}
+            </ul>
+          </div>
+          <p>Nome do dono: {client?.fullName.split(" ")[0]}</p>
+          <p>Telefone: {client?.tel}</p>
+          <div className="relative">
+            <p>Levar:</p>
+            {delivery ? (
+              <p className="absolute left-[60px] top-[7px]  text-green-500">
+                <AiOutlineCheck />
+              </p>
+            ) : (
+              <p className="absolute left-[60px] top-[7px]   text-red-500">
+                <AiOutlineClose />
+              </p>
+            )}
+          </div>
         </div>
 
         <button
-          className="w-full bg-brand-orange rounded-[8px]  h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white flex justify-center items-center cursor-pointer "
+          className="w-full bg-brand-orange rounded-[8px]  h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white flex justify-center items-center cursor-pointer font-normal"
           onClick={handleDelete}
         >
           Finalizar

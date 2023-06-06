@@ -121,35 +121,38 @@ const PetRegistration = ({ closeModal }) => {
         weight < 0.5
       )
     ) {
+
+      const petData = {
+        petPicture: bufferData,
+        petName,
+        race,
+        size,
+        age,
+        weight,
+        sex,
+        owner,
+      };
+  
+      async function createPet(clientId, petData) {
+        try {
+          const response = await axios.post(
+            `http://localhost:3000/newPet/${clientId}`,
+            petData
+          );
+          console.log(petData);
+          return response.data; // Se desejar, pode retornar a resposta do servidor
+        } catch (error) {
+          console.log(error);
+        }
+      }
+  
+      createPet(id, petData);
+      
       alert("Pet cadastrado com sucesso!");
       window.location.reload();
     }
 
-    const petData = {
-      petPicture: bufferData,
-      petName,
-      race,
-      size,
-      age,
-      weight,
-      sex,
-      owner,
-    };
-
-    async function createPet(clientId, petData) {
-      try {
-        const response = await axios.post(
-          `http://localhost:3000/newPet/${clientId}`,
-          petData
-        );
-        console.log(petData);
-        return response.data; // Se desejar, pode retornar a resposta do servidor
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    createPet(id, petData);
+    
   };
 
   return (

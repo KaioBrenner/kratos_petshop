@@ -89,3 +89,12 @@ input[type="number"]::-webkit-outer-spin-button {
 /* Estilos para a div personalizada que substitui o checkbox */
 
 
+
+
+#background{
+  aspect-ratio: 16/9;
+  background-image: url('../src/assets/images/background-cadastro1.png');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}

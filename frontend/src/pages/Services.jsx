@@ -24,8 +24,12 @@ const Services = () => {
     <div>
       <Header page="services" />
 
-      <div className="h-[92vh] flex justify-center items-center">
-        <div className="max-w-[1032px] w-[1032px] mx-4 bg-white flex flex-row flex-wrap justify-between gap-8">
+      <div className="h-[92vh] flex flex-col justify-center items-center">
+
+        <div className="justify-start container">
+          <h1 className="text-left text-3xl">Quantidade de Serviços: {services.length}</h1>
+        </div>
+        <div className="max-w-[1032px] w-[1032px] h-[752px] mx-4 mt-8 flex flex-row flex-wrap justify-between items-center gap-8">
           {services.map((service, index) => {
             if (index < 4) {
               return (
