@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "../components/Header";
 import ClientRow from "../components/ClientRow";
 import { BiCheck } from "react-icons/bi";
