@@ -68,9 +68,7 @@ const ClientData = () => {
     await updateClient(clientData);
   };
 
-  useEffect(() => {
-    console.log(clientData);
-  }, [clientData]);
+  
 
   return (
     <div>

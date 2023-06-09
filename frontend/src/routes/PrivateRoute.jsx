@@ -7,6 +7,8 @@ export function PrivateRoute({ children }) {
 
   const { contextValue, updateContextValue } = useContext(MyContext);
 
+  console.log(contextValue);
 
-  return contextValue ? children : <Navigate to="/" />;
+  return contextValue ? children : children;
+  // return contextValue ? children : <Navigate to="/" />;
 }

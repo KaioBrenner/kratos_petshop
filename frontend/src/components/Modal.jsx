@@ -6,8 +6,18 @@ import ProductRegistration from "../layout/ProductRegistration";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import BuyProducts from "../layout/BuyProducts";
 import grave from "../assets/images/pet-grave.svg";
+import knowMore from "../assets/images/pet-box.svg";
 
-const Modal = ({ type, name, handleDelete, petName, petId, ownerId }) => {
+const Modal = ({
+  type,
+  name,
+  handleDelete,
+  petName,
+  petId,
+  ownerId,
+  pet,
+  client,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -26,7 +36,12 @@ const Modal = ({ type, name, handleDelete, petName, petId, ownerId }) => {
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end">
-              <AddService closeModal={closeModal} petName={petName} petId={petId} ownerId={ownerId}></AddService>
+              <AddService
+                closeModal={closeModal}
+                petName={petName}
+                petId={petId}
+                ownerId={ownerId}
+              ></AddService>
             </div>
           </div>
         )}
@@ -144,6 +159,53 @@ const Modal = ({ type, name, handleDelete, petName, petId, ownerId }) => {
                 <h1 className="text-2xl font-bold mb-2">
                   Tem certeza que deseja excluir este pet?
                 </h1>
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  } else if (type === "serviceCard") {
+    return (
+      <>
+        <button
+          className="absolute top-[-32px] right-[-30px] border border-gray-600 rounded-full bg-brand-orange-faded cursor-pointer slide-bck-center h-[45px]"
+          onClick={(e) => {
+            setIsOpen(true);
+            e.preventDefault();
+          }}
+        >
+          <img src={knowMore} width={45} alt="Túmulo pet" />
+        </button>
+        {isOpen && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end h-[300px] w-[300px] z-50">
+              <div className="bg-gray-100 p-3 rounded-lg relative h-28">
+                <button
+                  type="submit"
+                  className="p-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center absolute right-[70px] bottom-3"
+                >
+                  <AiOutlineCheck />
+                </button>
+                <button
+                  className="p-4 bg-green-500 hover:bg-green-700  text-white font-bold py-2 px-4 rounded text-center absolute right-3 bottom-3"
+                  onClick={closeModal}
+                >
+                  <AiOutlineClose />
+                </button>
+                <h1 className="text-2xl font-bold mb-2">
+                  Dados do Pet
+                </h1>
+                <div>
+                  <p>Nome: {pet?.petName}</p>
+                  <p>Raça: {pet?.race}</p>
+                  <p>Porte: {pet?.size}</p>
+                  <p>Idade: {pet?.age}</p>
+                  <p>Peso: {pet?.weight} Kg</p>
+                  <p>Nome do dono: {client?.fullName.split(" ")[0]}</p>
+                  <p>Telefone: {client?.tel}</p>
+                  <textarea></textarea>
+                </div>
               </div>
             </div>
           </div>

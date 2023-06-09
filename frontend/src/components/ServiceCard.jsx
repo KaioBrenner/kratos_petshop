@@ -2,6 +2,7 @@ import pinscher from "../assets/images/pastor-alemão.jpg";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Modal from "./Modal";
 
 const ServiceCard = ({
   serviceId,
@@ -131,19 +132,24 @@ const ServiceCard = ({
   };
 
   return (
-    <div className=" border border-neutral-400 rounded-lg p-4 relative w-[480px] h-[360px] bg-white text-xl font-bold flex flex-row">
-      <div className="absolute z-50 w-[40px] h-[40px] bg-white top-[-15px] left-[-10px] border border-gray-400 rounded-full flex justify-center items-center">
+    <div className=" border border-neutral-400 rounded-lg p-4 relative w-[240px] h-[430px] bg-white text-xl font-bold flex flex-row">
+      <div className="absolute z-30 w-[40px] h-[40px] bg-white top-[-15px] left-[-10px] border border-gray-400 rounded-full flex justify-center items-center">
         {index + 1}
       </div>
-      <div className="w-[50%] relative">
+      <div className="w-[100%] relative">
         <img
           src={`data:image/jpeg;base64, ${pet?.petPicture}`}
           alt=""
-          width={45}
-          className="w-[170px] h-[170px] bg-white mb-4"
+          className="w-[100%] h-[170px] bg-white mb-4"
         />
 
-        <div className="h-[140px] flex flex-col justify-between">
+        <Modal type="serviceCard" pet={pet} client={client}></Modal>
+
+        <div className="h-[200px] flex flex-col justify-between">
+          <div>
+            <p>{pet?.petName}</p>
+            <p>{pet?.race}</p>
+          </div>
           <div>
             Serviços:
             <ul className="list-disc ml-6">
@@ -164,9 +170,17 @@ const ServiceCard = ({
               </p>
             )}
           </div>
+          <div>
+            <button
+              className="w-full bg-brand-orange rounded-[8px]  h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white flex justify-center items-center cursor-pointer font-normal"
+              onClick={handleDelete}
+            >
+              Finalizar
+            </button>
+          </div>
         </div>
       </div>
-      <div className="w-[50%] relative flex flex-col justify-between">
+      {/* <div className="w-[50%] relative flex flex-col justify-between">
         <div>
           <p>Nome: {pet?.petName}</p>
           <p>Raça: {pet?.race}</p>
@@ -182,7 +196,7 @@ const ServiceCard = ({
         >
           Finalizar
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

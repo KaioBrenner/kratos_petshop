@@ -29,7 +29,7 @@ const Services = () => {
         <div className="justify-start container">
           <h1 className="text-left text-3xl">Quantidade de Serviços: {services.length}</h1>
         </div>
-        <div className="max-w-[1032px] w-[1032px] h-[752px] mx-4 mt-8 flex flex-row flex-wrap justify-between items-center gap-8">
+        <div className="max-w-[1032px] w-[1032px] h-[752px] mx-4 mt-8 flex flex-row items-center gap-8">
           {services.map((service, index) => {
             if (index < 4) {
               return (
