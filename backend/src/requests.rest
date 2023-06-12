@@ -102,7 +102,7 @@ POST http://localhost:3000/newProduct
 Content-Type: application/json
 
 {
-    "name": "Ração Golden Premium",
+    "productName": "Ração Golden Premium",
     "category": "Alimento",
     "stock": 22,
     "price": 22.22
@@ -110,4 +110,4 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/getLogin
+DELETE http://localhost:3000/deleteProduct/6487712c548380a41c9755c7

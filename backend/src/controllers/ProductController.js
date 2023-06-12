@@ -4,23 +4,26 @@ const Category = require('../models/Category')
 module.exports = {
   async createProduto(req, res) {
     try {
-      const { name, category, stock, price } = req.body;
+      const { productName, category, stock, price } = req.body;
       
     
+      console.log(productName)
       const product = new Product({
-        name,
-        category,
-        stock,
-        price,
+        productName: req.body.productName,
+        category: req.body.category,
+        stock: req.body.stock,
+        price: req.body.price,
       });
 
-      product.save();
+
+      await product.save();
       res.json(product);
     } catch (error) {
-      console.log("====================================");
-      console.log(error);
-      console.log("====================================");
-      res.status(500).json({ msg: "Erro ao criar o Produto" });
+      console.log("Axios error:", error.message);
+      console.log("Response data:", error.response.data);
+      console.log("Response status:", error.response.status);
+      console.log("Response headers:", error.response.headers);
+      res.status(500).json({ msg: "Internal server error" });
     }
   },
 

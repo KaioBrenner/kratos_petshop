@@ -8,22 +8,38 @@ import dataProducts from "../constants/dataProducts";
 import Modal from "../components/Modal";
 
 const ProductList = () => {
-
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-      async function fetchProducts() {
-        try {
-          const response = await axios.get("http://localhost:3000/products");
-          const dataClients = response.data;
-          setProducts(dataClients);
-        } catch (error) {
-          console.log(error);
-        }
+    async function fetchProducts() {
+      try {
+        const response = await axios.get("http://localhost:3000/products");
+        const dataClients = response.data;
+        setProducts(dataClients);
+      } catch (error) {
+        console.log(error);
       }
-  
-      fetchProducts();
-    }, []);
+    }
+
+    fetchProducts();
+  }, []);
+
+  const handleDelete = () => {
+    async function deleteProduct(productId) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:3000/deleteProduct/${productId}`
+        );
+
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    deleteProduct(id);
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -61,10 +77,10 @@ const ProductList = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {products.map(({ name, category, stock, price }) => (
+                {products.map(({ productName, category, stock, price, _id }) => (
                   <tr className="border-y border-y-gray-200">
                     <td className="px-6 py-4 text-center whitespace-nowrap border-r border-r-gray-200">
-                      {name}
+                      {productName}
                     </td>
                     <td className="px-6 py-4 text-center whitespace-nowrap border-r border-r-gray-200">
                       {category}
@@ -75,7 +91,7 @@ const ProductList = () => {
                     <td className="px-6 py-4 text-center whitespace-nowrap border-r border-r-gray-200">
                       {price}
                     </td>
-                    <td className="px-6 py-4 text-center whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
+                    <td className="px-6 py-4 text-center whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer" onClick={handleDelete}>
                       Excluir
                     </td>
                   </tr>

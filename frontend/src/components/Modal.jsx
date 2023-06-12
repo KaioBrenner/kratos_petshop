@@ -10,7 +10,7 @@ import knowMore from "../assets/images/pet-box.svg";
 
 const Modal = ({
   type,
-  name,
+  productName,
   handleDelete,
   petName,
   petId,

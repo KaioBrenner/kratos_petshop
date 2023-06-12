@@ -1,6 +1,10 @@
+import { useEffect } from "react";
 import Modal from "./Modal";
 
-const ProductRow = ({ name, category, stock, price }) => {
+const ProductRow = ({ name, category, stock, price, _id }) => {
+  
+ 
+
   return (
     <tr
       className={`w-full text-center bg-white border-b-[1.24px] border-gray-200 hover:bg-gray-100`}
@@ -11,7 +15,7 @@ const ProductRow = ({ name, category, stock, price }) => {
       <td className="border-[1.24px] border-gray-200 p-4">{category}</td>
       <td>{stock}</td>
       <td>R${price.toFixed(2)}</td>
-      <td className="cursor-pointer text-red-500">Excluir</td>
+      <td className="cursor-pointer text-red-500" onClick={handleDelete}>Excluir</td>
     </tr>
   );
 };

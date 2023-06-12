@@ -17,73 +17,20 @@ import ProductList from "./pages/ProductList";
 import SalesHistory from "./pages/SalesHistory";
 import Services from "./pages/Services";
 
-import { PrivateRoute } from "./routes/PrivateRoute";
+// import { PrivateRoute } from "./routes/PrivateRoute";
 
 const App = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // Verifica se o usuário está logado ao carregar a página
-    const loggedIn = localStorage.getItem("loggedIn");
-    if (loggedIn === "true") {
-      // Redireciona para a página de login
-      navigate("/lista-clientes");
-    }
-  }, []);
-
   return (
     <MyContextProvider value={false}>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route
-            path="/lista-clientes"
-            element={
-              <PrivateRoute>
-                <ClientList />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/dados-cliente"
-            element={
-              <PrivateRoute>
-                <ClientData />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/servicos"
-            element={
-              <PrivateRoute>
-                <Services />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/cadastro-cliente"
-            element={
-              <PrivateRoute>
-                <ClientSignUp />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/lista-produtos"
-            element={
-              <PrivateRoute>
-                <ProductList />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/historico-vendas"
-            element={
-              <PrivateRoute>
-                <SalesHistory />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/lista-clientes" element={<ClientList />} />
+        <Route path="/dados-cliente" element={<ClientData />} />
+        <Route path="/servicos" element={<Services />} />
+        <Route path="/cadastro-cliente" element={<ClientSignUp />} />
+        <Route path="/lista-produtos" element={<ProductList />} />
+        <Route path="/historico-vendas" element={<SalesHistory />} />
+      </Routes>
     </MyContextProvider>
   );
 };

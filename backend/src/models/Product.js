@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const ProdutcSchema = new Schema({
 
-    name:{
+    productName:{
         type:String,
         validate:{
-            validator: nome => nome.length > 0,
+            validator: productName => productName.length > 0,
             message: 'O nome do produto não pode ser nulo'
         },
         required:[true, 'O campo nome é obrigatório'],
