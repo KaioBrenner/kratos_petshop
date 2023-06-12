@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import React, { createContext, useContext } from "react";
-
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { MyContextProvider } from "./MyContext";
+import { useNavigate } from "react-router-dom";
 
 // const MyComponent = () => {
 //   const contextValue = useContext(MyContext);
@@ -21,11 +20,19 @@ import Services from "./pages/Services";
 import { PrivateRoute } from "./routes/PrivateRoute";
 
 const App = () => {
-  // Rotas
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Verifica se o usuário está logado ao carregar a página
+    const loggedIn = localStorage.getItem("loggedIn");
+    if (loggedIn === "true") {
+      // Redireciona para a página de login
+      navigate("/lista-clientes");
+    }
+  }, []);
 
   return (
     <MyContextProvider value={false}>
-      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route
@@ -77,24 +84,20 @@ const App = () => {
             }
           />
         </Routes>
-      </BrowserRouter>
     </MyContextProvider>
   );
 };
 
 export default App;
 
-
-
-
-  // <Router>
-  //   <Routes>
-  //     <Route path="/" element={<Login />} />
-  //     <Route path="/dados-cliente" element={<ClientData />} />
-  //     <Route path="/lista-clientes" element={<ClientList />} />
-  //     <Route path="/cadastro-cliente" element={<ClientSignUp />} />
-  //     <Route path="/lista-produtos" element={<ProductList />} />
-  //     <Route path="/historico-vendas" element={<SalesHistory />} />
-  //     <Route path="/servicos" element={<Services />} />
-  //   </Routes>
-  // </Router>
+// <Router>
+//   <Routes>
+//     <Route path="/" element={<Login />} />
+//     <Route path="/dados-cliente" element={<ClientData />} />
+//     <Route path="/lista-clientes" element={<ClientList />} />
+//     <Route path="/cadastro-cliente" element={<ClientSignUp />} />
+//     <Route path="/lista-produtos" element={<ProductList />} />
+//     <Route path="/historico-vendas" element={<SalesHistory />} />
+//     <Route path="/servicos" element={<Services />} />
+//   </Routes>
+// </Router>

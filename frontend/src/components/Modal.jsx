@@ -26,7 +26,12 @@ const Modal = ({ type, name, handleDelete, petName, petId, ownerId }) => {
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end">
-              <AddService closeModal={closeModal} petName={petName} petId={petId} ownerId={ownerId}></AddService>
+              <AddService
+                closeModal={closeModal}
+                petName={petName}
+                petId={petId}
+                ownerId={ownerId}
+              ></AddService>
             </div>
           </div>
         )}
@@ -130,13 +135,13 @@ const Modal = ({ type, name, handleDelete, petName, petId, ownerId }) => {
               <div className="bg-gray-100 p-3 rounded-lg relative h-28">
                 <button
                   type="submit"
-                  className="p-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center absolute right-[70px] bottom-3"
+                  className="p-4  bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-center absolute right-[70px] bottom-3"
                   onClick={handleDelete}
                 >
                   <AiOutlineCheck />
                 </button>
                 <button
-                  className="p-4 bg-green-500 hover:bg-green-700  text-white font-bold py-2 px-4 rounded text-center absolute right-3 bottom-3"
+                  className="p-4  bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center absolute right-3 bottom-3"
                   onClick={closeModal}
                 >
                   <AiOutlineClose />

@@ -7,7 +7,7 @@ import { MyContextProvider, MyContext } from "../MyContext";
 import Header from "../components/Header";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
@@ -31,13 +31,12 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-
     // Lógica de login estará aqui
     if (employees[0].user === user && employees[0].password === password) {
       updateContextValue(true);
-      navigate("/lista-clientes")
+      navigate("/lista-clientes");
+      // localStorage.setItem("loggedIn", "true");
     }
-
 
     
   };
@@ -50,28 +49,26 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  // useEffect(() => {
-  //   if (redirectToClientes) {
-  //     window.location.replace("/lista-clientes");
-  //   }
-  // }, [redirectToClientes]);
 
-  // const PrivateRoute = ({ clientList: ClientList, isAuthenticated, }) => {
-  //   return (
-  //     <Route
-  //       render={() =>
-  //         isAuthenticated ? (
-  //           <ClientList />
-  //         ) : (
-  //           <Login />
-  //         )
-  //       }
-  //     />
-  //   );
+  // const isLoggedIn = () => {
+  //   const loggedIn = localStorage.getItem("loggedIn");
   // };
 
+
+  
+
+  useEffect(() => {
+    // Verifica se o usuário está logado ao carregar a página
+    const loggedIn = localStorage.getItem("loggedIn");
+    if (loggedIn === "true") {
+      // Redireciona para a página de login
+      navigate("/lista-clientes");
+    }
+  }, []);
+
+
   return (
-    <div>
+    <div >
       <Header page="login"></Header>
 
       <div
