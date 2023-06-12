@@ -5,6 +5,7 @@ const CategoryController = require("./controllers/CategoryController");
 const productController = require("./controllers/ProductController");
 const EmployeeController = require("./controllers/EmployeeController");
 const ServiceController = require("./controllers/ServiceController");
+const LoginController = require("./controllers/LoginController");
 const routes = express.Router();
 
 /* Rotas  Client */
@@ -44,5 +45,13 @@ routes.delete('/deleteService/:id', ServiceController.deleteService)
 /* Rota ADM */
 routes.post("/newEmployee", EmployeeController.createEmployee);
 routes.get("/employees", EmployeeController.employeeLists);
+
+
+
+/* Rota Login */
+
+// routes.post("/newLogin", LoginController.createLogin)
+
+routes.get("/getLogin", LoginController.loginLists)
 
 module.exports = routes;

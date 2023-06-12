@@ -91,3 +91,14 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/deleteService/647e66aa003f2c05ab58227b
+
+
+
+
+###
+
+POST http://localhost:3000/newLogin
+
+###
+
+GET http://localhost:3000/getLogin

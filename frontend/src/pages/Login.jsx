@@ -55,6 +55,7 @@ const Login = () => {
   // };
 
 
+<<<<<<< HEAD
   
 
   useEffect(() => {
@@ -67,6 +68,8 @@ const Login = () => {
   }, []);
 
 
+=======
+>>>>>>> 60828931f709ee16019b1a3871cb51349182bcc3
   return (
     <div >
       <Header page="login"></Header>
