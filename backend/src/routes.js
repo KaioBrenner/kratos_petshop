@@ -34,12 +34,13 @@ routes.get('/getPet/:id', petController.getPet)
 
 /*Rota Produto */
 routes.post("/newProduct", productController.createProduto);
-routes.get("/product", productController.productList);
+routes.get("/products", productController.productList);
 
 /* Rota Serviços */
 
 routes.post('/newService/:petId/:ownerId', ServiceController.createService);
 routes.get('/services', ServiceController.serviceList)
+routes.get('/getService/:id', ServiceController.getService)
 routes.delete('/deleteService/:id', ServiceController.deleteService)
 
 /* Rota ADM */

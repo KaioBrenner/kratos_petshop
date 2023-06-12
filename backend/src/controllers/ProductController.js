@@ -5,16 +5,11 @@ module.exports = {
   async createProduto(req, res) {
     try {
       const { name, category, stock, price } = req.body;
-
-      const categoryExists = await Category.findById(category);
-      if (!categoryExists) {
-        return res.status(404).json({ msg: "Categoria não encontrada" });
-      }
       
     
       const product = new Product({
         name,
-        category: categoryExists.name,
+        category,
         stock,
         price,
       });

@@ -15,6 +15,10 @@ const ProdutcSchema = new Schema({
 
     category:{
         type: String,
+        validate:{
+            validator: category => category.length > 0,
+            message: 'O nome do categoria não pode ser nulo'
+        },
         required: [true, 'O campo categoria é obrigatório']
     },
 
@@ -24,8 +28,7 @@ const ProdutcSchema = new Schema({
         validate:{
             validator: estoque => estoque > 0,
             message: 'O estoque não pode ser menor que 0' 
-        },
-        required:[true, 'O campo estoque é obrigatório']
+        }
     },
 
     price:{

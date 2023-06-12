@@ -2,11 +2,29 @@ import Header from "../components/Header";
 import ProductRow from "../components/ProductRow";
 import { BiCheck } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 import dataProducts from "../constants/dataProducts";
 import Modal from "../components/Modal";
 
 const ProductList = () => {
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+      async function fetchProducts() {
+        try {
+          const response = await axios.get("http://localhost:3000/products");
+          const dataClients = response.data;
+          setProducts(dataClients);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+  
+      fetchProducts();
+    }, []);
+
   return (
     <div>
       <Header page="client-list" />
@@ -43,7 +61,7 @@ const ProductList = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {dataProducts.map(({ name, category, stock, price }) => (
+                {products.map(({ name, category, stock, price }) => (
                   <tr className="border-y border-y-gray-200">
                     <td className="px-6 py-4 text-center whitespace-nowrap border-r border-r-gray-200">
                       {name}

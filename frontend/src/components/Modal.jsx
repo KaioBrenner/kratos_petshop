@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import addService from "../assets/images/pet-hospital.svg";
 import PetRegistration from "../layout/PetRegistration";
 import AddService from "../layout/AddService";
@@ -15,8 +15,10 @@ const Modal = ({
   petName,
   petId,
   ownerId,
+  serviceId,
   pet,
   client,
+  comments
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -179,16 +181,10 @@ const Modal = ({
         </button>
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end h-[300px] w-[300px] z-50">
-              <div className="bg-gray-100 p-3 rounded-lg relative h-28">
+            <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end  w-[400px] z-50">
+              <div className="bg-gray-100 p-3 rounded-lg relative w-full">
                 <button
-                  type="submit"
-                  className="p-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center absolute right-[70px] bottom-3"
-                >
-                  <AiOutlineCheck />
-                </button>
-                <button
-                  className="p-4 bg-green-500 hover:bg-green-700  text-white font-bold py-2 px-4 rounded text-center absolute right-3 bottom-3"
+                  className="p-4 bg-red-500 hover:bg-red-700  text-white font-bold py-2 px-4 rounded text-center absolute right-3 top-3"
                   onClick={closeModal}
                 >
                   <AiOutlineClose />
@@ -197,14 +193,14 @@ const Modal = ({
                   Dados do Pet
                 </h1>
                 <div>
-                  <p>Nome: {pet?.petName}</p>
-                  <p>Raça: {pet?.race}</p>
-                  <p>Porte: {pet?.size}</p>
-                  <p>Idade: {pet?.age}</p>
-                  <p>Peso: {pet?.weight} Kg</p>
-                  <p>Nome do dono: {client?.fullName.split(" ")[0]}</p>
-                  <p>Telefone: {client?.tel}</p>
-                  <textarea></textarea>
+                  <p>Nome: <span className="font-montserrat font-normal text-lg">{pet?.petName}</span></p>
+                  <p>Raça: <span className="font-montserrat font-normal text-lg">{pet?.race}</span></p>
+                  <p>Porte: <span className="font-montserrat font-normal text-lg">{pet?.size}</span></p>
+                  <p>Idade: <span className="font-montserrat font-normal text-lg">{pet?.age}</span></p>
+                  <p>Peso: <span className="font-montserrat font-normal text-lg">{pet?.weight} Kg</span></p>
+                  <p>Nome do dono: <span className="font-montserrat font-normal text-lg">{client?.fullName.split(" ")[0]}</span></p>
+                  <p>Telefone: <span className="font-montserrat font-normal text-lg">{client?.tel}</span></p>
+                  <textarea className="w-full mt-4 h-28" value={comments}></textarea>
                 </div>
               </div>
             </div>

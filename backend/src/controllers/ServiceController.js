@@ -17,6 +17,7 @@ module.exports = {
             shave: req.body.shave,
             nails: req.body.nails,
             delivery: req.body.delivery,
+            comments: req.body.comments,
             pet: petId,
             owner: ownerId,
           });
@@ -59,6 +60,18 @@ module.exports = {
       console.log(error);
       console.log("====================================");
       res.status(500).json({ msg: "Erro ao deletar o Pet" });
+    }
+  },
+
+  async getService(req, res) {
+    try {
+      const result = await Service.findById(req.params.id);
+      res.json(result);
+    } catch (error) {
+      console.log("====================================");
+      console.log(error);
+      console.log("====================================");
+      res.status(500).json({ msg: "Erro ao buscar o Serviço" });
     }
   },
 };

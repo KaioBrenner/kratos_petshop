@@ -1,7 +1,16 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
+import { useState, useEffect } from "react";
+
 const ProductRegistration = ({ closeModal }) => {
+  const [productData, setProductData] = useState({
+    productName: "",
+    category: "",
+    stock: 0,
+    price: 0,
+  });
+
   return (
     <>
       <div className="bg-gray-100 p-3 rounded-lg relative">
@@ -20,6 +29,14 @@ const ProductRegistration = ({ closeModal }) => {
                 type="text"
                 className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                 min="3"
+                onChange={(e) => {
+                  setProductData({
+                    ...productData,
+                    productName: e.target.value,
+                  });
+
+                  console.log(productData);
+                }}
               />
             </div>
             <div className="w-full">
@@ -27,20 +44,55 @@ const ProductRegistration = ({ closeModal }) => {
               <select
                 name="porte"
                 className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                onChange={(e) => {
+                  setProductData({
+                    ...productData,
+                    category: e.target.value,
+                  });
+
+                  console.log(productData);
+                }}
               >
-                <option value="alimento">Alimento</option>
-                <option value="acessorio">Acessório</option>
-                <option value="higiene">Higiene</option>
-                <option value="brinquedo">Brinquedo</option>
+                <option value="Alimento">Alimento</option>
+                <option value="Acessório">Acessório</option>
+                <option value="Higiene">Higiene</option>
+                <option value="Brinquedo">Brinquedo</option>
+                <option value="Serviço">Serviço</option>
               </select>
             </div>
             <div className="w-full">
               <label htmlFor="name">Quantidade:</label>
-              <input
-                type="number"
-                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                min={0}
-              />
+
+              {productData.category !== "Serviço" ? (
+                <input
+                  type="number"
+                  className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                  min={0}
+                  onChange={(e) => {
+                    setProductData({
+                      ...productData,
+                      stock: Number(e.target.value),
+                    });
+
+                    console.log(productData);
+                  }}
+                />
+              ) : (
+                <input
+                  type="number"
+                  className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                  min={0}
+                  readOnly
+                  onChange={(e) => {
+                    setProductData({
+                      ...productData,
+                      stock: Number(e.target.value),
+                    });
+
+                    console.log(productData);
+                  }}
+                />
+              )}
             </div>
             <div className="w-full">
               <label htmlFor="name">Preço:</label>
@@ -48,6 +100,14 @@ const ProductRegistration = ({ closeModal }) => {
                 type="number"
                 className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                 min={0}
+                onChange={(e) => {
+                  setProductData({
+                    ...productData,
+                    price: Number(e.target.value),
+                  });
+
+                  console.log(productData);
+                }}
               />
             </div>
           </div>

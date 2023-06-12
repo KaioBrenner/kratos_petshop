@@ -14,26 +14,32 @@ import petDelivery from "../assets/images/pet-delivery.png";
 import axios from "axios";
 
 const AddService = ({ closeModal, petName, petId, ownerId }) => {
-  const [checkboxValues, setCheckboxValues] = useState({
+  const [serviceData, setServiceData] = useState({
     bath: false,
     shave: false,
     nails: false,
     delivery: false,
+    comments: "",
   });
 
   const handleCheckboxChange = (event) => {
     const { id, checked } = event.target;
-    setCheckboxValues((prevState) => ({
+    setServiceData((prevState) => ({
       ...prevState,
       [id]: checked,
     }));
+
+    console.log(serviceData);
   };
 
   const handleSubmit = (event) => {
-
     event.preventDefault();
 
-    if(checkboxValues.bath === true || checkboxValues.shave === true || checkboxValues.nails === true){
+    if (
+      serviceData.bath === true ||
+      serviceData.shave === true ||
+      serviceData.nails === true
+    ) {
       async function createService(petId, ownerId, serviceData) {
         try {
           const response = await axios.post(
@@ -46,16 +52,14 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
           console.log(error);
         }
       }
-      
-      alert("Serviço adicionado com sucesso!")
-      createService(petId, ownerId, checkboxValues);
-    }else{
-      alert("Adicione ao menos um serviço para ser feito.")
+
+      alert("Serviço adicionado com sucesso!");
+      createService(petId, ownerId, serviceData);
+    } else {
+      alert("Adicione ao menos um serviço para ser feito.");
     }
 
-    
-
-    console.log(checkboxValues);
+    console.log(serviceData);
     console.log(petId);
     console.log(ownerId);
     window.location.reload();
@@ -93,7 +97,7 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
               <input
                 type="checkbox"
                 id="bath"
-                checked={checkboxValues.bath}
+                checked={serviceData.bath}
                 onChange={handleCheckboxChange}
               />
               <div className="custom-checkbox w-[100%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2">
@@ -113,7 +117,7 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
               <input
                 type="checkbox"
                 id="shave"
-                checked={checkboxValues.shave}
+                checked={serviceData.shave}
                 onChange={handleCheckboxChange}
               />
               <div className="custom-checkbox w-[100%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2">
@@ -132,7 +136,7 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
               <input
                 type="checkbox"
                 id="nails"
-                checked={checkboxValues.nails}
+                checked={serviceData.nails}
                 onChange={handleCheckboxChange}
               />
               <div className="custom-checkbox w-[100%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2">
@@ -151,7 +155,7 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
               <input
                 type="checkbox"
                 id="delivery"
-                checked={checkboxValues.delivery}
+                checked={serviceData.delivery}
                 onChange={handleCheckboxChange}
               />
               <div className="custom-checkbox w-[100%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2">
@@ -181,6 +185,19 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
             <button className="  w-[50%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2">
               <img src={petBox} alt="" />
             </button> */}
+          </div>
+
+          <div className="text-2xl text-left font-bold mb-2 leading-none mt-4">
+            <h1>Comments</h1>
+            <textarea
+              className="mt-4 w-full h-28 border border-neutral-400 font-normal text-base"
+              onChange={(e) =>
+                setServiceData((prevState) => ({
+                  ...prevState,
+                  comments: e.target.value,
+                }))
+              }
+            ></textarea>
           </div>
         </div>
       </form>

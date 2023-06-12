@@ -39,6 +39,7 @@ const Services = () => {
                   shave={service.shave}
                   nails={service.nails}
                   delivery={service.delivery}
+                  comments={service.comments}
                   petId={service.pet}
                   ownerId={service.owner}
                   index={index}

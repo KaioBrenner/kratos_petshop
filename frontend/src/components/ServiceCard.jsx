@@ -3,6 +3,7 @@ import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Modal from "./Modal";
+import '../index.css'
 
 const ServiceCard = ({
   serviceId,
@@ -12,6 +13,7 @@ const ServiceCard = ({
   shave,
   nails,
   delivery,
+  comments,
   index,
 }) => {
   const [pet, setPet] = useState();
@@ -59,8 +61,6 @@ const ServiceCard = ({
     setShowInput(false);
   };
 
-  console.log(serviceId);
-  console.log(petId);
 
   useEffect(() => {
     async function fetchPet() {
@@ -132,27 +132,27 @@ const ServiceCard = ({
   };
 
   return (
-    <div className=" border border-neutral-400 rounded-lg p-4 relative w-[240px] h-[430px] bg-white text-xl font-bold flex flex-row">
+    <div className=" border border-neutral-400 rounded-lg p-4 relative w-[240px] h-[480px] bg-white text-xl font-bold flex flex-row">
       <div className="absolute z-30 w-[40px] h-[40px] bg-white top-[-15px] left-[-10px] border border-gray-400 rounded-full flex justify-center items-center">
         {index + 1}
       </div>
-      <div className="w-[100%] relative">
+      <div className="w-[100%] relative flex flex-col justify-between">
         <img
           src={`data:image/jpeg;base64, ${pet?.petPicture}`}
           alt=""
           className="w-[100%] h-[170px] bg-white mb-4"
         />
 
-        <Modal type="serviceCard" pet={pet} client={client}></Modal>
+        <Modal type="serviceCard" pet={pet} client={client} serviceId={serviceId} comments={comments}></Modal>
 
         <div className="h-[200px] flex flex-col justify-between">
           <div>
-            <p>{pet?.petName}</p>
-            <p>{pet?.race}</p>
+            <p>Nome: <span className="font-normal">{pet?.petName}</span></p>
+            <p>Raça: <span className="font-normal">{pet?.race}</span></p>
           </div>
           <div>
             Serviços:
-            <ul className="list-disc ml-6">
+            <ul className="list-disc ml-6 text-lg font-normal font-montserrat">
               {bath ? <li>Banho</li> : ""}
               {shave ? <li>Tosa</li> : ""}
               {nails ? <li>Cortar Unhas</li> : ""}
@@ -160,6 +160,7 @@ const ServiceCard = ({
           </div>
           <div className="relative">
             <p>Levar:</p>
+            <div className="absolute border border-black w-4 h-4 left-[62px] top-[9px]"></div>
             {delivery ? (
               <p className="absolute left-[60px] top-[7px]  text-green-500">
                 <AiOutlineCheck />
@@ -170,7 +171,9 @@ const ServiceCard = ({
               </p>
             )}
           </div>
-          <div>
+        </div>
+        
+        <div>
             <button
               className="w-full bg-brand-orange rounded-[8px]  h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white flex justify-center items-center cursor-pointer font-normal"
               onClick={handleDelete}
@@ -178,7 +181,6 @@ const ServiceCard = ({
               Finalizar
             </button>
           </div>
-        </div>
       </div>
       {/* <div className="w-[50%] relative flex flex-col justify-between">
         <div>

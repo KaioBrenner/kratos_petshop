@@ -18,6 +18,9 @@ const ServiceSchema = new Schema({
     type: Boolean,
     default: true,
   },
+  comments: {
+    type: String,
+  },
   pet: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Pet",

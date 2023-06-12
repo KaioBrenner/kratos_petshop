@@ -79,14 +79,15 @@ GET http://localhost:3000/services
 
 
 ### Rota Usuário
-POST http://localhost:3000/newService/647df68b338f9f4537281c73/646fdb15f7ffc8723b41ac9d
+POST http://localhost:3000/newService/647f1fcfaf0130c337908d3a/6479da2d0b93a5b0cecc19b1
 Content-Type: application/json
 
 {
     "bath": true,
-    "shave": true,
+    "shave": false,
     "nails": false,
-    "delivery": true
+    "delivery": true,
+    "comments": "asjdnaksjdasd"
 }
 
 ###
@@ -97,7 +98,15 @@ DELETE http://localhost:3000/deleteService/647e66aa003f2c05ab58227b
 
 ###
 
-POST http://localhost:3000/newLogin
+POST http://localhost:3000/newProduct
+Content-Type: application/json
+
+{
+    "name": "Ração Golden Premium",
+    "category": "Alimento",
+    "stock": 22,
+    "price": 22.22
+}
 
 ###
 
