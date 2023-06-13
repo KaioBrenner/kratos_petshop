@@ -47,7 +47,7 @@ module.exports = {
       console.log("====================================");
       console.log(error);
       console.log("====================================");
-      res.status(500).json({ msg: "Erro ao deletar o produto" });
+      res.status(500).json({ msg: "Erro ao deletar o cliente" });
     }
   },
 

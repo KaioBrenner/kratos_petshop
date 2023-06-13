@@ -24,23 +24,6 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
-  const handleDelete = () => {
-    async function deleteProduct(productId) {
-      try {
-        const response = await axios.delete(
-          `http://localhost:3000/deleteProduct/${productId}`
-        );
-
-        return response;
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    deleteProduct(id);
-    window.location.reload();
-  };
-
   return (
     <div>
       <Header page="client-list" />
@@ -77,25 +60,18 @@ const ProductList = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {products.map(({ productName, category, stock, price, _id }) => (
-                  <tr className="border-y border-y-gray-200">
-                    <td className="px-6 py-4 text-center whitespace-nowrap border-r border-r-gray-200">
-                      {productName}
-                    </td>
-                    <td className="px-6 py-4 text-center whitespace-nowrap border-r border-r-gray-200">
-                      {category}
-                    </td>
-                    <td className="px-6 py-4 text-center whitespace-nowrap border-r border-r-gray-200">
-                      {stock}
-                    </td>
-                    <td className="px-6 py-4 text-center whitespace-nowrap border-r border-r-gray-200">
-                      {price}
-                    </td>
-                    <td className="px-6 py-4 text-center whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer" onClick={handleDelete}>
-                      Excluir
-                    </td>
-                  </tr>
-                ))}
+                {products.map(
+                  ({ productName, category, stock, price, _id }) => (
+                    <ProductRow
+                      productName={productName}
+                      category={category}
+                      stock={stock}
+                      price={price}
+                      id={_id}
+                    ></ProductRow>
+                  )
+                )}
+
               </tbody>
             </table>
           </div>

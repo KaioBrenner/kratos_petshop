@@ -1,9 +1,50 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
-
-import dataProducts from "../constants/dataProducts";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const BuyProducts = ({ closeModal }) => {
+  const [products, setProducts] = useState([]);
+  const [price, setPrice] = useState("");
+  const [product, setProduct] = useState({
+    productName: "",
+    stock: 0,
+    price: 0,
+  });
+  const [cart, setCart] = useState([]);
+
+  const [fullName, setFullName] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("")
+
+  const addToCart = (item) => {
+    setCart((prevCart) => [...prevCart, item]);
+  };
+
+  const removeFromCart = (index) => {
+    setCart((prevCart) => {
+      const updatedCart = [...prevCart];
+      updatedCart.splice(index, 1);
+      return updatedCart;
+    });
+  };
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await axios.get("http://localhost:3000/products");
+        const dataClients = response.data;
+        setProducts(dataClients);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    console.log(product);
+
+    fetchProducts();
+  }, []);
+
   return (
     <>
       <div className="bg-gray-100 p-3 rounded-lg relative">
@@ -21,9 +62,25 @@ const BuyProducts = ({ closeModal }) => {
               <select
                 name="porte"
                 className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                onChange={(e) => {
+                  const selectedProductPrice =
+                    e.target.options[e.target.selectedIndex].getAttribute(
+                      "data-price"
+                    );
+                  setPrice(selectedProductPrice);
+
+                  setProduct({
+                    ...product,
+                    productName: e.target.value,
+                    price: Number(selectedProductPrice),
+                  });
+                  console.log(product);
+                }}
               >
-                {dataProducts.map(({ name }, index) => (
-                  <option value="">{name}</option>
+                {products.map(({ productName, price }, index) => (
+                  <option value={`${productName}`} data-price={price}>
+                    {productName}
+                  </option>
                 ))}
               </select>
             </div>
@@ -33,6 +90,10 @@ const BuyProducts = ({ closeModal }) => {
                 type="number"
                 className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                 min={0}
+                onChange={(e) => {
+                  setProduct({ ...product, stock: Number(e.target.value) });
+                  console.log(product);
+                }}
               />
             </div>
             <div className="w-full">
@@ -40,7 +101,8 @@ const BuyProducts = ({ closeModal }) => {
               <input
                 type="number"
                 className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                value={"22.99"}
+                readOnly
+                value={price}
               />
             </div>
             <div className="w-full">
@@ -48,9 +110,12 @@ const BuyProducts = ({ closeModal }) => {
                 className="w-[100%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
                 onClick={(e) => {
                   e.preventDefault();
+                  console.log(product);
+                  addToCart(product);
+                  console.log(cart);
                 }}
               >
-                Adicionar à lista
+                Adicionar ao Carrinho
               </button>
             </div>
           </div>
@@ -73,15 +138,34 @@ const BuyProducts = ({ closeModal }) => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">Ração Premium</td>
-                  <td className="px-6 py-4 whitespace-nowrap">12</td>
+                {cart.map(({ productName, stock, price }, index) => {
+                  return (
+                    <tr key={index}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {productName}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">{stock}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        R${price.toFixed(2)}
+                      </td>
+                      <td
+                        className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer"
+                        onClick={() => removeFromCart(index)}
+                      >
+                        Excluir
+                      </td>
+                    </tr>
+                  );
+                })}
+                {/* <tr>
+                  <td className="px-6 py-4 whitespace-nowrap">{ productName }</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{  }</td>
                   <td className="px-6 py-4 whitespace-nowrap">150.22</td>
                   <td className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
                     Excluir
                   </td>
-                </tr>
-                <tr>
+                </tr> */}
+                {/* <tr>
                   <td className="px-6 py-4 whitespace-nowrap">
                     Shampoo Hipoalergênico
                   </td>
@@ -90,48 +174,59 @@ const BuyProducts = ({ closeModal }) => {
                   <td className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
                     Excluir
                   </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">Ração Premium</td>
-                  <td className="px-6 py-4 whitespace-nowrap">12</td>
-                  <td className="px-6 py-4 whitespace-nowrap">150.22</td>
-                  <td className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
-                    Excluir
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    Shampoo Hipoalergênico
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">2</td>
-                  <td className="px-6 py-4 whitespace-nowrap">30.99</td>
-                  <td className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
-                    Excluir
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">Ração Premium</td>
-                  <td className="px-6 py-4 whitespace-nowrap">12</td>
-                  <td className="px-6 py-4 whitespace-nowrap">150.22</td>
-                  <td className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
-                    Excluir
-                  </td>
-                </tr>
+                </tr> */}
               </tbody>
             </table>
           </div>
 
           <div className="w-full">
-            <label htmlFor="name">Forma de Pagamento:</label>
-            <select
-              name="porte"
-              className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-            >
-              <option value="">Dinheiro</option>
-              <option value="">Pix</option>
-              <option value="">Crédito</option>
-              <option value="">Débito</option>
-            </select>
+            <div className="flex gap-4">
+              <div className="w-1/2">
+                <label htmlFor="name">Nome do Cliente:</label>
+                <input
+                  type="text"
+                  className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                  placeholder="Ex: José Santos"
+                  name="fullName"
+                  defaultValue={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  min="3"
+                />
+              </div>
+              <div className="w-1/2">
+                <label htmlFor="name">CPF:</label>
+                <input
+                  type="number"
+                  className="border border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                  placeholder="Ex: 12345678900"
+                  name="cpf"
+                  defaultValue={cpf}
+                  onChange={(e) => {
+                    setCpf(e.target.value);
+                    console.log(cpf)
+                    console.log(fullName)
+                    console.log(paymentMethod)
+                  }}
+                  min="11"
+                  max="11"
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="name">Forma de Pagamento:</label>
+              <select
+                name="porte"
+                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                onChange={(e) => {
+                  setPaymentMethod(e.target.value)
+                }}
+              >
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Pix">Pix</option>
+                <option value="Crédito">Crédito</option>
+                <option value="Débito">Débito</option>
+              </select>
+            </div>
           </div>
 
           <div className="flex gap-5">
