@@ -4,11 +4,22 @@ import { BiCheck } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { SlMagnifier } from "react-icons/sl";
 import dataProducts from "../constants/dataProducts";
+
 import Modal from "../components/Modal";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredProducts = products.filter((product) =>
+    product.productName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   useEffect(() => {
     async function fetchProducts() {
@@ -32,6 +43,16 @@ const ProductList = () => {
         <h1 className="text-5xl text-left font-bold mb-4 container">
           Produtos
         </h1>
+
+        <div className="my-4 relative">
+          <input
+            type="search"
+            className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2 "
+            onChange={handleSearch}
+            placeholder="Pesquisar produto"
+          />
+          <SlMagnifier className="absolute top-5 right-4" />
+        </div>
 
         <div className="bg-white p-3 rounded-lg">
           <div className="flex gap-5 justify-start">
@@ -60,7 +81,17 @@ const ProductList = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {products.map(
+                {searchTerm ? filteredProducts.map(
+                  ({ productName, category, stock, price, _id }) => (
+                    <ProductRow
+                      productName={productName}
+                      category={category}
+                      stock={stock}
+                      price={price}
+                      id={_id}
+                    ></ProductRow>
+                  )
+                ) : products.map(
                   ({ productName, category, stock, price, _id }) => (
                     <ProductRow
                       productName={productName}
@@ -71,7 +102,6 @@ const ProductList = () => {
                     ></ProductRow>
                   )
                 )}
-
               </tbody>
             </table>
           </div>

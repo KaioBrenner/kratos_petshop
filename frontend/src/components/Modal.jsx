@@ -3,7 +3,7 @@ import addService from "../assets/images/pet-hospital.svg";
 import PetRegistration from "../layout/PetRegistration";
 import AddService from "../layout/AddService";
 import ProductRegistration from "../layout/ProductRegistration";
-import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineCheck, AiOutlineInfoCircle } from "react-icons/ai";
 import BuyProducts from "../layout/BuyProducts";
 import grave from "../assets/images/pet-grave.svg";
 import knowMore from "../assets/images/pet-box.svg";
@@ -171,13 +171,14 @@ const Modal = ({
     return (
       <>
         <button
-          className="absolute top-[-32px] right-[-30px] border border-gray-600 rounded-full bg-brand-orange-faded cursor-pointer slide-bck-center h-[45px]"
+          className="absolute top-[-32px] right-[-30px] border border-gray-600 rounded-full bg-brand-orange-faded cursor-pointer slide-bck-center h-[45px] w-[45px] flex justify-center items-center"
           onClick={(e) => {
             setIsOpen(true);
             e.preventDefault();
           }}
         >
-          <img src={knowMore} width={45} alt="Túmulo pet" />
+          {/* <img src={knowMore} width={45} alt="Túmulo pet" /> */}
+          <AiOutlineInfoCircle className="w-full text-[3rem]"></AiOutlineInfoCircle>
         </button>
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
