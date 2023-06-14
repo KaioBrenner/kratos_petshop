@@ -57,8 +57,8 @@ const SalesHistory = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {sales.map(({_id, clientCPF, clientName, totalPrice, dateTime, paymentMethod}) => (
-                  <SaleRow _id={_id} clientCPF={clientCPF} clientName={clientName} totalPrice={totalPrice} dateTime={dateTime} paymentMethod={paymentMethod}></SaleRow>
+                {sales.map(({_id, clientCPF, clientName, totalPrice, dateTime, paymentMethod, cart}) => (
+                  <SaleRow _id={_id} clientCPF={clientCPF} clientName={clientName} totalPrice={totalPrice} dateTime={dateTime} paymentMethod={paymentMethod} cart={cart}></SaleRow>
                 )
                   
                 )}

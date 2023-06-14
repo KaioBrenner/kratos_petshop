@@ -11,8 +11,7 @@ const Login = () => {
   const [employees, setEmployees] = useState([]);
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [redirectToClientes, setRedirectToClientes] = useState(false);
-  const { contextValue, updateContextValue } = useContext(MyContext);
+  
 
   useEffect(() => {
     async function fetchEmployees() {
@@ -33,12 +32,9 @@ const Login = () => {
 
     // Lógica de login estará aqui
     if (employees[0].user === user && employees[0].password === password) {
-      updateContextValue(true);
       navigate("/lista-clientes");
-      // localStorage.setItem("loggedIn", "true");
     }
 
-    
   };
 
   const handleUserChange = (e) => {
@@ -57,14 +53,7 @@ const Login = () => {
 
   
 
-  useEffect(() => {
-    // Verifica se o usuário está logado ao carregar a página
-    const loggedIn = localStorage.getItem("loggedIn");
-    if (loggedIn === "true") {
-      // Redireciona para a página de login
-      navigate("/lista-clientes");
-    }
-  }, []);
+  
 
 
   return (

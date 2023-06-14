@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { MyContextProvider } from "./MyContext";
 import { useNavigate } from "react-router-dom";
 
 // const MyComponent = () => {
@@ -21,17 +20,15 @@ import Services from "./pages/Services";
 
 const App = () => {
   return (
-    <MyContextProvider value={false}>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/lista-clientes" element={<ClientList />} />
-        <Route path="/dados-cliente" element={<ClientData />} />
-        <Route path="/servicos" element={<Services />} />
-        <Route path="/cadastro-cliente" element={<ClientSignUp />} />
-        <Route path="/lista-produtos" element={<ProductList />} />
-        <Route path="/historico-vendas" element={<SalesHistory />} />
-      </Routes>
-    </MyContextProvider>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/lista-clientes" element={<ClientList />} />
+      <Route path="/dados-cliente" element={<ClientData />} />
+      <Route path="/servicos" element={<Services />} />
+      <Route path="/cadastro-cliente" element={<ClientSignUp />} />
+      <Route path="/lista-produtos" element={<ProductList />} />
+      <Route path="/historico-vendas" element={<SalesHistory />} />
+    </Routes>
   );
 };
 
