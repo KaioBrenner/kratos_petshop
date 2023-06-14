@@ -21,6 +21,8 @@ const ProductRow = ({ productName, category, stock, price, id }) => {
     window.location.reload()
   }
 
+  
+
   return (
     <tr className="border-y border-y-gray-200">
       <td className="px-6 py-4 text-center whitespace-nowrap border-r border-r-gray-200">

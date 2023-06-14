@@ -77,6 +77,8 @@ const ProductRegistration = ({ closeModal }) => {
             "http://localhost:3000/newProduct",
             productData
           );
+
+          window.location.reload();
           if (
             !(
               productName.length <= 3 ||
@@ -102,6 +104,14 @@ const ProductRegistration = ({ closeModal }) => {
 
     createProduct(productData);
   };
+
+  useEffect(() => {
+    if (category === "Serviço") {
+      setStock(1)
+    }
+    console.log(productName, category, stock, price)
+    // Outras ações que dependem do estado atualizado podem ser executadas aqui
+  }, [category]);
   return (
     <>
       <div className="bg-gray-100 p-3 rounded-lg relative">
@@ -124,6 +134,7 @@ const ProductRegistration = ({ closeModal }) => {
                 defaultValue={productName}
                 onChange={(e) => {
                   setProductName(e.target.value);
+                  console.log(productName, category, stock, price);
                 }}
               />
               {productNameError && (
@@ -138,11 +149,7 @@ const ProductRegistration = ({ closeModal }) => {
                 name="category"
                 className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                 defaultValue={category}
-                onChange={(e) => {
-                  setCategory(e.target.value);
-
-                  console.log(category);
-                }}
+                onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="Alimento">Alimento</option>
                 <option value="Acessório">Acessório</option>
@@ -179,8 +186,11 @@ const ProductRegistration = ({ closeModal }) => {
                     name="stock"
                     className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                     min={0}
-                    value={0}
+                    value={1}
                     readOnly
+                    onChange={(e) => {
+                      setStock(Number(e.target.value));
+                    }}
                   />
                   {stockError && (
                     <span className="text-red-400 text-sm mt-40">

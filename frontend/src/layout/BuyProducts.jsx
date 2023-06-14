@@ -45,6 +45,10 @@ const BuyProducts = ({ closeModal }) => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+
+  },[])
+
   return (
     <>
       <div className="bg-gray-100 p-3 rounded-lg relative">
@@ -77,6 +81,7 @@ const BuyProducts = ({ closeModal }) => {
                   console.log(product);
                 }}
               >
+                <option value=""></option>
                 {products.map(({ productName, price }, index) => (
                   <option value={`${productName}`} data-price={price}>
                     {productName}
@@ -84,26 +89,28 @@ const BuyProducts = ({ closeModal }) => {
                 ))}
               </select>
             </div>
-            <div className="w-full">
-              <label htmlFor="name">Quantidade:</label>
-              <input
-                type="number"
-                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                min={0}
-                onChange={(e) => {
-                  setProduct({ ...product, stock: Number(e.target.value) });
-                  console.log(product);
-                }}
-              />
-            </div>
-            <div className="w-full">
-              <label htmlFor="name">Preço:</label>
-              <input
-                type="number"
-                className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                readOnly
-                value={price}
-              />
+            <div className="flex flex-row gap-4">
+              <div className="w-1/2">
+                <label htmlFor="name">Quantidade:</label>
+                <input
+                  type="number"
+                  className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                  min={0}
+                  onChange={(e) => {
+                    setProduct({ ...product, stock: Number(e.target.value), price: price *  Number(e.target.value)});
+                    console.log(product);
+                  }}
+                />
+              </div>
+              <div className="w-1/2">
+                <label htmlFor="name">Preço:</label>
+                <input
+                  type="number"
+                  className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+                  readOnly
+                  value={price}
+                />
+              </div>
             </div>
             <div className="w-full">
               <button
@@ -146,7 +153,7 @@ const BuyProducts = ({ closeModal }) => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">{stock}</td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        R${price.toFixed(2)}
+                        R${(price).toFixed(2)}
                       </td>
                       <td
                         className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer"
@@ -221,6 +228,7 @@ const BuyProducts = ({ closeModal }) => {
                   setPaymentMethod(e.target.value)
                 }}
               >
+                <option value=""></option>
                 <option value="Dinheiro">Dinheiro</option>
                 <option value="Pix">Pix</option>
                 <option value="Crédito">Crédito</option>
@@ -233,6 +241,10 @@ const BuyProducts = ({ closeModal }) => {
             <button
               type=""
               className="  w-[100%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
+              onClick={(e) => {
+                e.preventDefault()
+                console.log(cart)
+              }}
             >
               Efetuar Compra
             </button>

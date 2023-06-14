@@ -6,6 +6,7 @@ const productController = require("./controllers/ProductController");
 const EmployeeController = require("./controllers/EmployeeController");
 const ServiceController = require("./controllers/ServiceController");
 const LoginController = require("./controllers/LoginController");
+const SellHistoricController = require("./controllers/SellHistoricController");
 const routes = express.Router();
 
 /* Rotas  Client */
@@ -47,6 +48,12 @@ routes.delete('/deleteService/:id', ServiceController.deleteService)
 /* Rota ADM */
 routes.post("/newEmployee", EmployeeController.createEmployee);
 routes.get("/employees", EmployeeController.employeeLists);
+
+
+/* Rota Histórico */
+
+routes.post("/newSellHistoric", SellHistoricController.createSellHistoric)
+routes.get("/sellHistorics", SellHistoricController.SellHistoricList);
 
 
 

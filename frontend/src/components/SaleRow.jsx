@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 
-const SaleRow = ({ name, cpf, active }) => {
+const SaleRow = ({ _id, clientCPF, clientName, totalPrice, dateTime, paymentMethod }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleAccordion = () => {
@@ -28,13 +28,13 @@ const SaleRow = ({ name, cpf, active }) => {
           className="border-[1.24px] border-gray-200 p-4"
           onClick={CurrentDateTime}
         >
-          Jonas
+          {clientName}
         </td>
-        <td className="border-[1.24px] border-gray-200 p-4">00011122233</td>
-        <td className="border-[1.24px] border-gray-200 p-4">150.89</td>
-        <td className="border-[1.24px] border-gray-200 p-4">Cacau</td>
+        <td className="border-[1.24px] border-gray-200 p-4">{clientCPF}</td>
+        <td className="border-[1.24px] border-gray-200 p-4">{totalPrice}</td>
+        <td className="border-[1.24px] border-gray-200 p-4">{paymentMethod}</td>
         <td className="border-[1.24px] border-gray-200 p-4">
-          {CurrentDateTime()}
+          {dateTime}
         </td>
       </tr>
       {isOpen && (

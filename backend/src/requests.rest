@@ -68,8 +68,8 @@ POST http://localhost:3000/newProduct
 Content-Type: application/json
 
 {
-    "name": "Ração Premiumn",
-    "category": "6470a026ccf53739a6f6a099",
+    "productName": "Ração Premiumn",
+    "category": "Alimento",
     "stock": 2222,
     "price": 666
 }
@@ -111,3 +111,20 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:3000/deleteProduct/64877824ac87679cf8bbbe02
+
+
+###
+
+POST http://localhost:3000/newSellHistoric
+Content-Type: application/json
+
+{
+    "clientCPF": "11122233302",
+    "clientName": "João",
+    "totalPrice": 22,
+    "paymentMethod": "Dinheiro",
+    "dateTime": "12/03/2024"
+}
+
+###
+GET http://localhost:3000/sellHistorics

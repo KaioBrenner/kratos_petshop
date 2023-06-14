@@ -10,7 +10,6 @@ const ProdutcSchema = new Schema({
             message: 'O nome do produto não pode ser nulo'
         },
         required:[true, 'O campo nome é obrigatório'],
-        unique:[true]
     },
 
     category:{
