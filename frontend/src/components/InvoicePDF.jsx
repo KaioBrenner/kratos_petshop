@@ -11,8 +11,9 @@ const InvoicePDF = ({ customerName, items, total, paymentMethod }) => {
 
   return (
     <Document>
-      <Page style={styles.page} size="A4">
-        <Text>Nota Fiscal</Text>
+      <Page style={styles.page} size="A5">
+        <Text>NF-e</Text>
+        <Text>00.000.000/0000-00</Text>
         <Text>Cliente: {customerName}</Text>
         <Text>Método de Pagamento: {paymentMethod}</Text>
 
