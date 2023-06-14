@@ -4,10 +4,11 @@ module.exports = {
   async createSellHistoric(req, res) {
     try {
       const sellHistoric = new SellHistoric({
-        clientCPF: req.body.clientCPF,
-        clientName: req.body.clientName,
+        clientCPF: req.body.cpf,
+        clientName: req.body.fullName,
         totalPrice: req.body.totalPrice,
         paymentMethod: req.body.paymentMethod,
+        cart: req.body.cart,
         dateTime: req.body.dateTime
       });
 

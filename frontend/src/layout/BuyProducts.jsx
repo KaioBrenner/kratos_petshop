@@ -15,7 +15,7 @@ const BuyProducts = ({ closeModal }) => {
 
   const [fullName, setFullName] = useState("");
   const [cpf, setCpf] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("")
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const addToCart = (item) => {
     setCart((prevCart) => [...prevCart, item]);
@@ -28,6 +28,16 @@ const BuyProducts = ({ closeModal }) => {
       return updatedCart;
     });
   };
+
+  function formatarData(data) {
+    const dia = String(data.getDate()).padStart(2, "0");
+    const mes = String(data.getMonth() + 1).padStart(2, "0");
+    const ano = data.getFullYear();
+    const horas = String(data.getHours()).padStart(2, "0");
+    const minutos = String(data.getMinutes()).padStart(2, "0");
+
+    return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
+  }
 
   useEffect(() => {
     async function fetchProducts() {
@@ -45,9 +55,48 @@ const BuyProducts = ({ closeModal }) => {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
+  useEffect(() => {}, []);
 
-  },[])
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    console.log("rodou");
+
+    const countTotalPrice = () => {
+      let count = 0;
+      for (let i = 0; i < cart.length; i++) {
+        console.log(cart[i].price)
+        count += cart[i].price;
+      }
+      return count
+    }
+
+    const saleData = {
+      cart,
+      fullName,
+      cpf,
+      paymentMethod,
+      totalPrice: countTotalPrice(),
+      dateTime: formatarData(new Date()),
+    };
+
+    async function createSellHistoric(saleData) {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/newSellHistoric",
+          saleData
+        );
+
+        console.log(saleData)
+        return response.data;
+      } catch (error) {
+        // Se desejar, pode retornar a resposta do servidor
+        console.log(error);
+      }
+    }
+
+    createSellHistoric(saleData);
+  };
 
   return (
     <>
@@ -97,7 +146,11 @@ const BuyProducts = ({ closeModal }) => {
                   className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                   min={0}
                   onChange={(e) => {
-                    setProduct({ ...product, stock: Number(e.target.value), price: price *  Number(e.target.value)});
+                    setProduct({
+                      ...product,
+                      stock: Number(e.target.value),
+                      price: price * Number(e.target.value),
+                    });
                     console.log(product);
                   }}
                 />
@@ -153,7 +206,7 @@ const BuyProducts = ({ closeModal }) => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">{stock}</td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        R${(price).toFixed(2)}
+                        R${price.toFixed(2)}
                       </td>
                       <td
                         className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer"
@@ -210,9 +263,9 @@ const BuyProducts = ({ closeModal }) => {
                   defaultValue={cpf}
                   onChange={(e) => {
                     setCpf(e.target.value);
-                    console.log(cpf)
-                    console.log(fullName)
-                    console.log(paymentMethod)
+                    console.log(cpf);
+                    console.log(fullName);
+                    console.log(paymentMethod);
                   }}
                   min="11"
                   max="11"
@@ -225,7 +278,7 @@ const BuyProducts = ({ closeModal }) => {
                 name="porte"
                 className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                 onChange={(e) => {
-                  setPaymentMethod(e.target.value)
+                  setPaymentMethod(e.target.value);
                 }}
               >
                 <option value=""></option>
@@ -241,10 +294,7 @@ const BuyProducts = ({ closeModal }) => {
             <button
               type=""
               className="  w-[100%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
-              onClick={(e) => {
-                e.preventDefault()
-                console.log(cart)
-              }}
+              onClick={handleFormSubmit}
             >
               Efetuar Compra
             </button>

@@ -119,10 +119,11 @@ POST http://localhost:3000/newSellHistoric
 Content-Type: application/json
 
 {
-    "clientCPF": "11122233302",
-    "clientName": "João",
+    "cpf": "11122233302",
+    "fullName": "João",
     "totalPrice": 22,
     "paymentMethod": "Dinheiro",
+    "cart": [],
     "dateTime": "12/03/2024"
 }
 

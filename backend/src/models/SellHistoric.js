@@ -32,6 +32,10 @@ const SellHistoricSchema = new Schema({
     type: String,
     required: [true, "O campo paymentMethod é obrigatório"]
   },
+  cart: {
+    type: Array,
+    required: [true, "O campo cart é obrigatório"]
+  },
 
   dateTime: {
     type: String,
