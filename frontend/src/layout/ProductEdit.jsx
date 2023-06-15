@@ -23,6 +23,15 @@ const ProductEdit = ({
     price,
   });
 
+  // useEffect(() => {
+  //   setProductData({
+  //     productName: productName,
+  //     category: category,
+  //     stock: stock,
+  //     price: price,
+  //   });
+  // }, [productData]);
+
   useEffect(() => {
     console.log(productData);
   }, []);
@@ -53,12 +62,12 @@ const ProductEdit = ({
   };
 
   useEffect(() => {
-    if (category === "Serviço") {
-      setStock(1);
+    if (productData.category === "Serviço") {
+      setProductData({ ...productData, stock: 1 });
     }
-    console.log(productName, category, stock, price);
+    console.log(productData.category, productData.stock);
     // Outras ações que dependem do estado atualizado podem ser executadas aqui
-  }, [category]);
+  }, [productData.category]);
 
   return (
     <>
@@ -99,9 +108,14 @@ const ProductEdit = ({
               <select
                 name="category"
                 className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                defaultValue={category}
+                defaultValue={productData.category}
                 onChange={(e) => {
                   setProductData({ ...productData, category: e.target.value });
+                  
+                  if (e.target.value === "Serviço") {
+                    console.log("kkk")
+                  }
+
                   console.log(productData);
                 }}
               >
@@ -115,7 +129,7 @@ const ProductEdit = ({
             <div className="w-full flex flex-col">
               <label htmlFor="stock">Quantidade:</label>
 
-              {category !== "Serviço" ? (
+              {productData.category !== "Serviço" ? (
                 <>
                   <input
                     type="number"
@@ -146,13 +160,6 @@ const ProductEdit = ({
                     min={0}
                     value={1}
                     readOnly
-                    onChange={(e) => {
-                      setProductData({
-                        ...productData,
-                        stock: Number(e.target.value),
-                      });
-                      console.log(productData);
-                    }}
                   />
                   {stockError && (
                     <span className="text-red-400 text-sm mt-40">
