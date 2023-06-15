@@ -37,6 +37,7 @@ routes.get('/getPet/:id', petController.getPet)
 routes.post("/newProduct", productController.createProduto);
 routes.get("/products", productController.productList);
 routes.delete("/deleteProduct/:id", productController.deleteProduct)
+routes.put("/updateProduct/:id", productController.updateProduct)
 
 /* Rota Serviços */
 

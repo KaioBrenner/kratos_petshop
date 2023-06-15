@@ -128,4 +128,12 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/sellHistorics
+PUT http://localhost:3000/updateProduct/6487704a218d96e02fa43d09
+Content-Type: application/json
+
+{
+    "productName": "Joseiznho",
+    "category": "Alimento",
+    "stock": 22,
+    "price": 15
+}

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Modal from "./Modal";
 import axios from "axios";
+import {MdDeleteForever} from "react-icons/md"
 
 const ProductRow = ({ productName, category, stock, price, id }) => {
 
@@ -38,10 +39,10 @@ const ProductRow = ({ productName, category, stock, price, id }) => {
         R${price.toFixed(2)}
       </td>
       <td
-        className="px-6 py-4 text-center whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer"
+        className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer flex justify-center items-center text-2xl"
         onClick={handleDelete}
       >
-        Excluir
+        <MdDeleteForever></MdDeleteForever>
       </td>
     </tr>
   );

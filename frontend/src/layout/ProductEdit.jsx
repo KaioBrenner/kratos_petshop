@@ -3,7 +3,14 @@ import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ProductEdit = ({ closeModal, productName, category, stock, price }) => {
+const ProductEdit = ({
+  closeModal,
+  productName,
+  category,
+  stock,
+  price,
+  productId,
+}) => {
   //   const [productName, setProductName] = useState("");
   //   const [category, setCategory] = useState("Alimento");
   //   const [stock, setStock] = useState("");
@@ -17,8 +24,8 @@ const ProductEdit = ({ closeModal, productName, category, stock, price }) => {
   });
 
   useEffect(() => {
-    console.log(productData)
-  }, [])
+    console.log(productData);
+  }, []);
 
   const [productNameError, setProductNameError] = useState("");
   const [stockError, setStockError] = useState("");
@@ -29,91 +36,20 @@ const ProductEdit = ({ closeModal, productName, category, stock, price }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (productName.length <= 3) {
-      setProductNameError("O campo de nome é obrigatório");
-    } else {
-      setProductNameError("");
-    }
-
-    if (stock.length === 0) {
-      setStockError("O campo de quantidade é obrigatório");
-    } else {
-      setStockError("");
-    }
-
-    if (price.length === 0) {
-      setPriceError("O campo de preço é obrigatório");
-    } else {
-      setPriceError("");
-    }
-
-    const productData = {
-      productName,
-      category,
-      stock,
-      price,
-    };
-
-    async function fetchProducts() {
+    async function updatePet(productId, productData) {
       try {
-        const response = await axios.get("http://localhost:3000/products");
-        const dataProducts = response.data;
-        setProducts(dataProducts);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    console.log(productData);
-
-    async function createProduct(productData) {
-      try {
-        fetchProducts();
-
-        products.map((product) => {
-          console.log(product.productName);
-          console.log(productData.productName);
-        });
-
-        const isProductRegistered = products.some(
-          (product) => product.productName === productData.productName
+        const response = await axios.put(
+          `http://localhost:3000/updateProduct/${productId}`,
+          productData
         );
-
-        console.log(isProductRegistered);
-
-        if (isProductRegistered) {
-          alert("Erro ao cadastrar o produto!");
-        } else {
-          const response = await axios.post(
-            "http://localhost:3000/newProduct",
-            productData
-          );
-
-          window.location.reload();
-          if (
-            !(
-              productName.length <= 3 ||
-              stock.length === 0 ||
-              price.length === 0
-            )
-          ) {
-            alert("Produto cadastrado com sucesso!");
-          }
-          return response.data;
-        }
-
-        // const response = await axios.post(
-        //   `http://localhost:3000/newProduct`,
-        //   productData
-        // );
-        // console.log(productData);
-        // return response.data;
+        window.location.reload();
+        return response.data; // Se desejar, pode retornar a resposta do servidor
       } catch (error) {
         console.log(error);
       }
     }
 
-    createProduct(productData);
+    updatePet(productId, productData);
   };
 
   useEffect(() => {
@@ -123,6 +59,7 @@ const ProductEdit = ({ closeModal, productName, category, stock, price }) => {
     console.log(productName, category, stock, price);
     // Outras ações que dependem do estado atualizado podem ser executadas aqui
   }, [category]);
+
   return (
     <>
       <div className="bg-gray-100 p-3 rounded-lg relative">
@@ -144,15 +81,18 @@ const ProductEdit = ({ closeModal, productName, category, stock, price }) => {
                 min="3"
                 defaultValue={productName}
                 onChange={(e) => {
-                  setProductName(e.target.value);
-                  console.log(productName, category, stock, price);
+                  setProductData({
+                    ...productData,
+                    productName: e.target.value,
+                  });
+                  console.log(productData);
                 }}
               />
-              {productNameError && (
+              {/* {productNameError && (
                 <span className="text-red-400 text-sm mt-40">
                   {productNameError}
                 </span>
-              )}
+              )} */}
             </div>
             <div className="w-full flex flex-col">
               <label htmlFor="category">Categoria:</label>
@@ -160,7 +100,10 @@ const ProductEdit = ({ closeModal, productName, category, stock, price }) => {
                 name="category"
                 className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                 defaultValue={category}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => {
+                  setProductData({ ...productData, category: e.target.value });
+                  console.log(productData);
+                }}
               >
                 <option value="Alimento">Alimento</option>
                 <option value="Acessório">Acessório</option>
@@ -181,14 +124,18 @@ const ProductEdit = ({ closeModal, productName, category, stock, price }) => {
                     min={0}
                     defaultValue={stock}
                     onChange={(e) => {
-                      setStock(Number(e.target.value));
+                      setProductData({
+                        ...productData,
+                        stock: Number(e.target.value),
+                      });
+                      console.log(productData);
                     }}
                   />
-                  {stockError && (
+                  {/* {stockError && (
                     <span className="text-red-400 text-sm mt-40">
                       {stockError}
                     </span>
-                  )}
+                  )} */}
                 </>
               ) : (
                 <>
@@ -200,7 +147,11 @@ const ProductEdit = ({ closeModal, productName, category, stock, price }) => {
                     value={1}
                     readOnly
                     onChange={(e) => {
-                      setStock(Number(e.target.value));
+                      setProductData({
+                        ...productData,
+                        stock: Number(e.target.value),
+                      });
+                      console.log(productData);
                     }}
                   />
                   {stockError && (
@@ -220,12 +171,16 @@ const ProductEdit = ({ closeModal, productName, category, stock, price }) => {
                 min={0}
                 defaultValue={price}
                 onChange={(e) => {
-                  setPrice(Number(e.target.value));
+                  setProductData({
+                    ...productData,
+                    price: Number(e.target.value),
+                  });
+                  console.log(productData);
                 }}
               />
-              {priceError && (
+              {/* {priceError && (
                 <span className="text-red-400 text-sm mt-40">{priceError}</span>
-              )}
+              )} */}
             </div>
           </div>
 

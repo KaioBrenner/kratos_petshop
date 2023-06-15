@@ -2,6 +2,7 @@ import { BiCheck } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import {MdDeleteForever} from "react-icons/md"
 import deleteClient from "../constants/fetchClients.js";
 import { useEffect } from "react";
 
@@ -79,10 +80,10 @@ const ClientRow = ({ fullName, cpf, tel, active, cep, address, district, city, s
         )}
       </td>
       <td
-        className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer"
+        className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer flex justify-center items-center text-2xl"
         onClick={handleDelete}
       >
-        Excluir
+        <MdDeleteForever></MdDeleteForever>
       </td>
     </tr>
   );
