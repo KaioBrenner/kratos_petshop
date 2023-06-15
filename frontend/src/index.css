@@ -50,6 +50,13 @@ body {
     transition: 0.3s;
 }
 
+.slide-bck-center-home:hover {
+  transform: scale(0.97);
+  transition: 0.3s;
+  color: white;
+}
+
+
 
 
 .modal-overlay {

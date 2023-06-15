@@ -3,6 +3,8 @@ import SaleRow from "../components/SaleRow";
 import { BiCheck } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
 import Modal from "../components/Modal";
+import { FiArrowLeftCircle } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -29,9 +31,14 @@ const SalesHistory = () => {
     <div>
       <Header page="client-list" />
 
-      <main className="sm:px-16 px-6 flex flex-col justify-center my-20">
-        <h1 className="text-5xl text-left font-bold mb-4 container">
-          Histórico de Vendas
+      <main className="sm:px-16 px-6 flex flex-col justify-center mt-10">
+      <h1 className="text-5xl relative text-left font-bold mb-4 w-full">
+          Vendas
+          <div className="absolute text-[50px] bottom-0 right-0">
+            <Link to="/home">
+              <FiArrowLeftCircle></FiArrowLeftCircle>
+            </Link>
+          </div>
         </h1>
 
         <div className="bg-white p-3 rounded-lg">
@@ -64,8 +71,12 @@ const SalesHistory = () => {
                 )}
               </tbody>
             </table>
-          </div>
 
+            
+          </div>
+          <div className="flex gap-5 justify-start">
+            <Modal type="sellProducts"></Modal>
+          </div>
           {/* <div className="flex gap-5">
             <Modal type="buyProducts"></Modal>
           </div> */}

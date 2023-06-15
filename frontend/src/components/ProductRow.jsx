@@ -26,7 +26,7 @@ const ProductRow = ({ productName, category, stock, price, id }) => {
   return (
     <tr className="border-y border-y-gray-200">
       <td className="px-6 py-4 text-center whitespace-nowrap border-r border-r-gray-200">
-        {productName}
+        <Modal type="editProduct" productName={productName} category={category} stock={stock} price={price} productId={id}></Modal>
       </td>
       <td className="px-6 py-4 text-center whitespace-nowrap border-r border-r-gray-200">
         {category}

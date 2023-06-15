@@ -32,7 +32,7 @@ const Login = () => {
 
     // Lógica de login estará aqui
     if (employees[0].user === user && employees[0].password === password) {
-      navigate("/lista-clientes");
+      navigate("/home");
     }
 
   };

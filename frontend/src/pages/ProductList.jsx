@@ -3,6 +3,8 @@ import ProductRow from "../components/ProductRow";
 import { BiCheck } from "react-icons/bi";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { useState, useEffect } from "react";
+import { FiArrowLeftCircle } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { SlMagnifier } from "react-icons/sl";
 import dataProducts from "../constants/dataProducts";
@@ -39,9 +41,14 @@ const ProductList = () => {
     <div>
       <Header page="client-list" />
 
-      <main className="sm:px-16 px-6 flex flex-col justify-center my-20">
-        <h1 className="text-5xl text-left font-bold mb-4 container">
+      <main className="sm:px-16 px-6 flex flex-col justify-center mt-10">
+      <h1 className="text-5xl relative text-left font-bold mb-4 w-full">
           Produtos
+          <div className="absolute text-[50px] bottom-0 right-0">
+            <Link to="/home">
+              <FiArrowLeftCircle></FiArrowLeftCircle>
+            </Link>
+          </div>
         </h1>
 
         <div className="my-4 relative">
@@ -55,10 +62,10 @@ const ProductList = () => {
         </div>
 
         <div className="bg-white p-3 rounded-lg">
-          <div className="flex gap-5 justify-start">
+          {/* <div className="flex gap-5 justify-start">
             <Modal type="addProduct"></Modal>
             <Modal type="buyProducts"></Modal>
-          </div>
+          </div> */}
           <div className="max-h-[60vh] bg-white overflow-y-auto border border-gray-200  rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50 sticky top-0">
@@ -81,29 +88,35 @@ const ProductList = () => {
                 </tr>
               </thead>
               <tbody className="bg-white">
-                {searchTerm ? filteredProducts.map(
-                  ({ productName, category, stock, price, _id }) => (
-                    <ProductRow
-                      productName={productName}
-                      category={category}
-                      stock={stock}
-                      price={price}
-                      id={_id}
-                    ></ProductRow>
-                  )
-                ) : products.map(
-                  ({ productName, category, stock, price, _id }) => (
-                    <ProductRow
-                      productName={productName}
-                      category={category}
-                      stock={stock}
-                      price={price}
-                      id={_id}
-                    ></ProductRow>
-                  )
-                )}
+                {searchTerm
+                  ? filteredProducts.map(
+                      ({ productName, category, stock, price, _id }) => (
+                        <ProductRow
+                          productName={productName}
+                          category={category}
+                          stock={stock}
+                          price={price}
+                          id={_id}
+                        ></ProductRow>
+                      )
+                    )
+                  : products.map(
+                      ({ productName, category, stock, price, _id }) => (
+                        <ProductRow
+                          productName={productName}
+                          category={category}
+                          stock={stock}
+                          price={price}
+                          id={_id}
+                        ></ProductRow>
+                      )
+                    )}
               </tbody>
             </table>
+          </div>
+
+          <div className="flex gap-5 justify-start">
+            <Modal type="addProduct"></Modal>
           </div>
         </div>
       </main>

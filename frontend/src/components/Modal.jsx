@@ -3,7 +3,13 @@ import addService from "../assets/images/pet-hospital.svg";
 import PetRegistration from "../layout/PetRegistration";
 import AddService from "../layout/AddService";
 import ProductRegistration from "../layout/ProductRegistration";
-import { AiOutlineClose, AiOutlineCheck, AiOutlineInfoCircle } from "react-icons/ai";
+import ProductEdit from "../layout/ProductEdit";
+import { useNavigate } from "react-router-dom";
+import {
+  AiOutlineClose,
+  AiOutlineCheck,
+  AiOutlineInfoCircle,
+} from "react-icons/ai";
 import BuyProducts from "../layout/BuyProducts";
 import grave from "../assets/images/pet-grave.svg";
 import knowMore from "../assets/images/pet-box.svg";
@@ -11,6 +17,10 @@ import knowMore from "../assets/images/pet-box.svg";
 const Modal = ({
   type,
   productName,
+  category,
+  stock,
+  price,
+  productId,
   handleDelete,
   petName,
   petId,
@@ -18,9 +28,10 @@ const Modal = ({
   serviceId,
   pet,
   client,
-  comments
+  comments,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const closeModal = () => {
     setIsOpen(false);
@@ -74,10 +85,53 @@ const Modal = ({
     return (
       <>
         <button
-          className="w-[15%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mb-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2"
+          className="w-[15%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2"
           onClick={() => setIsOpen(true)}
         >
           Adicionar Produto
+        </button>
+        {isOpen && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end">
+              <ProductRegistration
+                closeModal={closeModal}
+                type="addProduct"
+              ></ProductRegistration>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  } else if (type === "editProduct") {
+    return (
+      <>
+        <button className="" onClick={() => setIsOpen(true)}>
+          {productName}
+        </button>
+        {isOpen && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end">
+              <ProductEdit
+                closeModal={closeModal}
+                productName={productName}
+                category={category}
+                stock={stock}
+                price={price}
+                productId={productId}
+              ></ProductEdit>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  } else if (type === "clientSignUp") {
+    return (
+      <>
+        <button
+          className="w-[15%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2"
+          onClick={() => navigate("/cadastro-cliente")}
+        >
+          Cadastrar Cliente
         </button>
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -111,14 +165,14 @@ const Modal = ({
         )}
       </>
     );
-  } else if (type === "buyProducts") {
+  } else if (type === "sellProducts") {
     return (
       <>
         <button
-          className=" w-[15%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mb-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 "
+          className=" w-[15%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 "
           onClick={() => setIsOpen(true)}
         >
-          Comprar Produtos
+          Vender Produtos
         </button>
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -190,18 +244,54 @@ const Modal = ({
                 >
                   <AiOutlineClose />
                 </button>
-                <h1 className="text-2xl font-bold mb-2">
-                  Dados do Pet
-                </h1>
+                <h1 className="text-2xl font-bold mb-2">Dados do Pet</h1>
                 <div>
-                  <p>Nome: <span className="font-montserrat font-normal text-lg">{pet?.petName}</span></p>
-                  <p>Raça: <span className="font-montserrat font-normal text-lg">{pet?.race}</span></p>
-                  <p>Porte: <span className="font-montserrat font-normal text-lg">{pet?.size}</span></p>
-                  <p>Idade: <span className="font-montserrat font-normal text-lg">{pet?.age}</span></p>
-                  <p>Peso: <span className="font-montserrat font-normal text-lg">{pet?.weight} Kg</span></p>
-                  <p>Nome do dono: <span className="font-montserrat font-normal text-lg">{client?.fullName.split(" ")[0]}</span></p>
-                  <p>Telefone: <span className="font-montserrat font-normal text-lg">{client?.tel}</span></p>
-                  <textarea className="w-full mt-4 h-28" value={comments}></textarea>
+                  <p>
+                    Nome:{" "}
+                    <span className="font-montserrat font-normal text-lg">
+                      {pet?.petName}
+                    </span>
+                  </p>
+                  <p>
+                    Raça:{" "}
+                    <span className="font-montserrat font-normal text-lg">
+                      {pet?.race}
+                    </span>
+                  </p>
+                  <p>
+                    Porte:{" "}
+                    <span className="font-montserrat font-normal text-lg">
+                      {pet?.size}
+                    </span>
+                  </p>
+                  <p>
+                    Idade:{" "}
+                    <span className="font-montserrat font-normal text-lg">
+                      {pet?.age}
+                    </span>
+                  </p>
+                  <p>
+                    Peso:{" "}
+                    <span className="font-montserrat font-normal text-lg">
+                      {pet?.weight} Kg
+                    </span>
+                  </p>
+                  <p>
+                    Nome do dono:{" "}
+                    <span className="font-montserrat font-normal text-lg">
+                      {client?.fullName.split(" ")[0]}
+                    </span>
+                  </p>
+                  <p>
+                    Telefone:{" "}
+                    <span className="font-montserrat font-normal text-lg">
+                      {client?.tel}
+                    </span>
+                  </p>
+                  <textarea
+                    className="w-full mt-4 h-28"
+                    value={comments}
+                  ></textarea>
                 </div>
               </div>
             </div>
