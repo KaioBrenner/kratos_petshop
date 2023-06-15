@@ -12,6 +12,7 @@ import axios from "axios";
 
 const SalesHistory = () => {
   const [sales, setSales] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function fetchSales() {
@@ -25,6 +26,21 @@ const SalesHistory = () => {
     }
 
     fetchSales();
+  }, []);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await axios.get("http://localhost:3000/products");
+        const dataClients = response.data;
+        setProducts(dataClients);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchProducts();
+    console.log(products)
   }, []);
 
   return (

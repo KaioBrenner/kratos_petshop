@@ -6,8 +6,11 @@ import axios from "axios";
 const BuyProducts = ({ closeModal }) => {
   const [products, setProducts] = useState([]);
   const [price, setPrice] = useState("");
+  const [stock, setStock] = useState(0);
+  const [category, setCategory] = useState("")
   const [product, setProduct] = useState({
     productName: "",
+    category: "",
     stock: 0,
     price: 0,
   });
@@ -65,11 +68,11 @@ const BuyProducts = ({ closeModal }) => {
     const countTotalPrice = () => {
       let count = 0;
       for (let i = 0; i < cart.length; i++) {
-        console.log(cart[i].price)
+        console.log(cart[i].price);
         count += cart[i].price;
       }
-      return count
-    }
+      return count;
+    };
 
     const saleData = {
       cart,
@@ -87,8 +90,8 @@ const BuyProducts = ({ closeModal }) => {
           saleData
         );
 
-        console.log(saleData)
-        alert("Compra efetuada com sucesso!")
+        console.log(saleData);
+        alert("Compra efetuada com sucesso!");
         return response.data;
       } catch (error) {
         // Se desejar, pode retornar a resposta do servidor
@@ -123,20 +126,40 @@ const BuyProducts = ({ closeModal }) => {
                     );
                   setPrice(selectedProductPrice);
 
+                  const selectedProductStock =
+                    e.target.options[e.target.selectedIndex].getAttribute(
+                      "data-stock"
+                    );
+                  setStock(selectedProductStock);
+
+                  const selectedProductCategory =
+                    e.target.options[e.target.selectedIndex].getAttribute(
+                      "data-category"
+                    );
+                  setCategory(selectedProductCategory);
+
                   setProduct({
-                    ...product,
                     productName: e.target.value,
+                    category: category,
+                    stock: Number(selectedProductStock),
                     price: Number(selectedProductPrice),
                   });
                   console.log(product);
                 }}
               >
                 <option value=""></option>
-                {products.map(({ productName, price }, index) => (
-                  <option value={`${productName}`} data-price={price}>
-                    {productName}
-                  </option>
-                ))}
+                {products.map(
+                  ({ productName, price, stock, category, _id }, index) => (
+                    <option
+                      value={`${productName}`}
+                      data-price={price}
+                      data-stock={stock}
+                      data-category={`${category}`}
+                    >
+                      {productName}
+                    </option>
+                  )
+                )}
               </select>
             </div>
             <div className="flex flex-row gap-4">
