@@ -152,6 +152,7 @@ const ProductRegistration = ({ closeModal }) => {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="Alimento">Alimento</option>
+                <option value="Granel">Granel</option>
                 <option value="Acessório">Acessório</option>
                 <option value="Higiene">Higiene</option>
                 <option value="Brinquedo">Brinquedo</option>

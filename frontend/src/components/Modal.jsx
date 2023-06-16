@@ -10,6 +10,10 @@ import {
   AiOutlineCheck,
   AiOutlineInfoCircle,
 } from "react-icons/ai";
+import { BsCartPlusFill } from "react-icons/bs";
+import ClientRow from "./ClientRow";
+import { SlMagnifier } from "react-icons/sl";
+import axios from "axios";
 import BuyProducts from "../layout/BuyProducts";
 import grave from "../assets/images/pet-grave.svg";
 import knowMore from "../assets/images/pet-box.svg";
@@ -29,6 +33,7 @@ const Modal = ({
   pet,
   client,
   comments,
+  servicePet,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -36,6 +41,31 @@ const Modal = ({
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  const [clients, setClients] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredClients = clients.filter((client) =>
+    client.fullName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  useEffect(() => {
+    async function fetchClients() {
+      try {
+        const response = await axios.get("http://localhost:3000/clients");
+        const dataClients = response.data;
+        setClients(dataClients);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchClients();
+  }, []);
 
   if (type === "addService") {
     return (
@@ -148,13 +178,13 @@ const Modal = ({
     return (
       <>
         <button
-          className=" w-[50%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 "
+          className=" w-[54px] box-border bg-green-500 rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white py-2 px-2 "
           onClick={(e) => {
             setIsOpen(true);
             e.preventDefault();
           }}
         >
-          Comprar Produtos
+          <BsCartPlusFill className="text-2xl w-full"></BsCartPlusFill>
         </button>
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -298,6 +328,161 @@ const Modal = ({
           </div>
         )}
       </>
+    );
+  } else if (type === "addServiceInServicesPage") {
+    return (
+      <>
+        <button
+          className="w-[50px] border-2 border-black rounded-full"
+          onClick={(e) => {
+            setIsOpen(true);
+            e.preventDefault();
+          }}
+        >
+          <img src={addService} alt="Adicionar atendimento" />
+        </button>
+        {isOpen && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end w-[1000px] ">
+              <div className="bg-gray-100 p-3 w-full rounded-lg relative">
+                <button
+                  className="p-4  bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-center absolute right-3 top-3"
+                  onClick={closeModal}
+                >
+                  <AiOutlineClose />
+                </button>
+                <h1 className="text-2xl text-left font-bold leading-none">
+                  Adicionar Serviço
+                </h1>
+                <div className="mt-12">
+                  <div className="my-4 relative">
+                    <input
+                      type="search"
+                      className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2 "
+                      onChange={handleSearch}
+                      placeholder="Pesquisar cliente"
+                    />
+                    <SlMagnifier className="absolute top-5 right-4" />
+                  </div>
+
+                  <div className="bg-white p-3 rounded-lg">
+                    <div className="max-h-[60vh] bg-white overflow-y-auto border border-gray-200 rounded-lg">
+                      <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50 sticky top-0">
+                          <tr>
+                            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Nome
+                            </th>
+                            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              CPF
+                            </th>
+                            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                              Pets
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody className="bg-white">
+                          {searchTerm
+                            ? filteredClients.map(
+                                (
+                                  {
+                                    fullName,
+                                    cpf,
+                                    tel,
+                                    active,
+                                    cep,
+                                    address,
+                                    district,
+                                    city,
+                                    state,
+                                    _id,
+                                  },
+                                  index
+                                ) => (
+                                  <ClientRow
+                                    fullName={fullName}
+                                    cpf={cpf}
+                                    tel={tel}
+                                    active={active}
+                                    cep={cep}
+                                    address={address}
+                                    district={district}
+                                    city={city}
+                                    state={state}
+                                    id={_id}
+                                    index={index}
+                                    key={_id}
+                                    page="services"
+                                  />
+                                )
+                              )
+                            : clients.map(
+                                (
+                                  {
+                                    fullName,
+                                    cpf,
+                                    tel,
+                                    active,
+                                    cep,
+                                    address,
+                                    district,
+                                    city,
+                                    state,
+                                    _id,
+                                  },
+                                  index
+                                ) => (
+                                  <ClientRow
+                                    fullName={fullName}
+                                    cpf={cpf}
+                                    tel={tel}
+                                    active={active}
+                                    cep={cep}
+                                    address={address}
+                                    district={district}
+                                    city={city}
+                                    state={state}
+                                    id={_id}
+                                    index={index}
+                                    key={_id}
+                                    page="services"
+                                  />
+                                )
+                              )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  } else if (type === "addServiceToPet") {
+    return (
+      <div>
+        <div className="cursor-pointer" onClick={() => setIsOpen(true)}>
+          <img
+            src={`data:image/jpeg;base64, ${servicePet?.petPicture}`}
+            alt=""
+            className="w-[50px] h-[50px] rounded-full bg-white"
+          />
+        </div>
+        {isOpen && (
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white p-4 rounded-lg border border-black flex flex-col items-end">
+              <AddService
+                closeModal={closeModal}
+                petName={servicePet?.petName}
+                petId={servicePet?._id}
+                ownerId={servicePet?.owner}
+              ></AddService>
+            </div>
+          </div>
+        )}
+      </div>
     );
   }
 };

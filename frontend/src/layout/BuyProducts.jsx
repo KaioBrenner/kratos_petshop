@@ -92,6 +92,7 @@ const BuyProducts = ({ closeModal }) => {
 
         console.log(saleData);
         alert("Compra efetuada com sucesso!");
+        window.location.reload()
         return response.data;
       } catch (error) {
         // Se desejar, pode retornar a resposta do servidor

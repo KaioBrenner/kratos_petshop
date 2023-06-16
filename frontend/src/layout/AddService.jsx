@@ -62,7 +62,6 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
     console.log(serviceData);
     console.log(petId);
     console.log(ownerId);
-    window.location.reload();
   };
 
   return (
@@ -188,7 +187,7 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
           </div>
 
           <div className="text-2xl text-left font-bold mb-2 leading-none mt-4">
-            <h1>Comments</h1>
+            <h1>Observações</h1>
             <textarea
               className="mt-4 w-full h-28 border border-neutral-400 font-normal text-base"
               onChange={(e) =>
