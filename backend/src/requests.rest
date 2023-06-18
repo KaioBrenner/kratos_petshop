@@ -137,3 +137,8 @@ Content-Type: application/json
     "stock": 22,
     "price": 15
 }
+
+
+###
+
+GET http://localhost:3000/getClient/648a212f1c52cfe5ff0d5bbc

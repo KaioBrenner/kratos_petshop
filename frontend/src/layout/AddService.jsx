@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import grooming from "../assets/images/grooming.svg";
 import medicalReport from "../assets/images/medical-report.svg";
@@ -22,6 +22,145 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
     comments: "",
   });
 
+  useEffect(() => {
+    if (serviceData.bath) {
+      setServices((prevServices) => [
+        ...prevServices,
+        {
+          productName: bath.productName,
+          category: bath.category,
+          stock: bath.stock,
+          price: bath.price,
+        },
+      ]);
+    } else {
+      const updatedServices = services.filter(
+        (service) => service.productName !== bath.productName
+      );
+      setServices(updatedServices);
+    }
+
+  }, [serviceData.bath]);
+
+  useEffect(() => {
+    if (serviceData.shave) {
+      setServices((prevServices) => [
+        ...prevServices,
+        {
+          productName: shave.productName,
+          category: shave.category,
+          stock: shave.stock,
+          price: shave.price,
+        },
+      ]);
+    } else {
+      const updatedServices = services.filter(
+        (service) => service.productName !== shave.productName
+      );
+      setServices(updatedServices);
+    }
+
+  }, [serviceData.shave]);
+  
+  useEffect(() => {
+    if (serviceData.nails) {
+      setServices((prevServices) => [
+        ...prevServices,
+        {
+          productName: nails.productName,
+          category: nails.category,
+          stock: nails.stock,
+          price: nails.price,
+        },
+      ]);
+    } else {
+      const updatedServices = services.filter(
+        (service) => service.productName !== nails.productName
+      );
+      setServices(updatedServices);
+    }
+
+  }, [serviceData.nails]);
+  
+  useEffect(() => {
+    if (serviceData.delivery) {
+      setServices((prevServices) => [
+        ...prevServices,
+        {
+          productName: delivery.productName,
+          category: delivery.category,
+          stock: delivery.stock,
+          price: delivery.price,
+        },
+      ]);
+    } else {
+      const updatedServices = services.filter(
+        (service) => service.productName !== delivery.productName
+      );
+      setServices(updatedServices);
+    }
+
+  }, [serviceData.delivery]);
+
+  const [client, setClient] = useState({});
+
+  const [services, setServices] = useState([]);
+  const [paymentMethod, setPaymentMethod] = useState("");
+
+  const [bath, setBath] = useState({});
+  const [shave, setShave] = useState({});
+  const [nails, setNails] = useState({});
+  const [delivery, setDelivery] = useState({});
+
+  useEffect(() => {
+    async function fetchServices() {
+      try {
+        const responseBath = await axios.get(
+          "http://localhost:3000/getProduct/648b887f0e816e7192e7b626"
+        );
+        const dataBath = responseBath.data;
+        const responseShave = await axios.get(
+          "http://localhost:3000/getProduct/648cf13c1c4321e906806b67"
+        );
+        const dataShave = responseShave.data;
+        const responseNails = await axios.get(
+          "http://localhost:3000/getProduct/648cf1521c4321e906806b78"
+        );
+        const dataNails = responseNails.data;
+        const responseDelivery = await axios.get(
+          "http://localhost:3000/getProduct/648cf16b1c4321e906806b8b"
+        );
+        const dataDelivery = responseDelivery.data;
+
+        setBath(dataBath);
+        setShave(dataShave);
+        setNails(dataNails);
+        setDelivery(dataDelivery);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchServices();
+  }, []);
+
+  useEffect(() => {
+    async function fetchClient() {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/getClient/${ownerId}`
+        );
+        const dataClient = response.data;
+        setClient(dataClient);
+        console.log(client);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchClient();
+  }, []);
+
   const handleCheckboxChange = (event) => {
     const { id, checked } = event.target;
     setServiceData((prevState) => ({
@@ -34,6 +173,40 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    
+
+    function formatarData(data) {
+      const dia = String(data.getDate()).padStart(2, "0");
+      const mes = String(data.getMonth() + 1).padStart(2, "0");
+      const ano = data.getFullYear();
+      const horas = String(data.getHours()).padStart(2, "0");
+      const minutos = String(data.getMinutes()).padStart(2, "0");
+
+      return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
+    }
+
+
+    const countTotalPrice = () => {
+      let count = 0;
+      for (let i = 0; i < services.length; i++) {
+        console.log(services[i].price);
+        count += services[i].price;
+      }
+      return count;
+    };
+
+    const saleData = {
+      cart: services,
+      fullName: client.fullName,
+      cpf: client.cpf,
+      paymentMethod,
+      totalPrice: countTotalPrice(),
+      dateTime: formatarData(new Date()),
+    };
+
+    console.log(saleData);
+
 
     if (
       serviceData.bath === true ||
@@ -53,15 +226,31 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
         }
       }
 
-      alert("Serviço adicionado com sucesso!");
+      async function createSellHistoric(saleData) {
+        try {
+          const response = await axios.post(
+            "http://localhost:3000/newSellHistoric",
+            saleData
+          );
+          alert("Compra efetuada com sucesso!");
+          window.location.reload()
+          return response.data;
+        } catch (error) {
+          // Se desejar, pode retornar a resposta do servidor
+          console.log(error);
+        }
+      }
+  
+      createSellHistoric(saleData);
       createService(petId, ownerId, serviceData);
+      
+      alert("Serviço adicionado com sucesso!");
     } else {
       alert("Adicione ao menos um serviço para ser feito.");
     }
 
-    console.log(serviceData);
-    console.log(petId);
-    console.log(ownerId);
+    
+
   };
 
   return (
@@ -166,24 +355,6 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
               </div>
             </label>
 
-            {/* <label for="meuCheckbox" className="flex items-center cursor-pointer">
-                <input type="checkbox" id="meuCheckbox" className=""/>
-                <div className="w-[50%] h-[130px] bg-brand-orange rounded-[8px] inline-block  self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2">
-                <img src={petSoap} alt="Imagem do Checkbox" className="w-full h-full object-cover rounded-md"/>
-                </div>
-            </label> */}
-            {/* <button className=" custom-checkbox w-[50%] h-[130px] bg-brand-orange rounded-[8px] inline-block  self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2">
-              <img src={petSoap} alt="" />
-            </button>
-            <button className="  w-[50%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2">
-              <img src={grooming} alt="" />
-            </button>
-            <button className="  w-[50%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2">
-              <img src={nailClipper} alt="" />
-            </button>
-            <button className="  w-[50%] h-[130px] bg-brand-orange rounded-[8px] inline-block self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2">
-              <img src={petBox} alt="" />
-            </button> */}
           </div>
 
           <div className="text-2xl text-left font-bold mb-2 leading-none mt-4">
@@ -197,6 +368,23 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
                 }))
               }
             ></textarea>
+          </div>
+
+          <div>
+            <label htmlFor="name">Forma de Pagamento:</label>
+            <select
+              name="porte"
+              className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
+              onChange={(e) => {
+                setPaymentMethod(e.target.value);
+              }}
+            >
+              <option value=""></option>
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Pix">Pix</option>
+              <option value="Crédito">Crédito</option>
+              <option value="Débito">Débito</option>
+            </select>
           </div>
         </div>
       </form>

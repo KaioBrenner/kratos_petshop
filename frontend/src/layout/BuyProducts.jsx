@@ -83,6 +83,8 @@ const BuyProducts = ({ closeModal }) => {
       dateTime: formatarData(new Date()),
     };
 
+    console.log(saleData)
+
     async function createSellHistoric(saleData) {
       try {
         const response = await axios.post(
@@ -92,7 +94,7 @@ const BuyProducts = ({ closeModal }) => {
 
         console.log(saleData);
         alert("Compra efetuada com sucesso!");
-        window.location.reload()
+        // window.location.reload()
         return response.data;
       } catch (error) {
         // Se desejar, pode retornar a resposta do servidor
@@ -102,6 +104,10 @@ const BuyProducts = ({ closeModal }) => {
 
     createSellHistoric(saleData);
   };
+
+  useEffect(() => {
+    console.log(product)
+  },[product])
 
   return (
     <>
@@ -145,7 +151,6 @@ const BuyProducts = ({ closeModal }) => {
                     stock: Number(selectedProductStock),
                     price: Number(selectedProductPrice),
                   });
-                  console.log(product);
                 }}
               >
                 <option value=""></option>
@@ -176,7 +181,6 @@ const BuyProducts = ({ closeModal }) => {
                       stock: Number(e.target.value),
                       price: price * Number(e.target.value),
                     });
-                    console.log(product);
                   }}
                 />
               </div>
