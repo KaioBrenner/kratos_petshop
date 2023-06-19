@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     const getDates = () => {
-      const today = new Date(2023,10,5);
+      const today = new Date();
       const previousDates = [];
 
       // Itera pelos últimos 7 dias
