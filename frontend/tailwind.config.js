@@ -9,6 +9,7 @@ export default {
       colors: {
         'brand-orange': '#FFB445',
         'brand-orange-faded': '#ffb545e7',
+        'brand-orange-paw': '#ff9d0b'
       },
     },
   },

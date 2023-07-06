@@ -246,24 +246,6 @@ const BuyProducts = ({ closeModal }) => {
                     </tr>
                   );
                 })}
-                {/* <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">{ productName }</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{  }</td>
-                  <td className="px-6 py-4 whitespace-nowrap">150.22</td>
-                  <td className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
-                    Excluir
-                  </td>
-                </tr> */}
-                {/* <tr>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    Shampoo Hipoalergênico
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">2</td>
-                  <td className="px-6 py-4 whitespace-nowrap">30.99</td>
-                  <td className="px-6 py-4 whitespace-nowrap hover:text-red-500 hover:underline cursor-pointer">
-                    Excluir
-                  </td>
-                </tr> */}
               </tbody>
             </table>
           </div>

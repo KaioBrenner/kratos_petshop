@@ -9,7 +9,8 @@
   box-sizing: border-box;
 }
 body {
-  background-color: #ffb445;
+  background-image: url(./assets/images/background.png);
+  background-color: #ff9d0b;
 }
 
 /* ----------------------------------------------
@@ -53,7 +54,7 @@ body {
 .slide-bck-center-home:hover {
   transform: scale(0.97);
   transition: 0.3s;
-  color: white;
+  /* color: white; */
 }
 
 
