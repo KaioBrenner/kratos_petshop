@@ -35,22 +35,55 @@ const BuyProducts = ({ closeModal }) => {
   };
 
   const handleStockBuy = () => {
-    console.log(product.stock);
-    console.log("----");
-    console.log(stock);
+    const isProductOnCart = cart.some((item) => item._id === id);
 
-    product.stock <= stock && product.stock > 0
-      ? addToCart(product)
-      : alert(`Estoque Inválido. Verifique e tente novamente.`);
+    if (product.stock <= stock && product.stock > 0) {
+      if (cart.length === 0) {
+        addToCart(product);
+      } else {
+        if (isProductOnCart) {
+          Promise.all(
+            cart.map(async (item) => {
+              if (item._id === id) {
+                if (item.stock + product.stock <= stock) {
+                  console.log(item.stock + product.stock);
+                  const itemIndex = cart.indexOf(item);
+                  const cartItem = cart[itemIndex];
 
-    console.log(cart);
-    if (cart.length > 0) {
-      cart.map((product) => {
-        console.log(product._id);
-        if (product._id === id) {
-          console.log("mesmo id");
+                  const updatedCartItem = {
+                    ...cartItem,
+                    stock: item.stock + product.stock,
+                    price: price * (item.stock + product.stock),
+                  };
+
+                  // Chamada assíncrona para atualizar o item no carrinho
+                  await new Promise((resolve) => {
+                    setCart((prevCart) => {
+                      const updatedCart = [...prevCart];
+                      updatedCart[itemIndex] = updatedCartItem;
+                      return updatedCart;
+                    });
+                    resolve();
+                  });
+
+                  console.log(updatedCartItem);
+                } else {
+                  alert(`Estoque Inválido. Verifique e tente novamente.`);
+                }
+              }
+            })
+          );
+        } else {
+          const newProduct = {
+            ...product,
+            stock: product.stock,
+          };
+
+          addToCart(newProduct);
         }
-      });
+      }
+    } else {
+      alert(`Estoque Inválido. Verifique e tente novamente.`);
     }
   };
 
