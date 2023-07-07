@@ -7,8 +7,10 @@ const BuyProducts = ({ closeModal }) => {
   const [products, setProducts] = useState([]);
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState(0);
-  const [category, setCategory] = useState("")
+  const [category, setCategory] = useState("");
+  const [id, setId] = useState("");
   const [product, setProduct] = useState({
+    _id: "",
     productName: "",
     category: "",
     stock: 0,
@@ -30,6 +32,26 @@ const BuyProducts = ({ closeModal }) => {
       updatedCart.splice(index, 1);
       return updatedCart;
     });
+  };
+
+  const handleStockBuy = () => {
+    console.log(product.stock);
+    console.log("----");
+    console.log(stock);
+
+    product.stock <= stock && product.stock > 0
+      ? addToCart(product)
+      : alert(`Estoque Inválido. Verifique e tente novamente.`);
+
+    console.log(cart);
+    if (cart.length > 0) {
+      cart.map((product) => {
+        console.log(product._id);
+        if (product._id === id) {
+          console.log("mesmo id");
+        }
+      });
+    }
   };
 
   function formatarData(data) {
@@ -83,7 +105,7 @@ const BuyProducts = ({ closeModal }) => {
       dateTime: formatarData(new Date()),
     };
 
-    console.log(saleData)
+    console.log(saleData);
 
     async function createSellHistoric(saleData) {
       try {
@@ -106,8 +128,8 @@ const BuyProducts = ({ closeModal }) => {
   };
 
   useEffect(() => {
-    console.log(product)
-  },[product])
+    console.log(product);
+  }, [product]);
 
   return (
     <>
@@ -145,7 +167,14 @@ const BuyProducts = ({ closeModal }) => {
                     );
                   setCategory(selectedProductCategory);
 
+                  const selectedProductId =
+                    e.target.options[e.target.selectedIndex].getAttribute(
+                      "data-id"
+                    );
+                  setId(selectedProductId);
+
                   setProduct({
+                    _id: `${selectedProductId}`,
                     productName: e.target.value,
                     category: category,
                     stock: Number(selectedProductStock),
@@ -161,6 +190,7 @@ const BuyProducts = ({ closeModal }) => {
                       data-price={price}
                       data-stock={stock}
                       data-category={`${category}`}
+                      data-id={`${_id}`}
                     >
                       {productName}
                     </option>
@@ -174,8 +204,11 @@ const BuyProducts = ({ closeModal }) => {
                 <input
                   type="number"
                   className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
-                  min={0}
+                  min={1}
+                  max={stock}
+                  placeholder={`Quantidade máxima: ${stock}`}
                   onChange={(e) => {
+                    console.log(id);
                     setProduct({
                       ...product,
                       stock: Number(e.target.value),
@@ -199,9 +232,7 @@ const BuyProducts = ({ closeModal }) => {
                 className="w-[100%] bg-brand-orange rounded-[8px] inline-block h-12 self-center mt-3 slide-bck-center hover:shadow-xl hover:text-white  py-2 px-2"
                 onClick={(e) => {
                   e.preventDefault();
-                  console.log(product);
-                  addToCart(product);
-                  console.log(cart);
+                  handleStockBuy();
                 }}
               >
                 Adicionar ao Carrinho
