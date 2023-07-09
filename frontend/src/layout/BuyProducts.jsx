@@ -1,6 +1,6 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
 const BuyProducts = ({ closeModal }) => {
@@ -17,6 +17,12 @@ const BuyProducts = ({ closeModal }) => {
     price: 0,
   });
   const [cart, setCart] = useState([]);
+
+  const inputRef = useRef(null);
+
+  const cleanInput = () => {
+    inputRef.current.value = "";
+  };
 
   const [fullName, setFullName] = useState("");
   const [cpf, setCpf] = useState("");
@@ -68,7 +74,9 @@ const BuyProducts = ({ closeModal }) => {
 
                   console.log(updatedCartItem);
                 } else {
-                  alert(`Estoque Inválido. Verifique e tente novamente.`);
+                  alert(
+                    `Quantidade ultrapassa o estoque do produto. Verifique e tente novamente.`
+                  );
                 }
               }
             })
@@ -83,7 +91,7 @@ const BuyProducts = ({ closeModal }) => {
         }
       }
     } else {
-      alert(`Estoque Inválido. Verifique e tente novamente.`);
+      alert(`Quantidade Inválida. Verifique e tente novamente.`);
     }
   };
 
@@ -140,6 +148,41 @@ const BuyProducts = ({ closeModal }) => {
 
     console.log(saleData);
 
+    async function decreaseProductStock(saleData) {
+      try {
+        const { cart } = saleData;
+        const updatedProductsInCart = cart.map((item) => {
+          for (const product of products) {
+            if (item._id === product._id) {
+              return { ...product, stock: product.stock - item.stock };
+            }
+          }
+        });
+
+        console.log(updatedProductsInCart);
+
+        let response;
+
+        for (const item of updatedProductsInCart) {
+          for (const product of products) {
+            if (item._id === product._id) {
+              const { _id } = item;
+              console.log(item);
+              response = await axios.put(
+                `http://localhost:3000/updateProduct/${_id}`,
+                item
+              );
+            }
+          }
+        }
+
+        return response.data;
+      } catch (error) {
+        // Se desejar, pode retornar a resposta do servidor
+        console.log(error);
+      }
+    }
+
     async function createSellHistoric(saleData) {
       try {
         const response = await axios.post(
@@ -149,7 +192,7 @@ const BuyProducts = ({ closeModal }) => {
 
         console.log(saleData);
         alert("Compra efetuada com sucesso!");
-        // window.location.reload()
+        window.location.reload()
         return response.data;
       } catch (error) {
         // Se desejar, pode retornar a resposta do servidor
@@ -157,6 +200,7 @@ const BuyProducts = ({ closeModal }) => {
       }
     }
 
+    decreaseProductStock(saleData);
     createSellHistoric(saleData);
   };
 
@@ -217,17 +261,21 @@ const BuyProducts = ({ closeModal }) => {
               >
                 <option value=""></option>
                 {products.map(
-                  ({ productName, price, stock, category, _id }, index) => (
-                    <option
-                      value={`${productName}`}
-                      data-price={price}
-                      data-stock={stock}
-                      data-category={`${category}`}
-                      data-id={`${_id}`}
-                    >
-                      {productName}
-                    </option>
-                  )
+                  ({ productName, price, stock, category, _id }, index) => {
+                    if (category !== "Serviço") {
+                      return (
+                        <option
+                          value={`${productName}`}
+                          data-price={price}
+                          data-stock={stock}
+                          data-category={`${category}`}
+                          data-id={`${_id}`}
+                        >
+                          {productName}
+                        </option>
+                      );
+                    }
+                  }
                 )}
               </select>
             </div>
@@ -239,6 +287,7 @@ const BuyProducts = ({ closeModal }) => {
                   className="border  border-gray-300 focus:outline-orange-300 focus:border-orange-300 drop-shadow-xl rounded-lg text-base pl-3 h-10 w-full mt-2"
                   min={1}
                   max={stock}
+                  ref={inputRef}
                   placeholder={`Quantidade máxima: ${stock}`}
                   onChange={(e) => {
                     console.log(id);
@@ -266,6 +315,7 @@ const BuyProducts = ({ closeModal }) => {
                 onClick={(e) => {
                   e.preventDefault();
                   handleStockBuy();
+                  cleanInput();
                 }}
               >
                 Adicionar ao Carrinho
