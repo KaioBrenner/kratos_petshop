@@ -18,7 +18,6 @@ const ClientRow = ({
   city,
   state,
   id,
-  key,
   index,
   page,
 }) => {
@@ -203,7 +202,7 @@ const ClientRow = ({
           {pets.map((pet) => {
             if (id === pet.owner) {
               return (
-                <Modal type="addServiceToPet" servicePet={pet} ></Modal>
+                <Modal type="addServiceToPet" servicePet={pet} key={pet._id}></Modal>
               );
             }
             return null;

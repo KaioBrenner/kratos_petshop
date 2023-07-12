@@ -57,17 +57,7 @@ const SaleRow = ({
                     />
                   </PDFViewer>
                 </div>
-                {/* {cart.map(({ productName, stock, price }) => (
-                  <>
-                    <li>
-                      {productName} | {stock}x | R${price.toFixed(2)}
-                    </li>
-                  </>
-                ))} */}
-                {/* <li>Ração Premium | 12x | R$150.89</li>
-              <li>Coleira Ajustável | 3x | R$150.89</li>
-              <li>Shampoo Hipoalergênico | 2x | R$150.89</li>
-              <li>Brinquedo de Pelúcia | R$150.89</li> */}
+                
               </ul>
             </td>
           </tr>

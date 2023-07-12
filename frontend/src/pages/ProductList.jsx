@@ -96,7 +96,8 @@ const ProductList = () => {
                           category={category}
                           stock={stock}
                           price={price}
-                          id={_id}
+                        id={_id}
+                        key={_id}
                         ></ProductRow>
                       )
                     )
@@ -107,7 +108,8 @@ const ProductList = () => {
                           category={category}
                           stock={stock}
                           price={price}
-                          id={_id}
+                        id={_id}
+                        key={_id}
                         ></ProductRow>
                       )
                     )}

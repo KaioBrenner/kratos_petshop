@@ -59,10 +59,6 @@ const ProductRegistration = ({ closeModal }) => {
       try {
         fetchProducts();
 
-        products.map((product) => {
-          console.log(product.productName);
-          console.log(productData.productName);
-        });
 
         const isProductRegistered = products.some(
           (product) => product.productName === productData.productName

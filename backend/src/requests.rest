@@ -102,10 +102,10 @@ POST http://localhost:3000/newProduct
 Content-Type: application/json
 
 {
-    "productName": "Ração Golden Premium",
-    "category": "Alimento",
-    "stock": 22,
-    "price": 22.22
+    "productName": "Delivery",
+    "category": "Serviço",
+    "stock": 1,
+    "price": 10
 }
 
 ###
@@ -115,16 +115,12 @@ DELETE http://localhost:3000/deleteProduct/64877824ac87679cf8bbbe02
 
 ###
 
-POST http://localhost:3000/newSellHistoric
+POST http://localhost:3000/newEmployee
 Content-Type: application/json
 
 {
-    "cpf": "11122233302",
-    "fullName": "João",
-    "totalPrice": 22,
-    "paymentMethod": "Dinheiro",
-    "cart": [],
-    "dateTime": "12/03/2024"
+    "user": "admin",
+    "password": "admin"
 }
 
 ###

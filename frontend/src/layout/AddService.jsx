@@ -116,19 +116,19 @@ const AddService = ({ closeModal, petName, petId, ownerId }) => {
     async function fetchServices() {
       try {
         const responseBath = await axios.get(
-          "http://localhost:3000/getProduct/648b887f0e816e7192e7b626"
+          "http://localhost:3000/getProduct/64ae97bf58c7900350de602b"
         );
         const dataBath = responseBath.data;
         const responseShave = await axios.get(
-          "http://localhost:3000/getProduct/648cf13c1c4321e906806b67"
+          "http://localhost:3000/getProduct/64ae97d658c7900350de602d"
         );
         const dataShave = responseShave.data;
         const responseNails = await axios.get(
-          "http://localhost:3000/getProduct/648cf1521c4321e906806b78"
+          "http://localhost:3000/getProduct/64ae97e358c7900350de602f"
         );
         const dataNails = responseNails.data;
         const responseDelivery = await axios.get(
-          "http://localhost:3000/getProduct/648cf16b1c4321e906806b8b"
+          "http://localhost:3000/getProduct/64ae97ef58c7900350de6031"
         );
         const dataDelivery = responseDelivery.data;
 

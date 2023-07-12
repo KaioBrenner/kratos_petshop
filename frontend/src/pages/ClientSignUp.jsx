@@ -104,14 +104,6 @@ const ClientSignUp = () => {
       try {
         fetchClients();
 
-        console.log(clientData);
-
-        clients.map((client) => {
-          // console.log(client.cpf)
-          // console.log(clientData.cpf)
-          console.log(client.tel);
-          console.log(clientData.tel);
-        });
 
         const isClientRegistered = clients.some(
           (client) =>
@@ -136,6 +128,7 @@ const ClientSignUp = () => {
             )
           ) {
             alert("Cliente cadastrado com sucesso!");
+            window.location.reload();
           }
           return response.data;
         }

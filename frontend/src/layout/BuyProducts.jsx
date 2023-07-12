@@ -270,6 +270,7 @@ const BuyProducts = ({ closeModal }) => {
                           data-stock={stock}
                           data-category={`${category}`}
                           data-id={`${_id}`}
+                          key={_id}
                         >
                           {productName}
                         </option>
@@ -341,9 +342,9 @@ const BuyProducts = ({ closeModal }) => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {cart.map(({ productName, stock, price }, index) => {
+                {cart.map(({ productName, stock, price, _id }, index) => {
                   return (
-                    <tr key={index}>
+                    <tr key={_id}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {productName}
                       </td>

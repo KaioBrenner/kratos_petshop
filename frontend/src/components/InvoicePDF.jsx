@@ -18,8 +18,8 @@ const InvoicePDF = ({ customerName, items, total, paymentMethod }) => {
         <Text>Método de Pagamento: {paymentMethod}</Text>
 
         <Text>Itens:</Text>
-        {items.map(({ productName, stock, price }, index) => (
-          <Text key={index}>
+        {items.map(({ productName, stock, price, _id }, index) => (
+          <Text key={_id}>
             - {productName} | {stock}x | R${price.toFixed(2)}
           </Text>
         ))}

@@ -53,6 +53,7 @@ const Services = () => {
                   petId={service.pet}
                   ownerId={service.owner}
                   index={index}
+                  key={service._id}
                 />
               );
             }

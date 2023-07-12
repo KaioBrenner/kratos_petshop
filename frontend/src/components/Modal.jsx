@@ -321,6 +321,7 @@ const Modal = ({
                   <textarea
                     className="w-full mt-4 h-28"
                     value={comments}
+                    readOnly
                   ></textarea>
                 </div>
               </div>
