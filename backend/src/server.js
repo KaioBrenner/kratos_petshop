@@ -16,6 +16,20 @@ connectDatabase()
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
+
+
+// app.use(cors(
+//   {
+//       origin: ["https://deploy-mern-frontend.vercel.app"],
+//       methods: ["POST", "GET"],
+//       credentials: true
+//   }
+// ));
+
+app.get("/", (req, res) => {
+  res.json("Hello");
+})
+
 app.use(express.json());
 
 app.use(cors());
