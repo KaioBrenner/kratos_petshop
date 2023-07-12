@@ -1,3 +1,4 @@
+require('dotenv').config()
 const mongoose = require("mongoose");
 
 const connectDataBase = () => {
@@ -5,7 +6,7 @@ const connectDataBase = () => {
 
   mongoose
     .connect(
-      "mongodb+srv://root:root@cluster0.ff2hnxp.mongodb.net/?retryWrites=true&w=majority",
+      `mongodb+srv://root:${process.env.MONGODB_PASSWORD}@cluster0.ff2hnxp.mongodb.net/?retryWrites=true&w=majority`,
       { useNewUrlParser: true, useUnifiedTopology: true }
     )
     .then(() => console.log("MongoDB Atlas Connected"))
