@@ -17,6 +17,7 @@ const ClientRow = ({
   district,
   city,
   state,
+  key,
   id,
   index,
   page,
